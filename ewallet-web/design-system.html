@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexVault — Design System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#0B0E14',   /* Fondo principal — azul casi negro */
+            surface: '#151925',       /* Cards, modales, secciones elevadas */
+            primary: '#6366F1',       /* Indigo — botones, links, acciones principales */
+            accent: '#34D399',        /* Verde menta — exito, dinero, indicadores positivos */
+            'text-main': '#F8FAFC',   /* Blanco hueso — texto principal */
+            'text-muted': '#94A3B8',  /* Gris azulado — texto secundario, captions */
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],  /* Titulos — moderna, tech */
+            body: ['"Inter"', 'sans-serif'],              /* Cuerpo — limpia, legible */
+          },
+        },
+      },
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .ds-section { padding: 4rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .ds-section:last-child { border-bottom: none; }
+    .ds-title { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #6366F1; margin-bottom: 1rem; }
+    .ds-heading { font-size: 2rem; font-weight: 700; margin-bottom: 2rem; }
+    .swatch { width: 100%; aspect-ratio: 1; border-radius: 1rem; position: relative; overflow: hidden; }
+    .swatch-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.75rem; font-size: 0.75rem; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); }
+    .code-block { background: rgba(21,25,37,0.8); border: 1px solid rgba(255,255,255,0.06); border-radius: 0.75rem; padding: 1rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; overflow-x: auto; color: #94A3B8; white-space: pre; }
+    .code-block .hl-key { color: #6366F1; }
+    .code-block .hl-val { color: #34D399; }
+    .code-block .hl-str { color: #F8FAFC; }
+    .type-sample { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 1.5rem 0; }
+    .type-sample:last-child { border-bottom: none; }
+    .component-preview { background: rgba(21,25,37,0.4); border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 2rem; display: flex; align-items: center; justify-content: center; min-height: 120px; }
+    .ds-nav-link { color: #94A3B8; font-size: 0.875rem; transition: color 0.2s; }
+    .ds-nav-link:hover { color: #F8FAFC; }
+    .ds-nav-link.active { color: #6366F1; }
+  </style>
+</head>
+<body class="bg-background text-text-main font-body antialiased">
+
+  <!-- ═══════════ DESIGN SYSTEM NAVBAR ═══════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-display font-bold text-sm">N</div>
+        <span class="font-display font-bold text-lg">NexVault</span>
+        <span class="text-xs text-text-muted bg-surface px-2 py-0.5 rounded-full ml-1">Design System</span>
+      </div>
+      <div class="hidden md:flex items-center gap-6">
+        <a href="#colors" class="ds-nav-link">Colors</a>
+        <a href="#typography" class="ds-nav-link">Typography</a>
+        <a href="#spacing" class="ds-nav-link">Spacing</a>
+        <a href="#components" class="ds-nav-link">Components</a>
+        <a href="#effects" class="ds-nav-link">Effects</a>
+        <a href="#assets" class="ds-nav-link">Assets</a>
+        <a href="#grid" class="ds-nav-link">Grid</a>
+      </div>
+      <a href="index.html" class="text-sm text-text-muted hover:text-white transition-colors">&larr; Back to Site</a>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-6 pt-24">
+
+    <!-- ═══════════ HEADER ═══════════ -->
+    <div class="py-16 border-b border-white/5">
+      <h1 class="font-display text-5xl sm:text-6xl font-bold tracking-tight mb-4">Design System</h1>
+      <p class="text-text-muted text-lg max-w-2xl leading-relaxed">
+        Documentacion visual completa de NexVault. Todos los tokens, componentes y patrones usados en la landing page.
+        Esta pagina sirve como referencia para exportar a Figma.
+      </p>
+      <div class="flex gap-3 mt-6">
+        <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Tailwind CSS</span>
+        <span class="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full">Figma Ready</span>
+        <span class="text-xs bg-surface text-text-muted px-3 py-1 rounded-full border border-white/5">v1.0</span>
+      </div>
+    </div>
+
+    <!-- ═══════════ SECTION: COLORS ═══════════ -->
+    <section id="colors" class="ds-section">
+      <p class="ds-title">01 / Color Palette</p>
+      <h2 class="ds-heading font-display">Colors</h2>
+      <p class="text-text-muted mb-8 max-w-xl">Todos los colores estan definidos en <code class="text-primary">tailwind.config.theme.extend.colors</code>. Usa nombres semanticos, nunca hex directo.</p>
+
+      <!-- Primary Colors -->
+      <h3 class="font-display font-semibold text-lg mb-4">Core Palette</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+        <div>
+          <div class="swatch bg-background border border-white/10">
+            <div class="swatch-label">
+              <p class="text-white font-medium">Background</p>
+              <p class="text-text-muted">#0B0E14</p>
+            </div>
+          </div>
+          <p class="text-xs text-text-muted mt-2"><code>bg-background</code></p>
+        </div>
+        <div>
+          <div class="swatch bg-surface border border-white/10">
+            <div class="swatch-label">
+              <p class="text-white font-medium">Surface</p>
+              <p class="text-text-muted">#151925</p>
+            </div>
+          </div>
+          <p class="text-xs text-text-muted mt-2"><code>bg-surface</code></p>
+        </div>
+        <div>
+          <div class="swatch bg-primary">
+            <div class="swatch-label">
+              <p class="text-white font-medium">Primary</p>
+              <p class="text-white/70">#6366F1</p>
+            </div>
+          </div>
+          <p class="text-xs text-text-muted mt-2"><code>bg-primary</code> / <code>text-primary</code></p>
+        </div>
+        <div>
+          <div class="swatch bg-accent">
+            <div class="swatch-label">
+              <p class="text-background font-medium">Accent</p>
+              <p class="text-background/70">#34D399</p>
+            </div>
+          </div>
+          <p class="text-xs text-text-muted mt-2"><code>bg-accent</code> / <code>text-accent</code></p>
+        </div>
+        <div>
+          <div class="swatch bg-text-main">
+            <div class="swatch-label">
+              <p class="text-background font-medium">Text Main</p>
+              <p class="text-background/70">#F8FAFC</p>
+            </div>
+          </div>
+          <p class="text-xs text-text-muted mt-2"><code>text-text-main</code></p>
+        </div>
+        <div>
+          <div class="swatch bg-text-muted">
+            <div class="swatch-label">
+              <p class="text-background font-medium">Text Muted</p>
+              <p class="text-background/70">#94A3B8</p>
+            </div>
+          </div>
+          <p class="text-xs text-text-muted mt-2"><code>text-text-muted</code></p>
+        </div>
+      </div>
+
+      <!-- Gradient -->
+      <h3 class="font-display font-semibold text-lg mb-4">Gradients</h3>
+      <div class="grid sm:grid-cols-2 gap-4 mb-6">
+        <div>
+          <div class="h-24 rounded-xl" style="background: linear-gradient(135deg, #6366F1 0%, #34D399 100%)"></div>
+          <p class="text-xs text-text-muted mt-2">Primary Gradient — <code>linear-gradient(135deg, #6366F1, #34D399)</code></p>
+          <p class="text-xs text-text-muted">Uso: <code>.text-gradient</code>, highlights, decoracion</p>
+        </div>
+        <div>
+          <div class="h-24 rounded-xl" style="background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)"></div>
+          <p class="text-xs text-text-muted mt-2">Button Gradient — <code>linear-gradient(135deg, #6366F1, #4F46E5)</code></p>
+          <p class="text-xs text-text-muted">Uso: <code>.btn-primary</code></p>
+        </div>
+      </div>
+
+      <!-- Opacity Scale -->
+      <h3 class="font-display font-semibold text-lg mb-4">Opacity Scale (Borders & Overlays)</h3>
+      <div class="flex gap-3 flex-wrap">
+        <div class="w-16 h-16 rounded-lg bg-white/5 flex items-center justify-center text-xs text-text-muted">5%</div>
+        <div class="w-16 h-16 rounded-lg bg-white/10 flex items-center justify-center text-xs text-text-muted">10%</div>
+        <div class="w-16 h-16 rounded-lg bg-white/20 flex items-center justify-center text-xs text-text-muted">20%</div>
+        <div class="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center text-xs text-primary">P/10</div>
+        <div class="w-16 h-16 rounded-lg bg-primary/25 flex items-center justify-center text-xs text-primary">P/25</div>
+        <div class="w-16 h-16 rounded-lg bg-accent/10 flex items-center justify-center text-xs text-accent">A/10</div>
+      </div>
+
+      <!-- Accessibility -->
+      <div class="mt-8 p-4 rounded-xl bg-surface border border-white/5">
+        <h4 class="font-display font-semibold text-sm mb-2">Accesibilidad</h4>
+        <div class="grid sm:grid-cols-2 gap-4 text-sm">
+          <div>
+            <p class="text-text-main">Text Main (#F8FAFC) sobre Background (#0B0E14)</p>
+            <p class="text-accent text-xs mt-1">Ratio: 17.4:1 — AAA Pass</p>
+          </div>
+          <div>
+            <p class="text-text-muted">Text Muted (#94A3B8) sobre Background (#0B0E14)</p>
+            <p class="text-accent text-xs mt-1">Ratio: 7.5:1 — AAA Pass</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ SECTION: TYPOGRAPHY ═══════════ -->
+    <section id="typography" class="ds-section">
+      <p class="ds-title">02 / Typography</p>
+      <h2 class="ds-heading font-display">Tipografia</h2>
+      <p class="text-text-muted mb-8 max-w-xl">Dos fuentes de Google Fonts. Space Grotesk para titulos (tech, moderna). Inter para cuerpo (legible, datos financieros).</p>
+
+      <div class="grid lg:grid-cols-2 gap-8 mb-8">
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <p class="text-xs text-primary mb-3 font-medium">DISPLAY FONT</p>
+          <p class="font-display text-4xl font-bold mb-2">Space Grotesk</p>
+          <p class="text-text-muted text-sm">Weights: 400, 500, 600, 700</p>
+          <p class="text-text-muted text-sm mt-1">Tailwind: <code class="text-primary">font-display</code></p>
+          <p class="font-display text-2xl mt-4 tracking-tight">AaBbCcDd 0123456789</p>
+        </div>
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <p class="text-xs text-accent mb-3 font-medium">BODY FONT</p>
+          <p class="font-body text-4xl font-bold mb-2">Inter</p>
+          <p class="text-text-muted text-sm">Weights: 300, 400, 500, 600, 700</p>
+          <p class="text-text-muted text-sm mt-1">Tailwind: <code class="text-primary">font-body</code></p>
+          <p class="font-body text-2xl mt-4">AaBbCcDd 0123456789</p>
+        </div>
+      </div>
+
+      <!-- Type Scale -->
+      <h3 class="font-display font-semibold text-lg mb-4">Type Scale</h3>
+      <div class="space-y-0">
+        <div class="type-sample flex flex-col sm:flex-row sm:items-baseline gap-4">
+          <div class="w-40 shrink-0">
+            <p class="text-xs text-text-muted">H1 — 4.5rem/72px</p>
+            <p class="text-xs text-text-muted">font-display bold</p>
+          </div>
+          <h1 class="font-display text-7xl font-bold tracking-tight">Reimagined</h1>
+        </div>
+        <div class="type-sample flex flex-col sm:flex-row sm:items-baseline gap-4">
+          <div class="w-40 shrink-0">
+            <p class="text-xs text-text-muted">H2 — 3rem/48px</p>
+            <p class="text-xs text-text-muted">font-display bold</p>
+          </div>
+          <h2 class="font-display text-5xl font-bold tracking-tight">Section Title</h2>
+        </div>
+        <div class="type-sample flex flex-col sm:flex-row sm:items-baseline gap-4">
+          <div class="w-40 shrink-0">
+            <p class="text-xs text-text-muted">H3 — 1.25rem/20px</p>
+            <p class="text-xs text-text-muted">font-display semibold</p>
+          </div>
+          <h3 class="font-display text-xl font-semibold">Card Heading</h3>
+        </div>
+        <div class="type-sample flex flex-col sm:flex-row sm:items-baseline gap-4">
+          <div class="w-40 shrink-0">
+            <p class="text-xs text-text-muted">Body — 1rem/16px</p>
+            <p class="text-xs text-text-muted">font-body regular</p>
+          </div>
+          <p class="text-base leading-relaxed">NexVault is the next-generation e-wallet that combines military-grade security with lightning-fast transactions.</p>
+        </div>
+        <div class="type-sample flex flex-col sm:flex-row sm:items-baseline gap-4">
+          <div class="w-40 shrink-0">
+            <p class="text-xs text-text-muted">Small — 0.875rem/14px</p>
+            <p class="text-xs text-text-muted">font-body, text-muted</p>
+          </div>
+          <p class="text-sm text-text-muted leading-relaxed">256-bit AES encryption, biometric auth, and real-time fraud detection.</p>
+        </div>
+        <div class="type-sample flex flex-col sm:flex-row sm:items-baseline gap-4">
+          <div class="w-40 shrink-0">
+            <p class="text-xs text-text-muted">Caption — 0.75rem/12px</p>
+            <p class="text-xs text-text-muted">font-body, uppercase</p>
+          </div>
+          <p class="text-xs text-accent font-semibold tracking-widest uppercase">Why NexVault</p>
+        </div>
+        <div class="type-sample flex flex-col sm:flex-row sm:items-baseline gap-4">
+          <div class="w-40 shrink-0">
+            <p class="text-xs text-text-muted">Stat — 3rem/48px</p>
+            <p class="text-xs text-text-muted">font-display bold</p>
+          </div>
+          <p class="font-display text-5xl font-bold text-gradient">$2.4B</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ SECTION: SPACING ═══════════ -->
+    <section id="spacing" class="ds-section">
+      <p class="ds-title">03 / Spacing</p>
+      <h2 class="ds-heading font-display">Espaciado</h2>
+      <p class="text-text-muted mb-8 max-w-xl">Basado en la escala de Tailwind (multiplos de 4px). Consistente en todo el proyecto.</p>
+
+      <div class="space-y-3">
+        <div class="flex items-center gap-4">
+          <span class="w-16 text-xs text-text-muted text-right">4px</span>
+          <div class="h-4 bg-primary/30 rounded" style="width: 4px"></div>
+          <span class="text-xs text-text-muted"><code>p-1</code> / <code>gap-1</code></span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-16 text-xs text-text-muted text-right">8px</span>
+          <div class="h-4 bg-primary/40 rounded" style="width: 8px"></div>
+          <span class="text-xs text-text-muted"><code>p-2</code> / <code>gap-2</code></span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-16 text-xs text-text-muted text-right">12px</span>
+          <div class="h-4 bg-primary/50 rounded" style="width: 12px"></div>
+          <span class="text-xs text-text-muted"><code>p-3</code> / <code>gap-3</code></span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-16 text-xs text-text-muted text-right">16px</span>
+          <div class="h-4 bg-primary/60 rounded" style="width: 16px"></div>
+          <span class="text-xs text-text-muted"><code>p-4</code> / <code>gap-4</code> — padding de cards internas</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-16 text-xs text-text-muted text-right">24px</span>
+          <div class="h-4 bg-primary/70 rounded" style="width: 24px"></div>
+          <span class="text-xs text-text-muted"><code>p-6</code> / <code>gap-6</code> — padding principal, gap entre cards</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-16 text-xs text-text-muted text-right">32px</span>
+          <div class="h-4 bg-primary/80 rounded" style="width: 32px"></div>
+          <span class="text-xs text-text-muted"><code>p-8</code> / <code>gap-8</code> — gap entre secciones internas</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-16 text-xs text-text-muted text-right">48px</span>
+          <div class="h-4 bg-primary/90 rounded" style="width: 48px"></div>
+          <span class="text-xs text-text-muted"><code>py-12</code> — padding vertical de secciones menores</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-16 text-xs text-text-muted text-right">96px</span>
+          <div class="h-4 bg-primary rounded" style="width: 96px"></div>
+          <span class="text-xs text-text-muted"><code>py-24</code> — padding vertical de secciones principales</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="w-16 text-xs text-text-muted text-right">128px</span>
+          <div class="h-4 bg-accent rounded" style="width: 128px"></div>
+          <span class="text-xs text-text-muted"><code>py-32</code> — padding vertical en desktop (lg:py-32)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ SECTION: COMPONENTS ═══════════ -->
+    <section id="components" class="ds-section">
+      <p class="ds-title">04 / Components</p>
+      <h2 class="ds-heading font-display">Componentes</h2>
+
+      <!-- Buttons -->
+      <h3 class="font-display font-semibold text-lg mb-4">Buttons</h3>
+      <div class="component-preview gap-4 flex-wrap mb-4">
+        <a href="#" class="btn-primary px-8 py-4 rounded-2xl font-semibold text-base inline-flex items-center gap-2">
+          <span>Primary Button</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="#" class="px-8 py-4 rounded-2xl font-semibold text-base border border-white/10 hover:border-white/25 hover:bg-white/5 transition-all">
+          Secondary Button
+        </a>
+        <a href="#" class="btn-primary text-sm px-5 py-2.5 rounded-xl font-medium">
+          <span>Small CTA</span>
+        </a>
+      </div>
+      <div class="code-block mb-10">&lt;!-- Primary Button --&gt;
+&lt;a href="#" class="<span class="hl-val">btn-primary</span> px-8 py-4 rounded-2xl font-semibold"&gt;
+  Start Free &rarr;
+&lt;/a&gt;
+
+&lt;!-- Secondary / Ghost Button --&gt;
+&lt;a href="#" class="px-8 py-4 rounded-2xl font-semibold <span class="hl-val">border border-white/10 hover:border-white/25 hover:bg-white/5</span>"&gt;
+  Learn More
+&lt;/a&gt;</div>
+
+      <!-- Glass Cards -->
+      <h3 class="font-display font-semibold text-lg mb-4">Glass Cards</h3>
+      <div class="grid md:grid-cols-2 gap-4 mb-4">
+        <div class="glass-card">
+          <h4 class="font-display font-semibold text-lg mb-2">glass-card</h4>
+          <p class="text-text-muted text-sm">Glassmorphism con backdrop-blur, borde sutil, hover lift. Usado en features y testimonials.</p>
+        </div>
+        <div class="glass-card-lg">
+          <h4 class="font-display font-semibold text-lg mb-2">glass-card-lg</h4>
+          <p class="text-text-muted text-sm">Version grande con mas padding y blur. Usado en stats y CTA.</p>
+        </div>
+      </div>
+      <div class="code-block mb-10">&lt;!-- Glass Card (standard) --&gt;
+&lt;div class="<span class="hl-val">glass-card</span>"&gt;
+  <span class="hl-key">background:</span> rgba(21, 25, 37, 0.6);
+  <span class="hl-key">backdrop-filter:</span> blur(16px);
+  <span class="hl-key">border:</span> 1px solid rgba(255, 255, 255, 0.06);
+  <span class="hl-key">border-radius:</span> 1.25rem;
+  <span class="hl-key">padding:</span> 1.75rem;
+&lt;/div&gt;
+
+&lt;!-- Glass Card Large --&gt;
+&lt;div class="<span class="hl-val">glass-card-lg</span>"&gt;
+  <span class="hl-key">padding:</span> 3rem;
+  <span class="hl-key">border-radius:</span> 1.5rem;
+  <span class="hl-key">backdrop-filter:</span> blur(20px);
+&lt;/div&gt;</div>
+
+      <!-- Badges -->
+      <h3 class="font-display font-semibold text-lg mb-4">Badges & Pills</h3>
+      <div class="component-preview gap-3 flex-wrap mb-4">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm">
+          <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+          <span class="text-xs font-medium text-text-muted tracking-wide uppercase">Now in Open Beta</span>
+        </span>
+        <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">Tailwind CSS</span>
+        <span class="text-xs bg-accent/10 text-accent px-3 py-1 rounded-full">Figma Ready</span>
+        <span class="text-xs bg-surface text-text-muted px-3 py-1 rounded-full border border-white/5">v1.0</span>
+      </div>
+      <div class="code-block mb-10">&lt;!-- Status Badge --&gt;
+&lt;span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full
+  <span class="hl-val">border border-primary/30 bg-primary/5 backdrop-blur-sm</span>"&gt;
+  &lt;span class="w-2 h-2 rounded-full bg-accent animate-pulse"&gt;&lt;/span&gt;
+  &lt;span class="text-xs font-medium text-text-muted uppercase"&gt;Now in Open Beta&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- Tag --&gt;
+&lt;span class="text-xs <span class="hl-val">bg-primary/10 text-primary</span> px-3 py-1 rounded-full"&gt;Tag&lt;/span&gt;</div>
+
+      <!-- Icon Containers -->
+      <h3 class="font-display font-semibold text-lg mb-4">Icon Containers</h3>
+      <div class="component-preview gap-4 flex-wrap mb-4">
+        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        </div>
+        <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+          <span class="font-display font-bold text-primary text-lg">1</span>
+        </div>
+        <div class="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center">
+          <span class="font-display font-bold text-accent text-lg">3</span>
+        </div>
+      </div>
+      <div class="code-block mb-10">&lt;!-- Small Icon (features) --&gt;
+&lt;div class="<span class="hl-val">w-10 h-10 rounded-xl bg-primary/10</span> flex items-center justify-center"&gt;
+  &lt;svg class="w-5 h-5 text-primary"&gt;...&lt;/svg&gt;
+&lt;/div&gt;
+
+&lt;!-- Step Number (how it works) --&gt;
+&lt;div class="<span class="hl-val">w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20</span> flex items-center justify-center"&gt;
+  &lt;span class="font-display font-bold text-primary text-lg"&gt;1&lt;/span&gt;
+&lt;/div&gt;</div>
+
+      <!-- Avatar Stack -->
+      <h3 class="font-display font-semibold text-lg mb-4">Avatar Stack</h3>
+      <div class="component-preview mb-4">
+        <div class="flex items-center gap-6">
+          <div class="flex -space-x-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background"></div>
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-emerald-400 border-2 border-background"></div>
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-primary border-2 border-background"></div>
+          </div>
+          <div>
+            <p class="text-sm font-semibold">12,000+ users</p>
+            <p class="text-xs text-text-muted">joined this month</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navbar -->
+      <h3 class="font-display font-semibold text-lg mb-4">Navbar</h3>
+      <div class="component-preview flex-col gap-4 mb-4">
+        <div class="w-full rounded-xl bg-background/90 backdrop-blur-xl border border-white/5 px-6 py-4 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-display font-bold text-sm">N</div>
+            <span class="font-display font-bold text-lg">NexVault</span>
+          </div>
+          <div class="flex items-center gap-8">
+            <span class="text-text-muted text-sm">Features</span>
+            <span class="text-text-muted text-sm">How it Works</span>
+            <span class="text-text-muted text-sm">Stats</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-sm text-text-muted">Sign In</span>
+            <span class="btn-primary text-sm px-5 py-2.5 rounded-xl font-medium"><span>Get Started</span></span>
+          </div>
+        </div>
+        <p class="text-xs text-text-muted">Estado: Default (transparent). Al hacer scroll aplica <code>.navbar-scrolled</code> con blur y fondo.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════ SECTION: EFFECTS ═══════════ -->
+    <section id="effects" class="ds-section">
+      <p class="ds-title">05 / Effects & Animations</p>
+      <h2 class="ds-heading font-display">Efectos</h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <h4 class="font-display font-semibold mb-2">Gradient Text</h4>
+          <p class="text-gradient font-display text-3xl font-bold mb-3">Reimagined.</p>
+          <p class="text-xs text-text-muted">Clase: <code>.text-gradient</code></p>
+          <p class="text-xs text-text-muted">CSS: <code>background-clip: text</code> con gradiente primary→accent</p>
+        </div>
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <h4 class="font-display font-semibold mb-2">Glassmorphism</h4>
+          <div class="glass-card p-4 mb-3">
+            <p class="text-sm">Contenido con blur de fondo</p>
+          </div>
+          <p class="text-xs text-text-muted"><code>backdrop-filter: blur(16px)</code> + borde <code>rgba(255,255,255,0.06)</code></p>
+        </div>
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <h4 class="font-display font-semibold mb-2">Glow Effect</h4>
+          <div class="w-full h-16 rounded-xl relative overflow-hidden bg-background flex items-center justify-center">
+            <div class="absolute w-32 h-32 bg-primary/30 blur-[40px] rounded-full"></div>
+            <p class="relative text-sm font-medium">Glow behind elements</p>
+          </div>
+          <p class="text-xs text-text-muted mt-3"><code>box-shadow: 0 0 20px rgba(99,102,241,0.3)</code> o blur absoluto</p>
+        </div>
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <h4 class="font-display font-semibold mb-2">Scroll Reveal</h4>
+          <p class="text-sm text-text-muted mb-3">Elementos aparecen al entrar en viewport</p>
+          <p class="text-xs text-text-muted">Clase: <code>.reveal</code> → <code>.reveal.visible</code></p>
+          <p class="text-xs text-text-muted">Transition: <code>0.8s cubic-bezier(0.16, 1, 0.3, 1)</code></p>
+          <p class="text-xs text-text-muted">Transform: <code>translateY(30px)</code> → <code>translateY(0)</code></p>
+        </div>
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <h4 class="font-display font-semibold mb-2">Grain Overlay</h4>
+          <div class="w-full h-16 rounded-xl relative overflow-hidden bg-background">
+            <div class="grain" style="opacity: 0.15"></div>
+          </div>
+          <p class="text-xs text-text-muted mt-3">SVG noise filter al 3% de opacidad. Agrega textura sutil al fondo.</p>
+        </div>
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <h4 class="font-display font-semibold mb-2">Marquee</h4>
+          <p class="text-sm text-text-muted mb-3">Scroll infinito horizontal para logos de partners</p>
+          <p class="text-xs text-text-muted">Clase: <code>.marquee</code> + <code>.marquee-content</code></p>
+          <p class="text-xs text-text-muted">Animation: <code>20s linear infinite</code></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ SECTION: ASSETS ═══════════ -->
+    <section id="assets" class="ds-section">
+      <p class="ds-title">06 / Assets & Images</p>
+      <h2 class="ds-heading font-display">Imagenes Generadas</h2>
+      <p class="text-text-muted mb-8 max-w-xl">Generadas con Nano Banana 2 (Gemini Flash Image). Estilo: 3D Render, High Tech, Glossy & Minimal.</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div>
+          <div class="aspect-video rounded-xl overflow-hidden bg-surface border border-white/5">
+            <img src="images/hero.png" alt="Hero" class="w-full h-full object-cover">
+          </div>
+          <p class="text-sm font-medium mt-2">Hero Image</p>
+          <p class="text-xs text-text-muted">hero.png — 16:9</p>
+        </div>
+        <div>
+          <div class="aspect-video rounded-xl overflow-hidden bg-surface border border-white/5">
+            <img src="images/feature-security.png" alt="Security" class="w-full h-full object-cover">
+          </div>
+          <p class="text-sm font-medium mt-2">Feature: Security</p>
+          <p class="text-xs text-text-muted">feature-security.png</p>
+        </div>
+        <div>
+          <div class="aspect-video rounded-xl overflow-hidden bg-surface border border-white/5">
+            <img src="images/feature-speed.png" alt="Speed" class="w-full h-full object-cover">
+          </div>
+          <p class="text-sm font-medium mt-2">Feature: Speed</p>
+          <p class="text-xs text-text-muted">feature-speed.png</p>
+        </div>
+        <div>
+          <div class="aspect-video rounded-xl overflow-hidden bg-surface border border-white/5">
+            <img src="images/feature-global.png" alt="Global" class="w-full h-full object-cover">
+          </div>
+          <p class="text-sm font-medium mt-2">Feature: Global</p>
+          <p class="text-xs text-text-muted">feature-global.png</p>
+        </div>
+      </div>
+
+      <!-- Logo -->
+      <h3 class="font-display font-semibold text-lg mt-10 mb-4">Logo</h3>
+      <div class="component-preview gap-8 flex-wrap">
+        <div class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-display font-bold">N</div>
+          <span class="font-display font-bold text-2xl tracking-tight">NexVault</span>
+        </div>
+        <div class="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl">
+          <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-display font-bold text-sm">N</div>
+          <span class="font-display font-bold text-lg tracking-tight">NexVault</span>
+        </div>
+        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white font-display font-bold">N</div>
+      </div>
+    </section>
+
+    <!-- ═══════════ SECTION: GRID ═══════════ -->
+    <section id="grid" class="ds-section">
+      <p class="ds-title">07 / Grid & Layout</p>
+      <h2 class="ds-heading font-display">Grid System</h2>
+
+      <div class="space-y-6">
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <h4 class="font-display font-semibold mb-4">Breakpoints</h4>
+          <div class="space-y-2">
+            <div class="flex items-center gap-4">
+              <span class="w-20 text-xs text-text-muted text-right font-mono">375px</span>
+              <div class="h-3 bg-primary/30 rounded" style="width: 20%"></div>
+              <span class="text-xs text-text-muted">Mobile (default)</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="w-20 text-xs text-text-muted text-right font-mono">640px</span>
+              <div class="h-3 bg-primary/50 rounded" style="width: 35%"></div>
+              <span class="text-xs text-text-muted">sm: — Small tablet</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="w-20 text-xs text-text-muted text-right font-mono">768px</span>
+              <div class="h-3 bg-primary/70 rounded" style="width: 50%"></div>
+              <span class="text-xs text-text-muted">md: — Tablet / 2-3 column grid</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="w-20 text-xs text-text-muted text-right font-mono">1024px</span>
+              <div class="h-3 bg-primary/90 rounded" style="width: 70%"></div>
+              <span class="text-xs text-text-muted">lg: — Desktop / hero 2-col layout</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="w-20 text-xs text-text-muted text-right font-mono">1280px</span>
+              <div class="h-3 bg-primary rounded" style="width: 85%"></div>
+              <span class="text-xs text-text-muted">max-w-7xl — Content max width</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <h4 class="font-display font-semibold mb-4">Column Layouts</h4>
+          <div class="space-y-4">
+            <div>
+              <p class="text-xs text-text-muted mb-2">Features / Testimonials: <code>grid md:grid-cols-3 gap-6</code></p>
+              <div class="grid grid-cols-3 gap-2">
+                <div class="h-8 bg-primary/20 rounded"></div>
+                <div class="h-8 bg-primary/20 rounded"></div>
+                <div class="h-8 bg-primary/20 rounded"></div>
+              </div>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted mb-2">Stats: <code>grid sm:grid-cols-2 lg:grid-cols-4 gap-8</code></p>
+              <div class="grid grid-cols-4 gap-2">
+                <div class="h-8 bg-accent/20 rounded"></div>
+                <div class="h-8 bg-accent/20 rounded"></div>
+                <div class="h-8 bg-accent/20 rounded"></div>
+                <div class="h-8 bg-accent/20 rounded"></div>
+              </div>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted mb-2">Hero: <code>grid lg:grid-cols-2 gap-12</code></p>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="h-8 bg-primary/20 rounded"></div>
+                <div class="h-8 bg-primary/20 rounded"></div>
+              </div>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted mb-2">Footer: <code>grid sm:grid-cols-2 lg:grid-cols-4 gap-12</code></p>
+              <div class="grid grid-cols-4 gap-2">
+                <div class="h-8 bg-white/5 rounded"></div>
+                <div class="h-8 bg-white/5 rounded"></div>
+                <div class="h-8 bg-white/5 rounded"></div>
+                <div class="h-8 bg-white/5 rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ SECTION: FIGMA EXPORT NOTES ═══════════ -->
+    <section class="ds-section">
+      <p class="ds-title">08 / Notas para Figma</p>
+      <h2 class="ds-heading font-display">Exportacion a Figma</h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <h4 class="font-display font-semibold mb-3">Color Styles</h4>
+          <ul class="space-y-2 text-sm text-text-muted">
+            <li>Crear 6 color styles en Figma con los mismos nombres:</li>
+            <li class="text-text-main"><code>background</code>, <code>surface</code>, <code>primary</code>, <code>accent</code>, <code>text-main</code>, <code>text-muted</code></li>
+            <li>Agregar los gradientes como estilos separados</li>
+          </ul>
+        </div>
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <h4 class="font-display font-semibold mb-3">Text Styles</h4>
+          <ul class="space-y-2 text-sm text-text-muted">
+            <li>H1: Space Grotesk Bold 72px</li>
+            <li>H2: Space Grotesk Bold 48px</li>
+            <li>H3: Space Grotesk Semibold 20px</li>
+            <li>Body: Inter Regular 16px</li>
+            <li>Small: Inter Regular 14px</li>
+            <li>Caption: Inter Semibold 12px uppercase</li>
+          </ul>
+        </div>
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <h4 class="font-display font-semibold mb-3">Componentes</h4>
+          <ul class="space-y-2 text-sm text-text-muted">
+            <li>Crear como componentes de Figma:</li>
+            <li class="text-text-main">Button/Primary, Button/Secondary, Button/Small</li>
+            <li class="text-text-main">Card/Glass, Card/Glass-LG</li>
+            <li class="text-text-main">Badge/Status, Badge/Tag</li>
+            <li class="text-text-main">Icon/Container, Icon/Step</li>
+            <li class="text-text-main">Avatar/Stack</li>
+            <li class="text-text-main">Navbar/Default, Navbar/Scrolled</li>
+          </ul>
+        </div>
+        <div class="p-6 rounded-xl bg-surface border border-white/5">
+          <h4 class="font-display font-semibold mb-3">Estructura HTML</h4>
+          <ul class="space-y-2 text-sm text-text-muted">
+            <li>Cada seccion del HTML esta marcada con:</li>
+            <li class="text-text-main"><code>&lt;!-- SECTION: Nombre --&gt;</code></li>
+            <li>Secciones: Navbar, Hero, Marquee, Features, How It Works, Stats, Testimonials, CTA, Footer</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="border-t border-white/5 py-8 mt-16">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-text-muted text-xs">NexVault Design System v1.0 — Generado automaticamente</p>
+      <a href="index.html" class="text-sm text-primary hover:text-white transition-colors">&larr; Volver al sitio</a>
+    </div>
+  </footer>
+
+</body>
+</html>

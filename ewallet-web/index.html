@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexVault — Tu Billetera Digital de Nueva Generacion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: '#0B0E14',
+            surface: '#151925',
+            primary: '#6366F1',
+            accent: '#34D399',
+            'text-main': '#F8FAFC',
+            'text-muted': '#94A3B8',
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            body: ['"Inter"', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-background text-text-main font-body antialiased overflow-x-hidden">
+
+  <!-- SECTION: Navbar — Fixed top, glassmorphism on scroll (.navbar-scrolled) -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-display font-bold text-sm group-hover:scale-110 transition-transform">N</div>
+        <span class="font-display font-bold text-xl tracking-tight">NexVault</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#features" class="text-text-muted hover:text-white transition-colors text-sm">Beneficios</a>
+        <a href="#how-it-works" class="text-text-muted hover:text-white transition-colors text-sm">Como Funciona</a>
+        <a href="#stats" class="text-text-muted hover:text-white transition-colors text-sm">Cifras</a>
+        <a href="#cta" class="text-text-muted hover:text-white transition-colors text-sm">Precios</a>
+        <a href="design-system.html" class="text-text-muted hover:text-accent transition-colors text-sm flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+          Design System
+        </a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#" class="hidden sm:block text-sm text-text-muted hover:text-white transition-colors">Iniciar Sesion</a>
+        <a href="#cta" class="btn-primary text-sm px-5 py-2.5 rounded-xl font-medium">Comenzar</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SECTION: Hero — Full viewport, animated grid, floating orbs, gradient glows, grain overlay -->
+  <section id="hero" class="relative min-h-[90vh] flex items-center pt-20 pb-12 overflow-hidden">
+    <!-- Animated dot grid background -->
+    <canvas id="hero-grid" class="absolute inset-0 z-0" style="pointer-events:none;"></canvas>
+
+    <!-- Floating orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Radial ring pulse -->
+    <div class="hero-ring"></div>
+
+    <div class="hero-glow"></div>
+    <div class="hero-glow-mint"></div>
+    <div class="grain"></div>
+
+    <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div class="space-y-8 animate-fade-up">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm">
+          <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+          <span class="text-xs font-medium text-text-muted tracking-wide uppercase">Ahora en Beta Abierta</span>
+        </div>
+
+        <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
+          Tu Dinero,<br>
+          <span class="text-gradient">Reinventado.</span>
+        </h1>
+
+        <p class="text-lg text-text-muted max-w-lg leading-relaxed">
+          NexVault es la billetera digital de nueva generacion que combina seguridad de grado militar con transacciones ultrarapidas. Envia, recibe y haz crecer tu dinero en todo el mundo.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a href="#cta" class="btn-primary px-8 py-4 rounded-2xl font-semibold text-base inline-flex items-center gap-2 group">
+            Empieza Gratis
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+          <a href="#how-it-works" class="px-8 py-4 rounded-2xl font-semibold text-base border border-white/10 hover:border-white/25 hover:bg-white/5 transition-all">
+            Saber Mas
+          </a>
+        </div>
+
+        <div class="flex items-center gap-6 pt-4">
+          <div class="flex -space-x-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background"></div>
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-emerald-400 border-2 border-background"></div>
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-primary border-2 border-background"></div>
+          </div>
+          <div>
+            <p class="text-sm font-semibold">12,000+ usuarios</p>
+            <p class="text-xs text-text-muted">se unieron este mes</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative animate-fade-up-delay flex justify-center lg:justify-end">
+        <div class="relative">
+          <div class="absolute inset-0 bg-primary/20 blur-[80px] rounded-full scale-75"></div>
+          <img src="images/hero.png" alt="NexVault App" class="relative w-full max-w-lg drop-shadow-2xl hover:scale-[1.02] transition-transform duration-700">
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
+  </section>
+
+  <!-- SECTION: Marquee — Infinite horizontal scroll of partner logos -->
+  <section class="py-12 border-y border-white/5 overflow-hidden">
+    <div class="marquee">
+      <div class="marquee-content">
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Visa</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Mastercard</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Apple Pay</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Google Pay</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Stripe</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Plaid</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Coinbase</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Visa</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Mastercard</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Apple Pay</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Google Pay</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Stripe</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Plaid</span>
+        <span class="text-text-muted/40 font-display text-xl font-semibold px-8">Coinbase</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Features — 3-col grid of glass-cards with generated images -->
+  <section id="features" class="py-16 lg:py-20 relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+        <span class="text-accent text-sm font-semibold tracking-widest uppercase">Por Que NexVault</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mt-4 tracking-tight">Construido para el futuro de las&nbsp;finanzas</h2>
+        <p class="text-text-muted mt-6 text-lg leading-relaxed">Tres pilares que hacen de NexVault la billetera digital mas confiable del mercado.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Security -->
+        <div class="glass-card group reveal">
+          <div class="relative h-48 mb-6 overflow-hidden rounded-xl">
+            <img src="images/feature-security.png" alt="Security" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            </div>
+            <h3 class="font-display text-xl font-semibold">Seguridad de Grado Militar</h3>
+          </div>
+          <p class="text-text-muted text-sm leading-relaxed">Encriptacion AES de 256 bits, autenticacion biometrica y deteccion de fraude en tiempo real protegen cada transaccion que realizas.</p>
+        </div>
+
+        <!-- Speed -->
+        <div class="glass-card group reveal" style="animation-delay: 0.1s">
+          <div class="relative h-48 mb-6 overflow-hidden rounded-xl">
+            <img src="images/feature-speed.png" alt="Speed" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h3 class="font-display text-xl font-semibold">Transferencias Instantaneas</h3>
+          </div>
+          <p class="text-text-muted text-sm leading-relaxed">Envia dinero a cualquier lugar en menos de 3 segundos. Nuestra red propia liquida transacciones 100 veces mas rapido que los bancos tradicionales.</p>
+        </div>
+
+        <!-- Global -->
+        <div class="glass-card group reveal" style="animation-delay: 0.2s">
+          <div class="relative h-48 mb-6 overflow-hidden rounded-xl">
+            <img src="images/feature-global.png" alt="Global" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+          </div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="font-display text-xl font-semibold">180+ Paises</h3>
+          </div>
+          <p class="text-text-muted text-sm leading-relaxed">Soporte multimoneda con tasas de conversion en tiempo real. Cero comisiones ocultas en transferencias internacionales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: How It Works — 3-step numbered flow with connecting line -->
+  <section id="how-it-works" class="py-16 lg:py-20 relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+        <span class="text-accent text-sm font-semibold tracking-widest uppercase">Como Funciona</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mt-4 tracking-tight">Listo en&nbsp;minutos</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 relative">
+        <div class="hidden md:block absolute top-16 left-[16%] right-[16%] h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+
+        <div class="text-center reveal">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-6 relative">
+            <span class="font-display font-bold text-primary text-lg">1</span>
+          </div>
+          <h3 class="font-display text-lg font-semibold mb-3">Crea tu Cuenta</h3>
+          <p class="text-text-muted text-sm leading-relaxed">Registrate en 30 segundos solo con tu correo. Sin papeleo, sin ir al banco.</p>
+        </div>
+
+        <div class="text-center reveal" style="animation-delay: 0.15s">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-6">
+            <span class="font-display font-bold text-primary text-lg">2</span>
+          </div>
+          <h3 class="font-display text-lg font-semibold mb-3">Vincula tu Banco</h3>
+          <p class="text-text-muted text-sm leading-relaxed">Conecta tu banco o tarjeta de forma segura. Tus credenciales nunca se almacenan.</p>
+        </div>
+
+        <div class="text-center reveal" style="animation-delay: 0.3s">
+          <div class="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center mx-auto mb-6">
+            <span class="font-display font-bold text-accent text-lg">3</span>
+          </div>
+          <h3 class="font-display text-lg font-semibold mb-3">Envia y Gana</h3>
+          <p class="text-text-muted text-sm leading-relaxed">Transfiere dinero al instante, gana cashback en cada transaccion y mira como crece tu saldo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Stats — 4-col stat counters inside glass-card-lg -->
+  <section id="stats" class="py-16 lg:py-20 relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="glass-card-lg grid sm:grid-cols-2 lg:grid-cols-4 gap-8 reveal">
+        <div class="text-center">
+          <p class="font-display text-4xl sm:text-5xl font-bold text-gradient">S/ 8.5B</p>
+          <p class="text-text-muted text-sm mt-2">Volumen Transaccionado</p>
+        </div>
+        <div class="text-center">
+          <p class="font-display text-4xl sm:text-5xl font-bold text-white">180+</p>
+          <p class="text-text-muted text-sm mt-2">Paises Soportados</p>
+        </div>
+        <div class="text-center">
+          <p class="font-display text-4xl sm:text-5xl font-bold text-accent">99.99%</p>
+          <p class="text-text-muted text-sm mt-2">Garantia de Disponibilidad</p>
+        </div>
+        <div class="text-center">
+          <p class="font-display text-4xl sm:text-5xl font-bold text-white">< 3s</p>
+          <p class="text-text-muted text-sm mt-2">Velocidad de Transferencia</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Testimonials — 3-col grid of glass-cards with star ratings -->
+  <section class="py-16 lg:py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+        <span class="text-accent text-sm font-semibold tracking-widest uppercase">Testimonios</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mt-4 tracking-tight">Miles ya confian en nosotros</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="glass-card reveal">
+          <div class="flex items-center gap-1 mb-4">
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-text-main text-sm leading-relaxed mb-6">"Envie S/ 5,000 a mi familia en provincia en 2 segundos. Sin comisiones. NexVault es realmente el futuro del dinero."</p>
+          <div class="flex items-center gap-3">
+            <img src="images/avatar-carolina.png" alt="Carolina Mendoza" class="w-10 h-10 rounded-full object-cover border-2 border-primary/30">
+            <div>
+              <p class="text-sm font-semibold">Carolina Mendoza</p>
+              <p class="text-xs text-text-muted">Diseñadora Freelance</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card reveal" style="animation-delay: 0.1s">
+          <div class="flex items-center gap-1 mb-4">
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-text-main text-sm leading-relaxed mb-6">"Como fundador de startup, necesito pagar a colaboradores en 8 paises. NexVault lo maneja todo sin friccion. Un cambio total."</p>
+          <div class="flex items-center gap-3">
+            <img src="images/avatar-diego.png" alt="Diego Ramirez" class="w-10 h-10 rounded-full object-cover border-2 border-primary/30">
+            <div>
+              <p class="text-sm font-semibold">Diego Ramirez</p>
+              <p class="text-xs text-text-muted">CEO, BuildStack</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card reveal" style="animation-delay: 0.2s">
+          <div class="flex items-center gap-1 mb-4">
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-text-main text-sm leading-relaxed mb-6">"El cashback en cada transaccion es increible. He ganado S/ 1,200 solo por gastar normalmente. Es basicamente dinero gratis."</p>
+          <div class="flex items-center gap-3">
+            <img src="images/avatar-valeria.png" alt="Valeria Torres" class="w-10 h-10 rounded-full object-cover border-2 border-accent/30">
+            <div>
+              <p class="text-sm font-semibold">Valeria Torres</p>
+              <p class="text-xs text-text-muted">Cientifica de Datos</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: CTA — Final conversion block with gradient glow and primary button -->
+  <section id="cta" class="py-16 lg:py-20 relative">
+    <div class="max-w-4xl mx-auto px-6 text-center reveal">
+      <div class="glass-card-lg relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/15 blur-[120px] rounded-full"></div>
+        <div class="relative z-10 py-4">
+          <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+            Listo para tomar<br><span class="text-gradient">el control?</span>
+          </h2>
+          <p class="text-text-muted text-lg max-w-xl mx-auto mb-8 leading-relaxed">
+            Unete a las 12,000+ personas que ya dieron el salto. Sin comisiones los primeros 3 meses.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#" class="btn-primary px-10 py-4 rounded-2xl font-semibold text-lg inline-flex items-center justify-center gap-2 group">
+              Crear Cuenta Gratis
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+          <p class="text-text-muted text-xs mt-4">Sin tarjeta de credito. Cancela cuando quieras.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Footer — 4-col grid with logo, product, company, legal links -->
+  <footer class="border-t border-white/5 py-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-display font-bold text-sm">N</div>
+            <span class="font-display font-bold text-lg">NexVault</span>
+          </div>
+          <p class="text-text-muted text-sm leading-relaxed">La billetera digital de nueva generacion para un mundo sin fronteras.</p>
+        </div>
+        <div>
+          <h4 class="font-display font-semibold text-sm mb-4 text-text-muted uppercase tracking-wider">Producto</h4>
+          <ul class="space-y-3">
+            <li><a href="#features" class="text-sm text-text-muted hover:text-white transition-colors">Beneficios</a></li>
+            <li><a href="#cta" class="text-sm text-text-muted hover:text-white transition-colors">Precios</a></li>
+            <li><a href="#" class="text-sm text-text-muted hover:text-white transition-colors">Seguridad</a></li>
+            <li><a href="#" class="text-sm text-text-muted hover:text-white transition-colors">API</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display font-semibold text-sm mb-4 text-text-muted uppercase tracking-wider">Empresa</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-sm text-text-muted hover:text-white transition-colors">Nosotros</a></li>
+            <li><a href="#" class="text-sm text-text-muted hover:text-white transition-colors">Empleos</a></li>
+            <li><a href="#" class="text-sm text-text-muted hover:text-white transition-colors">Blog</a></li>
+            <li><a href="#" class="text-sm text-text-muted hover:text-white transition-colors">Prensa</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-display font-semibold text-sm mb-4 text-text-muted uppercase tracking-wider">Legal</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-sm text-text-muted hover:text-white transition-colors">Privacidad</a></li>
+            <li><a href="#" class="text-sm text-text-muted hover:text-white transition-colors">Terminos</a></li>
+            <li><a href="#" class="text-sm text-text-muted hover:text-white transition-colors">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-text-muted text-xs">&copy; 2026 NexVault. Todos los derechos reservados.</p>
+        <div class="flex gap-6">
+          <a href="#" class="text-text-muted hover:text-white transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
+          <a href="#" class="text-text-muted hover:text-white transition-colors"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+
+  <!-- Animated dot grid for hero background -->
+  <script>
+  (function() {
+    const canvas = document.getElementById('hero-grid');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w, h, dots = [], mouse = { x: -1000, y: -1000 }, time = 0;
+    const spacing = 40;
+    const primaryColor = [99, 102, 241];
+    const accentColor = [52, 211, 153];
+
+    function resize() {
+      const hero = canvas.parentElement;
+      w = canvas.width = hero.offsetWidth;
+      h = canvas.height = hero.offsetHeight;
+      dots = [];
+      for (let x = spacing; x < w; x += spacing) {
+        for (let y = spacing; y < h; y += spacing) {
+          dots.push({ x, y });
+        }
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      time += 0.008;
+      for (const dot of dots) {
+        const dx = dot.x - mouse.x;
+        const dy = dot.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const wave = Math.sin(dot.x * 0.01 + dot.y * 0.01 + time * 3) * 0.5 + 0.5;
+        const mouseInfluence = Math.max(0, 1 - dist / 200);
+        const size = 1 + wave * 0.8 + mouseInfluence * 3;
+        const baseOpacity = 0.06 + wave * 0.06;
+        const opacity = baseOpacity + mouseInfluence * 0.5;
+        const color = mouseInfluence > 0.1 ? accentColor : primaryColor;
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${color[0]},${color[1]},${color[2]},${opacity})`;
+        if (mouseInfluence > 0.2) {
+          ctx.shadowColor = `rgba(${color[0]},${color[1]},${color[2]},0.6)`;
+          ctx.shadowBlur = 8;
+        } else {
+          ctx.shadowBlur = 0;
+        }
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+
+    canvas.parentElement.addEventListener('mousemove', function(e) {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    canvas.parentElement.addEventListener('mouseleave', function() {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    });
+
+    window.addEventListener('resize', resize);
+    resize();
+    draw();
+  })();
+  </script>
+</body>
+</html>

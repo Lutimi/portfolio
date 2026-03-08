@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+---
+
+<Layout title="Desafíos — Luis Ticona">
+  <Header />
+
+  <!-- Gate: Password screen -->
+  <section id="gate" class="min-h-screen flex items-center justify-center pt-24 pb-16 px-6">
+    <div class="glass-card p-8 sm:p-12 max-w-md w-full text-center relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -top-20 -right-20 w-48 h-48 bg-primary/10 rounded-full blur-[60px]"></div>
+        <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-accent/8 rounded-full blur-[50px]"></div>
+      </div>
+
+      <div class="relative">
+        <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-surface flex items-center justify-center">
+          <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        </div>
+
+        <h1 class="font-display text-2xl font-bold text-text-main mb-2">Zona de Desafíos</h1>
+        <p class="text-sm text-text-muted mb-8">Ingresa la clave para acceder a mis trabajos de desafíos y experimentos.</p>
+
+        <form id="gate-form" class="space-y-4">
+          <div class="relative">
+            <input
+              type="password"
+              id="gate-password"
+              placeholder="Clave de acceso"
+              autocomplete="off"
+              class="w-full px-4 py-3 bg-surface border border-border rounded-xl text-text-main placeholder:text-text-dim focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all text-sm"
+            />
+          </div>
+          <p id="gate-error" class="text-xs text-red-400 hidden">Clave incorrecta. Intenta de nuevo.</p>
+          <button type="submit" class="btn-primary w-full justify-center text-sm">
+            Acceder
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content: Challenges (hidden until authenticated) -->
+  <section id="challenges-content" class="hidden pt-24 pb-16 min-h-screen">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mb-16">
+        <span class="section-label mb-4 block">
+          <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          Zona de Desafíos
+        </span>
+        <h1 class="font-display text-3xl sm:text-4xl font-bold text-text-main mb-2">
+          Mis Desafíos
+        </h1>
+        <p class="text-text-muted max-w-lg">
+          Proyectos web, experimentos y trabajos realizados durante desafíos de desarrollo y diseño.
+        </p>
+      </div>
+
+      <!-- Challenges grid -->
+      <div id="challenges-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Empty state -->
+        <div id="empty-state" class="col-span-full glass-card p-12 text-center">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-surface flex items-center justify-center">
+            <svg class="w-8 h-8 text-text-dim" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+          </div>
+          <h3 class="font-display text-lg font-semibold text-text-main mb-2">Próximamente</h3>
+          <p class="text-sm text-text-muted max-w-md mx-auto">
+            Aquí aparecerán los proyectos de mis desafíos. Estoy preparando contenido nuevo — vuelve pronto.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Back link -->
+      <div class="mt-16 text-center">
+        <a href="/" class="btn-ghost text-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+          </svg>
+          Volver al portfolio
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<script>
+  const CORRECT_HASH = '85949e80d7e700a792a78be22b0f6002dfc661990a52bbf1ffa29fc57feed2ae'
+
+  async function sha256(message: string): Promise<string> {
+    const msgBuffer = new TextEncoder().encode(message)
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer)
+    const hashArray = Array.from(new Uint8Array(hashBuffer))
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+  }
+
+  const gate = document.getElementById('gate')!
+  const content = document.getElementById('challenges-content')!
+  const form = document.getElementById('gate-form')!
+  const input = document.getElementById('gate-password') as HTMLInputElement
+  const error = document.getElementById('gate-error')!
+
+  if (sessionStorage.getItem('challenges-auth') === 'true') {
+    gate.classList.add('hidden')
+    content.classList.remove('hidden')
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const hash = await sha256(input.value)
+
+    if (hash === CORRECT_HASH) {
+      sessionStorage.setItem('challenges-auth', 'true')
+      gate.classList.add('hidden')
+      content.classList.remove('hidden')
+      error.classList.add('hidden')
+    } else {
+      error.classList.remove('hidden')
+      input.value = ''
+      input.focus()
+    }
+  })
+</script>

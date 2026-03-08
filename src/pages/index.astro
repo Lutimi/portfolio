@@ -16,6 +16,36 @@ const projects = [
     country: 'Perú',
     year: '2026',
   },
+  {
+    title: 'Web DiveRent',
+    description: 'Diseño web para DiveRent, plataforma de alquiler de vehículos del grupo Divemotor. Experiencia de usuario enfocada en conversión y claridad visual.',
+    image: '/images/diverent-cover.svg',
+    tags: ['Figma', 'Web Design', 'UI/UX', 'Automotive'],
+    href: 'https://www.behance.net/gallery/215757979/Web-DiveRent',
+    industry: 'Automotive',
+    country: 'Perú',
+    year: '2024',
+  },
+  {
+    title: 'Plataforma WIKIVI',
+    description: 'Plataforma web de banco de videos culturales. Diseño modular con Atomic Design en Figma, permitiendo a creadores audiovisuales ofertar su contenido.',
+    image: '/images/wikivi-cover.svg',
+    tags: ['Figma', 'Atomic Design', 'UX Research', 'Plataforma Digital'],
+    href: 'https://www.behance.net/gallery/160250757/Plataforma-WIKIVI',
+    industry: 'Cultura & Media',
+    country: 'Perú',
+    year: '2022',
+  },
+  {
+    title: 'TuRuta',
+    description: 'App mobile para encontrar la mejor ruta de transporte público en Lima. Case study completo con research, prototipado y diseño de alta fidelidad.',
+    image: '/images/turuta-cover.png',
+    tags: ['Figma', 'Mobile App', 'UX Research', 'Prototipado'],
+    href: '#',
+    industry: 'Transporte',
+    country: 'Perú',
+    year: '2022',
+  },
 ]
 
 const skills = [
@@ -171,17 +201,17 @@ const experience = [
         ))}
 
         <!-- Placeholder -->
-        <div class="glass-card flex items-center justify-center min-h-[320px] border-dashed border-border">
+        <a href="/desafios" class="glass-card flex items-center justify-center min-h-[320px] border-dashed border-border group">
           <div class="text-center px-6">
-            <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-surface flex items-center justify-center">
-              <svg class="w-6 h-6 text-text-dim" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4" />
+            <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-surface flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+              <svg class="w-6 h-6 text-text-dim group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <p class="text-sm text-text-dim font-medium">Próximo proyecto</p>
-            <p class="text-xs text-text-dim mt-1">En desarrollo</p>
+            <p class="text-sm text-text-dim font-medium group-hover:text-text-main transition-colors">Zona de Desafíos</p>
+            <p class="text-xs text-text-dim mt-1">Acceso con clave</p>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>

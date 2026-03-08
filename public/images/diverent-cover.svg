@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e94560"/>
+      <stop offset="100%" stop-color="#ff6b6b"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect x="40" y="180" width="120" height="4" rx="2" fill="url(#accent)"/>
+  <text x="40" y="230" font-family="system-ui,sans-serif" font-weight="700" font-size="48" fill="#f8fafc">DiveRent</text>
+  <text x="40" y="265" font-family="system-ui,sans-serif" font-weight="400" font-size="18" fill="#94a3b8">Alquiler de vehículos  Web Design</text>
+  <rect x="500" y="100" width="260" height="250" rx="16" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <circle cx="630" cy="200" r="40" fill="none" stroke="url(#accent)" stroke-width="2"/>
+  <path d="M615 200 L645 200 M630 185 L630 215" stroke="url(#accent)" stroke-width="2" stroke-linecap="round"/>
+  <rect x="560" y="260" width="140" height="12" rx="6" fill="rgba(255,255,255,0.08)"/>
+  <rect x="580" y="285" width="100" height="8" rx="4" fill="rgba(255,255,255,0.05)"/>
+</svg>

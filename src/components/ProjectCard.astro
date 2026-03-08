@@ -1,0 +1,71 @@
+---
+interface Props {
+  title: string
+  description: string
+  image: string
+  tags: string[]
+  href: string
+  industry: string
+  country: string
+  year: string
+}
+
+const { title, description, image, tags, href, industry, country, year } = Astro.props
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener"
+  class="glass-card group block overflow-hidden"
+>
+  <!-- Image -->
+  <div class="relative overflow-hidden aspect-video">
+    <img
+      src={image}
+      alt={title}
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
+
+    <!-- Floating badge -->
+    <div class="absolute top-4 right-4">
+      <span class="tag">{industry}</span>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="p-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="text-xs text-text-dim">{country}</span>
+      <span class="text-text-dim">·</span>
+      <span class="text-xs text-text-dim">{year}</span>
+    </div>
+
+    <h3 class="font-display text-xl font-semibold text-text-main group-hover:text-primary transition-colors mb-2">
+      {title}
+    </h3>
+
+    <p class="text-sm text-text-muted leading-relaxed mb-4">
+      {description}
+    </p>
+
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-2">
+      {tags.map(tag => (
+        <span class="text-xs px-2 py-1 rounded-md bg-surface text-text-dim border border-border">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    <!-- Arrow -->
+    <div class="mt-4 flex items-center gap-2 text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+      Ver proyecto
+      <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </div>
+  </div>
+</a>

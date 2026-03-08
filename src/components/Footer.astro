@@ -1,0 +1,60 @@
+---
+const currentYear = new Date().getFullYear()
+---
+
+<footer id="contacto" class="border-t border-border mt-32">
+  <div class="mx-auto max-w-7xl px-6 py-16">
+    <div class="grid md:grid-cols-3 gap-12">
+      <!-- Brand -->
+      <div>
+        <a href="/" class="font-display text-2xl font-bold tracking-tight text-text-main">
+          LT<span class="text-primary">.</span>
+        </a>
+        <p class="mt-4 text-sm text-text-muted leading-relaxed max-w-xs">
+          Product Designer Senior & Software Engineer. Diseñando experiencias digitales desde Lima, Perú.
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <h4 class="font-display font-semibold text-sm text-text-main mb-4">Navegación</h4>
+        <ul class="space-y-2">
+          <li><a href="#proyectos" class="text-sm text-text-muted hover:text-text-main transition-colors">Proyectos</a></li>
+          <li><a href="#sobre-mi" class="text-sm text-text-muted hover:text-text-main transition-colors">Sobre mí</a></li>
+          <li><a href="#experiencia" class="text-sm text-text-muted hover:text-text-main transition-colors">Experiencia</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="font-display font-semibold text-sm text-text-main mb-4">Contacto</h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="mailto:lutimi19@gmail.com" class="text-sm text-text-muted hover:text-primary transition-colors">
+              lutimi19@gmail.com
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/Lutimi" target="_blank" rel="noopener" class="text-sm text-text-muted hover:text-primary transition-colors">
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="https://www.behance.net/luisticona1" target="_blank" rel="noopener" class="text-sm text-text-muted hover:text-primary transition-colors">
+              Behance
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-text-dim">
+        &copy; {currentYear} Luis Misael Ticona Miranda. Todos los derechos reservados.
+      </p>
+      <p class="text-xs text-text-dim">
+        Hecho con <span class="text-primary">Astro</span> + <span class="text-accent">Tailwind CSS</span>
+      </p>
+    </div>
+  </div>
+</footer>

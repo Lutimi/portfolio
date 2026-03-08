@@ -1,0 +1,46 @@
+---
+interface Props {
+  role: string
+  company: string
+  location: string
+  period: string
+  highlights: string[]
+  current?: boolean
+}
+
+const { role, company, location, period, highlights, current = false } = Astro.props
+---
+
+<div class="relative pl-8 pb-12 last:pb-0 group">
+  <!-- Timeline line -->
+  <div class="absolute left-0 top-2 bottom-0 w-px bg-border group-last:bg-transparent"></div>
+
+  <!-- Timeline dot -->
+  <div class:list={[
+    "absolute left-0 top-2 w-2 h-2 rounded-full -translate-x-[3.5px]",
+    current ? "bg-accent shadow-[0_0_8px_rgba(52,211,153,0.5)]" : "bg-text-dim"
+  ]}></div>
+
+  <!-- Content -->
+  <div>
+    <div class="flex flex-wrap items-center gap-2 mb-1">
+      <h4 class="font-display font-semibold text-text-main">{role}</h4>
+      {current && (
+        <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-accent/10 text-accent border border-accent/20">
+          Actual
+        </span>
+      )}
+    </div>
+    <p class="text-sm text-primary font-medium mb-1">{company}</p>
+    <p class="text-xs text-text-dim mb-3">{location} · {period}</p>
+
+    <ul class="space-y-1.5">
+      {highlights.map(h => (
+        <li class="text-sm text-text-muted leading-relaxed flex gap-2">
+          <span class="text-primary mt-1 shrink-0">›</span>
+          <span>{h}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>

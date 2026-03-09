@@ -129,8 +129,9 @@ const experience = [
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[200px]"></div>
     </div>
 
-    <div class="relative mx-auto max-w-7xl px-6 w-full">
-      <div class="max-w-3xl">
+    <div class="relative mx-auto max-w-7xl px-6 w-full grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Left: Text -->
+      <div>
         <div class="animate-fade-up">
           <span class="section-label mb-6 block">
             <span class="w-2 h-2 rounded-full bg-accent inline-block animate-pulse"></span>
@@ -163,7 +164,6 @@ const experience = [
           </a>
         </div>
 
-        <!-- Quick stats -->
         <div class="animate-fade-up-delay-3 mt-16 flex gap-12">
           <div>
             <p class="font-display text-3xl font-bold text-text-main">+4</p>
@@ -177,6 +177,61 @@ const experience = [
             <p class="font-display text-3xl font-bold text-text-main">UPC</p>
             <p class="text-sm text-text-muted mt-1">Ing. de Software</p>
           </div>
+        </div>
+      </div>
+
+      <!-- Right: Animated visual -->
+      <div class="hidden lg:flex items-center justify-center relative hero-visual">
+        <div class="relative w-full aspect-square max-w-lg">
+          <!-- Orbital rings -->
+          <div class="hero-ring-1 absolute inset-4 rounded-full border border-primary/15"></div>
+          <div class="hero-ring-2 absolute inset-12 rounded-full border border-accent/10"></div>
+          <div class="hero-ring-3 absolute inset-20 rounded-full border border-primary/20 border-dashed"></div>
+
+          <!-- Floating orbs -->
+          <div class="hero-orb-1 absolute w-4 h-4 rounded-full bg-primary shadow-[0_0_20px_rgba(99,102,241,0.6)]" style="top: 10%; left: 50%;"></div>
+          <div class="hero-orb-2 absolute w-3 h-3 rounded-full bg-accent shadow-[0_0_16px_rgba(52,211,153,0.6)]" style="top: 50%; right: 5%;"></div>
+          <div class="hero-orb-3 absolute w-5 h-5 rounded-full bg-primary-hover shadow-[0_0_24px_rgba(129,140,248,0.5)]" style="bottom: 15%; left: 20%;"></div>
+          <div class="hero-orb-4 absolute w-2 h-2 rounded-full bg-accent-hover shadow-[0_0_12px_rgba(110,231,183,0.5)]" style="top: 30%; left: 15%;"></div>
+
+          <!-- Center element -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="hero-center-glow relative w-32 h-32 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 backdrop-blur-sm border border-primary/20 flex items-center justify-center">
+              <svg class="w-14 h-14 text-primary/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+              </svg>
+              <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 animate-pulse"></div>
+            </div>
+          </div>
+
+          <!-- Floating glass cards -->
+          <div class="hero-card-1 absolute glass-card px-4 py-3 !rounded-xl" style="top: 8%; right: 0;">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-accent"></div>
+              <span class="text-xs font-medium text-text-muted">Design System</span>
+            </div>
+          </div>
+
+          <div class="hero-card-2 absolute glass-card px-4 py-3 !rounded-xl" style="bottom: 20%; right: -5%;">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-primary"></div>
+              <span class="text-xs font-medium text-text-muted">UX Research</span>
+            </div>
+          </div>
+
+          <div class="hero-card-3 absolute glass-card px-4 py-3 !rounded-xl" style="bottom: 5%; left: 10%;">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 rounded-full bg-accent-hover"></div>
+              <span class="text-xs font-medium text-text-muted">Prototipado</span>
+            </div>
+          </div>
+
+          <!-- Particle dots -->
+          <div class="hero-particle absolute w-1.5 h-1.5 rounded-full bg-primary/40" style="top: 25%; right: 30%; animation-delay: 0s;"></div>
+          <div class="hero-particle absolute w-1 h-1 rounded-full bg-accent/50" style="top: 60%; left: 30%; animation-delay: 1s;"></div>
+          <div class="hero-particle absolute w-1.5 h-1.5 rounded-full bg-primary/30" style="bottom: 30%; right: 20%; animation-delay: 2s;"></div>
+          <div class="hero-particle absolute w-1 h-1 rounded-full bg-accent/40" style="top: 40%; right: 45%; animation-delay: 0.5s;"></div>
+          <div class="hero-particle absolute w-1 h-1 rounded-full bg-primary-hover/30" style="top: 70%; left: 45%; animation-delay: 1.5s;"></div>
         </div>
       </div>
     </div>

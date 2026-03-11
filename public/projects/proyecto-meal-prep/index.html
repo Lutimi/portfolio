@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GymRat Provisions | Tu Nutrición Fitness Simplificada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00D26A;
+            --primary-dark: #00B359;
+            --secondary: #1A1A1A;
+            --accent: #FF6B35;
+            --neutral: #F5F5F5;
+            --text-light: #666;
+            --text-dark: #1A1A1A;
+            --white: #FFFFFF;
+            --gradient-hero: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 50%, #1A1A1A 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 210, 106, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('src/images/hero-gym-meal.png') center right/contain no-repeat;
+            opacity: 0.9;
+            z-index: 1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(26, 26, 26, 1) 0%, rgba(26, 26, 26, 0.8) 50%, transparent 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 3;
+            width: 100%;
+        }
+
+        .hero-text {
+            max-width: 650px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 210, 106, 0.15);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0, 210, 106, 0.3);
+        }
+
+        .hero-badge::before {
+            content: '🔥';
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 12px;
+            background: var(--primary);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 210, 106, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--white);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 8rem 2rem;
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: var(--neutral);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .problem-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--secondary);
+        }
+
+        .problem-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 8rem 2rem;
+            background: var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: var(--primary);
+            opacity: 0.05;
+            border-radius: 50%;
+            filter: blur(100px);
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .solution-image {
+            position: relative;
+        }
+
+        .solution-image img {
+            width: 100%;
+            border-radius: 30px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .solution-content .section-tag {
+            color: var(--primary);
+        }
+
+        .solution-content .section-title {
+            color: var(--white);
+            text-align: left;
+            font-size: 2.5rem;
+        }
+
+        .solution-content .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .solution-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-text p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 8rem 2rem;
+            background: var(--neutral);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .step {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .step p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 8rem 2rem;
+            background: var(--white);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border: 2px solid var(--neutral);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, var(--white) 0%, rgba(0, 210, 106, 0.05) 100%);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .pricing-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-price {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .pricing-period {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--neutral);
+            font-size: 0.95rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pricing-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        .pricing-card.popular .pricing-btn {
+            background: var(--accent);
+        }
+
+        .pricing-card.popular .pricing-btn:hover {
+            background: #E55A2B;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 8rem 2rem;
+            background: var(--secondary);
+        }
+
+        .testimonials .section-title {
+            color: var(--white);
+        }
+
+        .testimonials .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .testimonial-stars {
+            color: #FFD700;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .testimonial-info h4 {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .testimonial-info p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .cta-btn {
+            background: var(--white);
+            color: var(--primary);
+            padding: 1.25rem 3rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            padding: 4rem 2rem 2rem;
+            color: var(--white);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+        }
+
+        .footer-brand .logo {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-column h4 {
+            color: var(--white);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .problem-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .solution-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero::after {
+                width: 100%;
+                background: rgba(26, 26, 26, 0.95);
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">GymRat<span>Provisions</span> 💪</div>
+            <ul class="nav-links">
+                <li><a href="#problema">El Problema</a></li>
+                <li><a href="#solucion">Solución</a></li>
+                <li><a href="#como-funciona">Cómo Funciona</a></li>
+                <li><a href="#precios">Precios</a></li>
+            </ul>
+            <a href="#empezar" class="nav-cta">Empieza Ahora</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">Nuevo en Perú</div>
+                <h1>Come como un atleta <span>sin cocinar</span> como un chef</h1>
+                <p>Tu nutricionista, tu shopper personal y tu chef, todo en uno. Recibe comidas fitness preparadas según TU plan de alimentación. Sólo calienta, combina y come.</p>
+                <div class="hero-buttons">
+                    <a href="#empezar" class="btn-primary">Ver Planes 🚀</a>
+                    <a href="#como-funciona" class="btn-secondary">Cómo Funciona</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">10h</span>
+                        <span class="stat-label">Ahorradas/semana</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">150g+</span>
+                        <span class="stat-label">Proteína diaria</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">4.9★</span>
+                        <span class="stat-label">Rating clientes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problema">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">¿Te Identificas?</span>
+                <h2 class="section-title">El GymRat Moderno Tiene 4 Problemas</h2>
+                <p class="section-subtitle">El 67% abandona sus objetivos de fitness por estas razones. No seas uno de ellos.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">⏰</div>
+                    <h3>Falta de Tiempo</h3>
+                    <p>Trabajo + Gym = 12-14 horas fuera de casa. ¿Cuándo cocinas?</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🤷‍♂️</div>
+                    <h3>No Sabes Qué Comprar</h3>
+                    <p>Mercados abrumadores. ¿Qué tiene proteína? ¿Qué son macros?</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">😴</div>
+                    <h3>Flojera Post-Gym</h3>
+                    <p>Después de 2 horas de pesas, lo último que quieres es cocinar.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🗑️</div>
+                    <h3>Compras Improvisadas</h3>
+                    <p>50% de lo que compras se pierde. Sin plan = desperdicio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution" id="solucion">
+        <div class="container">
+            <div class="solution-grid">
+                <div class="solution-image">
+                    <img src="src/images/meal-prep-containers.png" alt="Meal Prep Saludable">
+                </div>
+                <div class="solution-content">
+                    <span class="section-tag">La Solución</span>
+                    <h2 class="section-title">Tu Personal Shopper Fitness</h2>
+                    <p class="section-subtitle">Un equipo dedicado a tu nutrición. Desde el mercado hasta tu refrigerador.</p>
+                    <div class="solution-features">
+                        <div class="feature">
+                            <div class="feature-icon">🥗</div>
+                            <div class="feature-text">
+                                <h4>Plan Personalizado</h4>
+                                <p>Tu nutricionista diseña tu menú semanal basado en tus objetivos (volumen, definición, mantenimiento)</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">🛒</div>
+                            <div class="feature-text">
+                                <h4>Compras Inteligentes</h4>
+                                <p>Nuestro shopper va a mercados locales (Surquillo, Magdalena) por productos frescos y económicos</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">👨‍🍳</div>
+                            <div class="feature-text">
+                                <h4>Preparación Profesional</h4>
+                                <p>Chef fitness pre-cocina y porciona tus comidas. Sólo calienta 3-5 minutos</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">🚚</div>
+                            <div class="feature-text">
+                                <h4>Delivery a Tu Puerta</h4>
+                                <p>Domingo por la noche: tu semana de comidas saludables llega fresca a tu hogar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="como-funciona">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Proceso</span>
+                <h2 class="section-title">Así de Simple</h2>
+                <p class="section-subtitle">4 pasos para transformar tu alimentación fitness</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Consulta Nutricional</h3>
+                    <p>Hablas con nuestro nutricionista deportivo. Evalúa tu meta (volumen/definición), calcula tus macros y crea tu plan semanal personalizado.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Selecciona Tu Plan</h3>
+                    <p>Elige entre Starter, Pro o Elite. Define cuántas comidas necesitas (10, 20 o 30 por semana). Cancela o modifica cuando quieras.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Preparación & Delivery</h3>
+                    <p>Nuestro equipo compra en mercados locales, pre-cocina tus comidas con medidas exactas, y te las entrega el domingo listas para la semana.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="precios">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Planes</span>
+                <h2 class="section-title">Elige Tu Nivel de GymRat</h2>
+                <p class="section-subtitle">Desde el iniciado hasta el atleta de competencia. Cancela cuando quieras.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-name">Starter</div>
+                    <div class="pricing-desc">Para el que empieza</div>
+                    <div class="pricing-price">S/199<span>/semana</span></div>
+                    <div class="pricing-period">~S/20 por comida</div>
+                    <ul class="pricing-features">
+                        <li>10 comidas/semana (almuerzo o cena)</li>
+                        <li>Consulta nutricionista inicial</li>
+                        <li>Compras básicas incluidas</li>
+                        <li>Guía de preparación rápida</li>
+                        <li>Delivery domingo</li>
+                    </ul>
+                    <button class="pricing-btn">Elegir Starter</button>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">MÁS POPULAR</div>
+                    <div class="pricing-name">Pro</div>
+                    <div class="pricing-desc">Para el comprometido</div>
+                    <div class="pricing-price">S/349<span>/semana</span></div>
+                    <div class="pricing-period">~S/17 por comida</div>
+                    <ul class="pricing-features">
+                        <li>20 comidas/semana (almuerzo + cena)</li>
+                        <li>2 consultas nutricionista/mes</li>
+                        <li>Snacks fitness incluidos</li>
+                        <li>App de seguimiento de macros</li>
+                        <li>15% descuento suplementos</li>
+                        <li>Chat con nutricionista</li>
+                    </ul>
+                    <button class="pricing-btn">Elegir Pro</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-name">Elite</div>
+n                    <div class="pricing-desc">Para el atleta serio</div>
+                    <div class="pricing-price">S/549<span>/semana</span></div>
+                    <div class="pricing-period">~S/18 por comida</div>
+                    <ul class="pricing-features">
+                        <li>30 comidas/semana (desayuno, almuerzo, cena, snack)</li>
+                        <li>4 consultas nutricionista/mes</li>
+                        <li>Menús especiales (keto, vegano, etc)</li>
+                        <li>Grupo VIP GymRats</li>
+                        <li>Delivery sábado y miércoles</li>
+                        <li>Eventos mensuales exclusivos</li>
+                    </ul>
+                    <button class="pricing-btn">Elegir Elite</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Testimonios</span>
+                <h2 class="section-title">Lo Que Dicen Nuestros GymRats</h2>
+                <p class="section-subtitle">Más de 200 atletas ya simplificaron su nutrición</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Dejé de comer pollo hervido 5 veces por semana. Ahora tengo variedad real: quinoa con atún, salmón con camote, pollo a la brasa light. Mi coach de nutrición está feliz con mis macros."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">LC</div>
+                        <div class="testimonial-info">
+                            <h4>Luis Carranza</h4>
+                            <p>CrossFit athlete • Miraflores</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Mi problema era el tiempo. Llegaba del gym a las 9pm y no quería cocinar. Ahora en 5 minutos tengo mi cena lista. He ganado 4kg de músculo en 3 meses."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AR</div>
+                        <div class="testimonial-info">
+                            <h4>Andrea Ruiz</h4>
+                            <p>Powerlifter • San Isidro</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Lo que más me gusta es que trabajan CON mi nutricionista. No es un menú genérico, es MI plan. Además el precio es mucho más barato que los servicios gringos."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MT</div>
+                        <div class="testimonial-info">
+                            <h4>Marco Torres</h4>
+                            <p>Bodybuilder • La Molina</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="empezar">
+        <h2 class="cta-title">¿Listo para Transformar Tu Alimentación?</h2>
+        <p class="cta-subtitle">Prueba tu primera semana con 20% de descuento. Sin compromisos. Cancela cuando quieras.</p>
+        <a href="#" class="cta-btn">Empezar Ahora - 20% OFF 🚀</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">GymRat<span>Provisions</span> 💪</div>
+                <p>Tu nutricionista, tu shopper y tu chef personal, todo en uno. El primer servicio de compras + meal prep para atletas peruanos.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Producto</h4>
+                <ul>
+                    <li><a href="#">Planes</a></li>
+                    <li><a href="#">Cómo Funciona</a></li>
+                    <li><a href="#">App</a></li>
+                    <li><a href="#">Para Empresas</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Compañía</h4>
+                <ul>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Carreras</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Soporte</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Términos</a></li>
+                    <li><a href="#">Privacidad</a></li>
+                    <li><a href="#">WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 GymRat Provisions. Hecho con 💚 en Lima, Perú para los atletas peruanos.</p>
+        </div>
+    </footer>
+</body>
+</html>

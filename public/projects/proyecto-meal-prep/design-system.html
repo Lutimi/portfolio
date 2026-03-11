@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System — GymRat Provisions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00D26A;
+            --primary-dark: #00B359;
+            --primary-light: #00E676;
+            --secondary: #1A1A1A;
+            --secondary-light: #2D2D2D;
+            --accent: #FF6B35;
+            --accent-light: #FF8A5C;
+            --neutral: #F5F5F5;
+            --neutral-dark: #E0E0E0;
+            --text-light: #666666;
+            --text-dark: #1A1A1A;
+            --white: #FFFFFF;
+            --white-80: rgba(255, 255, 255, 0.8);
+            --white-60: rgba(255, 255, 255, 0.6);
+            --gradient-hero: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 50%, #1A1A1A 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--neutral);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .ds-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            border-right: 1px solid var(--neutral-dark);
+            padding: 2rem;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .ds-nav-logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .ds-nav-logo span {
+            color: var(--primary);
+        }
+
+        .ds-nav-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .ds-nav-list {
+            list-style: none;
+        }
+
+        .ds-nav-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .ds-nav-list a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .ds-nav-list a:hover {
+            background: var(--neutral);
+            color: var(--primary);
+        }
+
+        .ds-nav-list a.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Main Content */
+        .ds-main {
+            margin-left: 280px;
+            padding: 3rem;
+        }
+
+        .ds-section {
+            margin-bottom: 4rem;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .ds-section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--neutral);
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .color-item {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--neutral-dark);
+        }
+
+        .color-swatch {
+            height: 120px;
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+
+        .color-swatch span {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        .color-info {
+            padding: 1rem;
+            background: var(--white);
+        }
+
+        .color-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .color-usage {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .color-contrast {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .contrast-pass {
+            background: #D4EDDA;
+            color: #155724;
+        }
+
+        .contrast-fail {
+            background: #F8D7DA;
+            color: #721C24;
+        }
+
+        /* Typography */
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .type-item {
+            display: flex;
+            align-items: baseline;
+            gap: 2rem;
+            padding: 1.5rem;
+            background: var(--neutral);
+            border-radius: 12px;
+        }
+
+        .type-preview {
+            flex: 1;
+        }
+
+        .type-specs {
+            flex-shrink: 0;
+            width: 200px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .type-specs span {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .type-specs .label {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        /* Spacing */
+        .spacing-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1rem;
+            background: var(--neutral);
+            border-radius: 12px;
+        }
+
+        .spacing-bar {
+            background: var(--primary);
+            border-radius: 4px;
+            height: 32px;
+        }
+
+        .spacing-info {
+            flex: 1;
+        }
+
+        .spacing-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .spacing-value {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-family: monospace;
+        }
+
+        /* Components */
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .component-card {
+            background: var(--neutral);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .component-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .component-preview {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .component-code {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            overflow-x: auto;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 210, 106, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: 2px solid var(--secondary);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: var(--white);
+        }
+
+        .btn-nav {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-nav:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 210, 106, 0.3);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--white);
+        }
+
+        .btn-large {
+            padding: 1.25rem 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Cards */
+        .card-problem {
+            background: var(--neutral);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            max-width: 280px;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-problem h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--secondary);
+        }
+
+        .card-problem p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .card-step {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            max-width: 320px;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+        }
+
+        .card-step h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-pricing {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            text-align: center;
+            border: 2px solid var(--neutral-dark);
+            max-width: 350px;
+        }
+
+        .card-pricing.featured {
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(0, 210, 106, 0.15);
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-amount {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--secondary);
+        }
+
+        .pricing-amount span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .card-testimonial {
+            background: var(--neutral);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 400px;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .testimonial-meta h4 {
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .testimonial-meta span {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Feature Item */
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            max-width: 400px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-text p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* Section Tags */
+        .section-tag {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 210, 106, 0.15);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 210, 106, 0.3);
+        }
+
+        /* Stats */
+        .stat {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Grid & Layout */
+        .grid-demo {
+            background: var(--neutral);
+            padding: 2rem;
+            border-radius: 16px;
+        }
+
+        .grid-row {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid-col {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .breakpoint-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .breakpoint-table th,
+        .breakpoint-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--neutral-dark);
+        }
+
+        .breakpoint-table th {
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* Icons */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 1rem;
+        }
+
+        .icon-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--neutral);
+            border-radius: 12px;
+        }
+
+        .icon-item svg {
+            width: 24px;
+            height: 24px;
+            color: var(--secondary);
+        }
+
+        .icon-name {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        /* Assets */
+        .asset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .asset-item {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--neutral-dark);
+        }
+
+        .asset-preview {
+            background: var(--neutral);
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .asset-preview img {
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+        }
+
+        .asset-info {
+            padding: 1rem;
+            background: var(--white);
+        }
+
+        .asset-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .asset-path {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="ds-nav">
+        <div class="ds-nav-logo">GymRat<span>.</span></div>
+        <div class="ds-nav-subtitle">Design System v1.0</div>
+        <ul class="ds-nav-list">
+            <li><a href="#colors" class="active">Color Palette</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#spacing">Spacing System</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#icons">Icons</a></li>
+            <li><a href="#assets">Assets</a></li>
+            <li><a href="#grid">Grid & Layout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="ds-main">
+        <!-- Color Palette -->
+        <section id="colors" class="ds-section">
+            <h2 class="ds-section-title">Color Palette</h2>
+            <div class="color-grid">
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--primary);">
+                        <span>#00D26A</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Primary Green</div>
+                        <div class="color-usage">Botones principales, CTA, acentos</div>
+                        <span class="color-contrast contrast-pass">AA Pass</span>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--primary-dark);">
+                        <span>#00B359</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Primary Dark</div>
+                        <div class="color-usage">Hover states, pressed</div>
+                        <span class="color-contrast contrast-pass">AA Pass</span>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--accent);">
+                        <span>#FF6B35</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Accent Orange</div>
+                        <div class="color-usage">Badges, destacados, alertas</div>
+                        <span class="color-contrast contrast-pass">AA Pass</span>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--secondary);">
+                        <span style="color: var(--white);">#1A1A1A</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Secondary Dark</div>
+                        <div class="color-usage">Texto principal, fondos oscuros</div>
+                        <span class="color-contrast contrast-pass">AAA Pass</span>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--secondary-light);">
+                        <span style="color: var(--white);">#2D2D2D</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Secondary Light</div>
+                        <div class="color-usage">Cards oscuras, hover en dark</div>
+                        <span class="color-contrast contrast-pass">AAA Pass</span>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--neutral); border: 1px solid var(--neutral-dark);">
+                        <span>#F5F5F5</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Neutral Light</div>
+                        <div class="color-usage">Fondos de sección, cards</div>
+                        <span class="color-contrast contrast-fail">Not for text</span>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--text-light); border: 1px solid var(--neutral-dark);">
+                        <span style="color: var(--white);">#666666</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Text Light</div>
+                        <div class="color-usage">Texto secundario, descripciones</div>
+                        <span class="color-contrast contrast-pass">AA Pass</span>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--white); border: 1px solid var(--neutral-dark);">
+                        <span>#FFFFFF</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">White</div>
+                        <div class="color-usage">Fondos, texto sobre oscuro</div>
+                        <span class="color-contrast contrast-fail">Not for dark bg</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section id="typography" class="ds-section">
+            <h2 class="ds-section-title">Typography Scale</h2>
+            <p style="margin-bottom: 2rem; color: var(--text-light);">Font Family: <strong>Inter</strong> (Google Fonts) — Weights: 300, 400, 500, 600, 700, 800, 900</p>
+            <div class="type-scale">
+                <div class="type-item">
+                    <div class="type-preview">
+                        <h1 style="font-size: 4rem; font-weight: 900; line-height: 1.1; color: var(--secondary);">Hero Title</h1>
+                    </div>
+                    <div class="type-specs">
+                        <span class="label">H1 / Hero</span>
+                        <span>64px (4rem)</span>
+                        <span>Weight: 900 (Black)</span>
+                        <span>Line-height: 1.1</span>
+                        <span>Use: Hero headlines</span>
+                    </div>
+                </div>
+                <div class="type-item">
+                    <div class="type-preview">
+                        <h2 style="font-size: 3rem; font-weight: 800; line-height: 1.2; color: var(--secondary);">Section Title</h2>
+                    </div>
+                    <div class="type-specs">
+                        <span class="label">H2 / Section</span>
+                        <span>48px (3rem)</span>
+                        <span>Weight: 800 (ExtraBold)</span>
+                        <span>Line-height: 1.2</span>
+                        <span>Use: Section headings</span>
+                    </div>
+                </div>
+                <div class="type-item">
+                    <div class="type-preview">
+                        <h3 style="font-size: 2.5rem; font-weight: 800; line-height: 1.2; color: var(--secondary);">Large Title</h3>
+                    </div>
+                    <div class="type-specs">
+                        <span class="label">H3 / Large</span>
+                        <span>40px (2.5rem)</span>
+                        <span>Weight: 800 (ExtraBold)</span>
+                        <span>Line-height: 1.2</span>
+                        <span>Use: Solution titles</span>
+                    </div>
+                </div>
+                <div class="type-item">
+                    <div class="type-preview">
+                        <h4 style="font-size: 1.5rem; font-weight: 700; line-height: 1.3; color: var(--secondary);">Card Title</h4>
+                    </div>
+                    <div class="type-specs">
+                        <span class="label">H4 / Card</span>
+                        <span>24px (1.5rem)</span>
+                        <span>Weight: 700 (Bold)</span>
+                        <span>Line-height: 1.3</span>
+                        <span>Use: Card headings, feature titles</span>
+                    </div>
+                </div>
+                <div class="type-item">
+                    <div class="type-preview">
+                        <p style="font-size: 1.25rem; font-weight: 400; line-height: 1.7; color: var(--text-light);">Body text large for hero descriptions and important paragraphs that need more presence.</p>
+                    </div>
+                    <div class="type-specs">
+                        <span class="label">Body Large</span>
+                        <span>20px (1.25rem)</span>
+                        <span>Weight: 400 (Regular)</span>
+                        <span>Line-height: 1.7</span>
+                        <span>Use: Hero descriptions</span>
+                    </div>
+                </div>
+                <div class="type-item">
+                    <div class="type-preview">
+                        <p style="font-size: 1rem; font-weight: 400; line-height: 1.6; color: var(--text-light);">Body text is the standard paragraph style used throughout the site for descriptions and content.</p>
+                    </div>
+                    <div class="type-specs">
+                        <span class="label">Body</span>
+                        <span>16px (1rem)</span>
+                        <span>Weight: 400 (Regular)</span>
+                        <span>Line-height: 1.6</span>
+                        <span>Use: General content</span>
+                    </div>
+                </div>
+                <div class="type-item">
+                    <div class="type-preview">
+                        <span style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--primary);">Section Tag</span>
+                    </div>
+                    <div class="type-specs">
+                        <span class="label">Label / Tag</span>
+                        <span>14px (0.9rem)</span>
+                        <span>Weight: 700 (Bold)</span>
+                        <span>Letter-spacing: 2px</span>
+                        <span>Use: Section labels</span>
+                    </div>
+                </div>
+                <div class="type-item">
+                    <div class="type-preview">
+                        <span style="font-size: 0.85rem; font-weight: 500; color: var(--text-light);">Small text for captions, metadata, and supporting information.</span>
+                    </div>
+                    <div class="type-specs">
+                        <span class="label">Small</span>
+                        <span>13.6px (0.85rem)</span>
+                        <span>Weight: 500 (Medium)</span>
+                        <span>Line-height: 1.5</span>
+                        <span>Use: Captions, metadata</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing -->
+        <section id="spacing" class="ds-section">
+            <h2 class="ds-section-title">Spacing System</h2>
+            <p style="margin-bottom: 2rem; color: var(--text-light);">Based on 4px grid. Use these values for margins, padding, and gaps.</p>
+            <div class="spacing-grid">
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: 4px;"></div>
+                    <div class="spacing-info">
+                        <div class="spacing-name">space-1</div>
+                        <div class="spacing-value">4px (0.25rem)</div>
+                    </div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: 8px;"></div>
+                    <div class="spacing-info">
+                        <div class="spacing-name">space-2</div>
+                        <div class="spacing-value">8px (0.5rem)</div>
+                    </div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: 12px;"></div>
+                    <div class="spacing-info">
+                        <div class="spacing-name">space-3</div>
+                        <div class="spacing-value">12px (0.75rem)</div>
+                    </div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: 16px;"></div>
+                    <div class="spacing-info">
+                        <div class="spacing-name">space-4</div>
+                        <div class="spacing-value">16px (1rem)</div>
+                    </div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: 24px;"></div>
+                    <div class="spacing-info">
+                        <div class="spacing-name">space-6</div>
+                        <div class="spacing-value">24px (1.5rem)</div>
+                    </div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: 32px;"></div>
+                    <div class="spacing-info">
+                        <div class="spacing-name">space-8</div>
+                        <div class="spacing-value">32px (2rem)</div>
+                    </div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: 48px;"></div>
+                    <div class="spacing-info">
+                        <div class="spacing-name">space-12</div>
+                        <div class="spacing-value">48px (3rem)</div>
+                    </div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: 64px;"></div>
+                    <div class="spacing-info">
+                        <div class="spacing-name">space-16</div>
+                        <div class="spacing-value">64px (4rem)</div>
+                    </div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: 96px;"></div>
+                    <div class="spacing-info">
+                        <div class="spacing-name">space-24</div>
+                        <div class="spacing-value">96px (6rem)</div>
+                    </div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-bar" style="width: 128px;"></div>
+                    <div class="spacing-info">
+                        <div class="spacing-name">space-32</div>
+                        <div class="spacing-value">128px (8rem)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Components -->
+        <section id="components" class="ds-section">
+            <h2 class="ds-section-title">Components Gallery</h2>
+            <div class="component-grid">
+                <!-- Buttons -->
+                <div class="component-card">
+                    <div class="component-title">Buttons</div>
+                    <div class="component-preview">
+                        <button class="btn-primary">Primary</button>
+                        <button class="btn-secondary">Secondary</button>
+                        <button class="btn-nav">Nav CTA</button>
+                    </div>
+                    <div class="component-preview" style="background: var(--secondary);">
+                        <button class="btn-outline-light">Outline Light</button>
+                    </div>
+                    <pre class="component-code">&lt;button class="btn-primary"&gt;Text&lt;/button&gt;
+&lt;button class="btn-secondary"&gt;Text&lt;/button&gt;
+&lt;button class="btn-nav"&gt;Text&lt;/button&gt;</pre>
+                </div>
+
+                <!-- Cards: Problem -->
+                <div class="component-card">
+                    <div class="component-title">Problem Card</div>
+                    <div class="component-preview">
+                        <div class="card-problem">
+                            <div class="card-icon">⏱️</div>
+                            <h3>Sin Tiempo</h3>
+                            <p>No alcanzas a preparar comidas saludables.</p>
+                        </div>
+                    </div>
+                    <pre class="component-code">&lt;div class="card-problem"&gt;
+  &lt;div class="card-icon"&gt;⏱️&lt;/div&gt;
+  &lt;h3&gt;Title&lt;/h3&gt;
+  &lt;p&gt;Description&lt;/p&gt;
+&lt;/div&gt;</pre>
+                </div>
+
+                <!-- Cards: Step -->
+                <div class="component-card">
+                    <div class="component-title">Step Card</div>
+                    <div class="component-preview">
+                        <div class="card-step">
+                            <div class="step-number">1</div>
+                            <h3>Elige tu Plan</h3>
+                            <p>Selecciona según tus objetivos.</p>
+                        </div>
+                    </div>
+                    <pre class="component-code">&lt;div class="card-step"&gt;
+  &lt;div class="step-number"&gt;1&lt;/div&gt;
+  &lt;h3&gt;Title&lt;/h3&gt;
+  &lt;p&gt;Description&lt;/p&gt;
+&lt;/div&gt;</pre>
+                </div>
+
+                <!-- Cards: Pricing -->
+                <div class="component-card">
+                    <div class="component-title">Pricing Card</div>
+                    <div class="component-preview">
+                        <div class="card-pricing featured">
+                            <div class="pricing-badge">Más Popular</div>
+                            <h3>Plan Fit</h3>
+                            <div class="pricing-amount">S/55<span>/día</span></div>
+                            <button class="btn-primary" style="margin-top: 1.5rem; width: 100%;">Elegir Plan</button>
+                        </div>
+                    </div>
+                    <pre class="component-code">&lt;div class="card-pricing featured"&gt;
+  &lt;div class="pricing-badge"&gt;Popular&lt;/div&gt;
+  &lt;h3&gt;Plan Name&lt;/h3&gt;
+  &lt;div class="pricing-amount"&gt;$55&lt;/div&gt;
+&lt;/div&gt;</pre>
+                </div>
+
+                <!-- Cards: Testimonial -->
+                <div class="component-card">
+                    <div class="component-title">Testimonial Card</div>
+                    <div class="component-preview">
+                        <div class="card-testimonial">
+                            <div class="testimonial-header">
+                                <div class="testimonial-avatar">LC</div>
+                                <div class="testimonial-meta">
+                                    <h4>Luis Carranza</h4>
+                                    <span>Atleta CrossFit</span>
+                                </div>
+                            </div>
+                            <p class="testimonial-text">"Las comidas llegan perfectas para mi rutina."</p>
+                        </div>
+                    </div>
+                    <pre class="component-code">&lt;div class="card-testimonial"&gt;
+  &lt;div class="testimonial-header"&gt;
+    &lt;div class="testimonial-avatar"&gt;LC&lt;/div&gt;
+    &lt;div class="testimonial-meta"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;p class="testimonial-text"&gt;...&lt;/p&gt;
+&lt;/div&gt;</pre>
+                </div>
+
+                <!-- Feature Item -->
+                <div class="component-card">
+                    <div class="component-title">Feature Item</div>
+                    <div class="component-preview">
+                        <div class="feature">
+                            <div class="feature-icon">🥗</div>
+                            <div class="feature-text">
+                                <h4>Comidas Preparadas</h4>
+                                <p>Listas para consumir.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <pre class="component-code">&lt;div class="feature"&gt;
+  &lt;div class="feature-icon"&gt;🥗&lt;/div&gt;
+  &lt;div class="feature-text"&gt;
+    &lt;h4&gt;Title&lt;/h4&gt;
+    &lt;p&gt;Description&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+                </div>
+
+                <!-- Tags & Badges -->
+                <div class="component-card">
+                    <div class="component-title">Tags & Badges</div>
+                    <div class="component-preview">
+                        <span class="section-tag">Section Tag</span>
+                        <span class="hero-badge">🔥 Popular</span>
+                        <span class="pricing-badge">Featured</span>
+                    </div>
+                    <pre class="component-code">&lt;span class="section-tag"&gt;Label&lt;/span&gt;
+&lt;span class="hero-badge"&gt;🔥 Badge&lt;/span&gt;
+&lt;span class="pricing-badge"&gt;Featured&lt;/span&gt;</pre>
+                </div>
+
+                <!-- Stats -->
+                <div class="component-card">
+                    <div class="component-title">Stats</div>
+                    <div class="component-preview">
+                        <div class="stat">
+                            <span class="stat-number">+500</span>
+                            <span class="stat-label">Atletas activos</span>
+                        </div>
+                    </div>
+                    <pre class="component-code">&lt;div class="stat"&gt;
+  &lt;span class="stat-number"&gt;+500&lt;/span&gt;
+  &lt;span class="stat-label"&gt;Label&lt;/span&gt;
+&lt;/div&gt;</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Icons -->
+        <section id="icons" class="ds-section">
+            <h2 class="ds-section-title">Icons</h2>
+            <p style="margin-bottom: 2rem; color: var(--text-light);">Native emoji icons used throughout the site. No icon library dependency.</p>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span style="font-size: 2rem;">⏱️</span>
+                    <div class="icon-name">Time</div>
+                </div>
+                <div class="icon-item">
+                    <span style="font-size: 2rem;">🍔</span>
+                    <div class="icon-name">Fast Food</div>
+                </div>
+                <div class="icon-item">
+                    <span style="font-size: 2rem;">🧮</span>
+                    <div class="icon-name">Calculator</div>
+                </div>
+                <div class="icon-item">
+                    <span style="font-size: 2rem;">😰</span>
+                    <div class="icon-name">Stress</div>
+                </div>
+                <div class="icon-item">
+                    <span style="font-size: 2rem;">🥗</span>
+                    <div class="icon-name">Salad</div>
+                </div>
+                <div class="icon-item">
+                    <span style="font-size: 2rem;">📊</span>
+                    <div class="icon-name">Chart</div>
+                </div>
+                <div class="icon-item">
+                    <span style="font-size: 2rem;">🚚</span>
+                    <div class="icon-name">Delivery</div>
+                </div>
+                <div class="icon-item">
+                    <span style="font-size: 2rem;">🔥</span>
+                    <div class="icon-name">Fire</div>
+                </div>
+                <div class="icon-item">
+                    <span style="font-size: 2rem;">⭐</span>
+                    <div class="icon-name">Star</div>
+                </div>
+                <div class="icon-item">
+                    <span style="font-size: 2rem;">✅</span>
+                    <div class="icon-name">Check</div>
+                </div>
+                <div class="icon-item">
+                    <span style="font-size: 2rem;">🍽️</span>
+                    <div class="icon-name">Dining</div>
+                </div>
+                <div class="icon-item">
+                    <span style="font-size: 2rem;">📱</span>
+                    <div class="icon-name">Mobile</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assets -->
+        <section id="assets" class="ds-section">
+            <h2 class="ds-section-title">Assets</h2>
+            <div class="asset-grid">
+                <div class="asset-item">
+                    <div class="asset-preview">
+                        <img src="src/images/hero-gym-meal.png" alt="Hero Image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div style="display: none; color: var(--text-light); font-size: 0.8rem; text-align: center;">Hero Image<br>Not Available</div>
+                    </div>
+                    <div class="asset-info">
+                        <div class="asset-name">Hero Main Image</div>
+                        <div class="asset-path">src/images/hero-gym-meal.png</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid & Layout -->
+        <section id="grid" class="ds-section">
+            <h2 class="ds-section-title">Grid & Layout</h2>
+            
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; color: var(--secondary);">Container</h3>
+            <div class="grid-demo" style="margin-bottom: 2rem;">
+                <div style="background: var(--primary); color: var(--white); padding: 2rem; text-align: center; border-radius: 8px;">
+                    Max-width: 1400px (hero) / 1200px (content)<br>
+                    Padding: 0 2rem
+                </div>
+            </div>
+
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; color: var(--secondary);">Grid Columns</h3>
+            <div class="grid-demo" style="margin-bottom: 2rem;">
+                <div class="grid-row" style="grid-template-columns: repeat(4, 1fr);">
+                    <div class="grid-col">1/4</div>
+                    <div class="grid-col">1/4</div>
+                    <div class="grid-col">1/4</div>
+                    <div class="grid-col">1/4</div>
+                </div>
+                <div class="grid-row" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="grid-col">1/3</div>
+                    <div class="grid-col">1/3</div>
+                    <div class="grid-col">1/3</div>
+                </div>
+                <div class="grid-row" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="grid-col">1/2</div>
+                    <div class="grid-col">1/2</div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; color: var(--secondary);">Breakpoints</h3>
+            <table class="breakpoint-table">
+                <thead>
+                    <tr>
+                        <th>Breakpoint</th>
+                        <th>Width</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mobile</td>
+                        <td>375px</td>
+                        <td>Phones portrait</td>
+                    </tr>
+                    <tr>
+                        <td>Tablet</td>
+                        <td>768px</td>
+                        <td>Tablets portrait</td>
+                    </tr>
+                    <tr>
+                        <td>Laptop</td>
+                        <td>1024px</td>
+                        <td>Small laptops</td>
+                    </tr>
+                    <tr>
+                        <td>Desktop</td>
+                        <td>1440px</td>
+                        <td>Full desktop</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 2rem; color: var(--text-light); font-size: 0.85rem;">
+            <p>GymRat Provisions Design System v1.0 — 2026</p>
+        </footer>
+    </main>
+</body>
+</html>

@@ -1,0 +1,37 @@
+# Treat images as binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Force batch scripts to always use CRLF line endings
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+
+# Force bash scripts to always use LF line endings
+*.sh text eol=lf
+
+# Treat Astro, HTML, CSS, JS, JSON, MD files as text
+*.astro text
+*.html text
+*.css text
+*.js text
+*.jsx text
+*.ts text
+*.tsx text
+*.json text
+*.md text
+*.mdx text
+*.yml text
+*.yaml text
+*.xml text

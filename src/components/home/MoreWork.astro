@@ -5,7 +5,6 @@ import { Image } from 'astro:assets'
 import type { ImageMetadata } from 'astro'
 import nexvault from '../../assets/more/nexvault.png'
 import gymrat from '../../assets/more/gymrat.png'
-import showroom from '../../assets/more/showroom.png'
 import type { HomeContent } from '../../i18n/home'
 
 interface Props {
@@ -13,7 +12,7 @@ interface Props {
 }
 
 const { more } = Astro.props
-const images: Record<string, ImageMetadata> = { nexvault, gymrat, showroom }
+const images: Record<string, ImageMetadata> = { nexvault, gymrat }
 ---
 
 <section class="mx-auto mt-32 max-w-[1360px] px-5 sm:px-10">

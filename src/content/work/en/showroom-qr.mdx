@@ -1,0 +1,103 @@
+---
+title: "I put a car’s whole story one QR scan away in Divemotor’s showrooms, with one mobile guide for FIAT, Jeep and RAM."
+project: Showroom QR
+summary: "Divemotor sells FIAT, Jeep and RAM vehicles in its showrooms. The idea was to let visitors explore a model on their own, right at the car. I led the design of a mobile guide that opens from a QR code at each vehicle: five sections per model, one template for three brands, and a component kit that turns a new model into content, not a new design."
+cover: ../../../assets/work/showroom/cover.png
+coverAlt: The Showroom QR guide on three phones, themed for FIAT, Jeep and RAM.
+pills: [Client work, Automotive, Mobile web, Multi-brand]
+role: UX/UI Designer at Vide Solutions, for Divemotor. I led the design of the guide, its multi-brand template and its components.
+team: Vide Solutions’ design team, for Divemotor
+duration: '2024'
+tools: [Figma]
+plate:
+  headline: One mobile guide, three car brands.
+  status: Built, partly used
+  outcome: A QR guide with five sections per model, one template for FIAT, Jeep and RAM, and a kit of 18 component sets.
+  role: UX/UI designer
+  team: Vide Solutions
+  image: ../../../assets/work/showroom/themes.png
+  imageAlt: The same safety screen in FIAT, Jeep and RAM, each with its own logo and accent colour.
+  mark: { x: 5.9, y: 23.6, w: 88.3, h: 6.2, label: 'Only the brand accent changes' }
+order: 5
+draft: false
+---
+
+import Figure from '../../../components/case/Figure.astro'
+import Insight from '../../../components/case/Insight.astro'
+import Metrics from '../../../components/case/Metrics.astro'
+
+import flow from '../../../assets/work/showroom/flow.png'
+import themes from '../../../assets/work/showroom/themes.png'
+import components from '../../../assets/work/showroom/components.png'
+
+## The car is right there. The information isn’t.
+
+In a showroom, the questions come at the car: what colours does it come in, how safe is it, what engine does it have? The answers lived in brochures, on brand websites built for a different moment, or with an advisor who might be busy with someone else.
+
+Divemotor asked for every vehicle on the floor to answer for itself. A visitor scans a QR code at the car, and the model opens on their phone: its design, safety, performance, comfort and technology, in the brand’s own look.
+
+## Five sections, in the words buyers use
+
+The brief listed what each model had to cover. I mapped every item to a card, so nothing in the brief was left without a place, and renamed “Mechanics” to “Performance”, the word buyers actually use.
+
+<Figure
+  src={flow}
+  alt="Five phone screens of the FIAT guide: the hero, the Design section with a colour picker, the menu, the Safety section and the Performance section."
+  mark={{ x: 22.6, y: 13.3, w: 16.8, h: 10.7, label: 'Tabs and version picker stay on top', align: 'left' }}
+  caption="The FIAT guide: hero, Design, menu, Safety and Performance. The section tabs and the version picker stay pinned as you scroll. (Prices are placeholders.)"
+  framed
+/>
+
+Two decisions keep it easy to use with one hand, standing next to the car:
+
+- **The section tabs and the version picker stay pinned** at the top as you scroll, so jumping from Design to Safety never means scrolling back up.
+- **Safety splits into Active and Passive** with a single toggle, instead of one long list of acronyms.
+
+<Insight>
+  A visitor at the car has one hand on their phone and their eyes on the vehicle. Every section is one tap away, never a scroll away.
+</Insight>
+
+## One template, three brands
+
+FIAT, Jeep and RAM look nothing alike, but the guide doesn’t need three designs. Each brand changes only its logo and its accent colour: FIAT’s red, Jeep’s yellow, RAM’s dark red. Layout, type, the grey scale and every component are shared.
+
+<Figure
+  src={themes}
+  alt="The same Safety screen in FIAT, Jeep and RAM, with each brand’s logo and accent colour."
+  mark={{ x: 5.9, y: 23.6, w: 88.3, h: 6.2, label: 'Only the brand accent changes' }}
+  caption="The same screen in three brands. The accent colour moves to the active tab, the toggle and the scroll arrow; nothing else changes."
+  framed
+/>
+
+That made a new brand, or a new model, a content task rather than a design task.
+
+## A kit built for swapping content
+
+Behind the template sits a kit of 18 component sets with 70 variants: the brand header in three states, the section tabs in six, the version picker open and closed, the Active and Passive toggle, and a feature card for every section.
+
+<Figure
+  src={components}
+  alt="The Figma component sets: Safety content in its Active and Passive states, the brand header, the section tabs, the version picker and the toggle."
+  mark={{ x: 6.1, y: 21.5, w: 55.3, h: 3.4, label: 'One toggle, two content states' }}
+  caption="Part of the kit: one content component with an Active and a Passive state, the tabs in every position, and the version picker. Reference photos from other brands are blurred."
+  framed
+/>
+
+## Where it landed
+
+The guide was developed and used in part of the showrooms. It is no longer online, and there were no usage numbers to share, so the designs here are what remains.
+
+<Metrics
+  items={[
+    { value: '3', label: 'brands on one template' },
+    { value: '5', label: 'sections per model' },
+    { value: '18', label: 'component sets' },
+    { value: '70', label: 'variants in the kit' },
+  ]}
+/>
+
+## What I learned
+
+Check every theme, not just the first. Jeep’s white text on its yellow accent doesn’t reach readable contrast; a template has to prove each brand colour against its text, and switch to dark text where the colour is light.
+
+I also learned how much names matter. In this kit, many components kept Figma’s default names, and finding the right one took longer than it should have. It’s why, in later work, every component and token I make has a name that design and code share.

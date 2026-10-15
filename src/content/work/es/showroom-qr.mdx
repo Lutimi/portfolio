@@ -1,0 +1,103 @@
+---
+title: 'Puse toda la historia de un auto a un escaneo de QR en los showrooms de Divemotor, con una sola guía mobile para FIAT, Jeep y RAM.'
+project: Showroom QR
+summary: 'Divemotor vende vehículos FIAT, Jeep y RAM en sus showrooms. La idea era que los visitantes pudieran explorar un modelo por su cuenta, junto al auto. Lideré el diseño de una guía mobile que se abre desde un código QR en cada vehículo: cinco secciones por modelo, una plantilla para tres marcas y un kit de componentes que convierte un modelo nuevo en contenido, no en un diseño nuevo.'
+cover: ../../../assets/work/showroom/cover.png
+coverAlt: La guía Showroom QR en tres celulares, con los temas de FIAT, Jeep y RAM.
+pills: [Cliente, Automotriz, Web mobile, Multimarca]
+role: UX/UI Designer en Vide Solutions, para Divemotor. Lideré el diseño de la guía, su plantilla multimarca y sus componentes.
+team: Equipo de diseño de Vide Solutions, para Divemotor
+duration: '2024'
+tools: [Figma]
+plate:
+  headline: Una guía mobile, tres marcas de autos.
+  status: Desarrollado, uso parcial
+  outcome: Una guía por QR con cinco secciones por modelo, una plantilla para FIAT, Jeep y RAM, y un kit de 18 sets de componentes.
+  role: UX/UI Designer
+  team: Vide Solutions
+  image: ../../../assets/work/showroom/themes.png
+  imageAlt: La misma pantalla de seguridad en FIAT, Jeep y RAM, cada una con su logo y su color de acento.
+  mark: { x: 5.9, y: 23.6, w: 88.3, h: 6.2, label: 'Solo cambia el acento de marca' }
+order: 5
+draft: false
+---
+
+import Figure from '../../../components/case/Figure.astro'
+import Insight from '../../../components/case/Insight.astro'
+import Metrics from '../../../components/case/Metrics.astro'
+
+import flow from '../../../assets/work/showroom/flow.png'
+import themes from '../../../assets/work/showroom/themes.png'
+import components from '../../../assets/work/showroom/components.png'
+
+## El auto está ahí. La información, no.
+
+En un showroom, las preguntas aparecen junto al auto: ¿en qué colores viene?, ¿qué tan seguro es?, ¿qué motor tiene? Las respuestas vivían en folletos, en sitios de marca pensados para otro momento, o con un asesor que podía estar atendiendo a alguien más.
+
+Divemotor pidió que cada vehículo del showroom respondiera por sí mismo. Un visitante escanea un código QR junto al auto, y el modelo se abre en su celular: su diseño, seguridad, performance, confort y tecnología, con el look de su marca.
+
+## Cinco secciones, con las palabras de quien compra
+
+El brief listaba lo que cada modelo tenía que cubrir. Llevé cada punto a una tarjeta, para que nada del brief quedara sin lugar, y cambié “Mecánica” por “Performance”, la palabra que usan los compradores.
+
+<Figure
+  src={flow}
+  alt="Cinco pantallas de la guía de FIAT: el hero, la sección Diseño con selector de colores, el menú, la sección Seguridad y la sección Performance."
+  mark={{ x: 22.6, y: 13.3, w: 16.8, h: 10.7, label: 'Pestañas y versión fijas arriba', align: 'left' }}
+  caption="La guía de FIAT: hero, Diseño, menú, Seguridad y Performance. Las pestañas de sección y el selector de versión quedan fijos al hacer scroll. (Los precios son de ejemplo.)"
+  framed
+/>
+
+Dos decisiones la hacen fácil de usar con una mano, de pie junto al auto:
+
+- **Las pestañas de sección y el selector de versión quedan fijos** arriba al hacer scroll, así pasar de Diseño a Seguridad nunca obliga a volver a subir.
+- **Seguridad se divide en Activa y Pasiva** con un solo selector, en vez de una lista larga de siglas.
+
+<Insight>
+  Un visitante junto al auto tiene una mano en el celular y los ojos en el vehículo. Cada sección está a un toque, nunca a un scroll.
+</Insight>
+
+## Una plantilla, tres marcas
+
+FIAT, Jeep y RAM no se parecen en nada, pero la guía no necesita tres diseños. Cada marca cambia solo su logo y su color de acento: el rojo de FIAT, el amarillo de Jeep, el rojo oscuro de RAM. El layout, la tipografía, la escala de grises y cada componente son compartidos.
+
+<Figure
+  src={themes}
+  alt="La misma pantalla de Seguridad en FIAT, Jeep y RAM, con el logo y el color de acento de cada marca."
+  mark={{ x: 5.9, y: 23.6, w: 88.3, h: 6.2, label: 'Solo cambia el acento de marca' }}
+  caption="La misma pantalla en tres marcas. El color de acento pasa a la pestaña activa, al selector y a la flecha de scroll; nada más cambia."
+  framed
+/>
+
+Así, una marca nueva, o un modelo nuevo, se volvió una tarea de contenido y no de diseño.
+
+## Un kit hecho para cambiar contenido
+
+Detrás de la plantilla hay un kit de 18 sets de componentes con 70 variantes: el header de marca en tres estados, las pestañas de sección en seis, el selector de versión abierto y cerrado, el selector Activa/Pasiva y una tarjeta de característica para cada sección.
+
+<Figure
+  src={components}
+  alt="Los sets de componentes en Figma: el contenido de Seguridad en sus estados Activa y Pasiva, el header de marca, las pestañas de sección, el selector de versión y el selector Activa/Pasiva."
+  mark={{ x: 6.1, y: 21.5, w: 55.3, h: 3.4, label: 'Un selector, dos estados de contenido' }}
+  caption="Parte del kit: un componente de contenido con un estado Activa y otro Pasiva, las pestañas en cada posición y el selector de versión. Las fotos de referencia de otras marcas están difuminadas."
+  framed
+/>
+
+## Dónde terminó
+
+La guía se desarrolló y se usó en parte de los showrooms. Ya no está en línea, y no hubo cifras de uso para compartir, así que estos diseños son lo que queda.
+
+<Metrics
+  items={[
+    { value: '3', label: 'marcas en una sola plantilla' },
+    { value: '5', label: 'secciones por modelo' },
+    { value: '18', label: 'sets de componentes' },
+    { value: '70', label: 'variantes en el kit' },
+  ]}
+/>
+
+## Lo que aprendí
+
+Hay que revisar cada tema, no solo el primero. El texto blanco de Jeep sobre su amarillo no alcanza un contraste legible; una plantilla tiene que probar cada color de marca contra su texto, y pasar a texto oscuro donde el color es claro.
+
+También aprendí cuánto importan los nombres. En este kit, muchos componentes se quedaron con los nombres por defecto de Figma, y encontrar el correcto tomaba más de lo que debía. Por eso, en mi trabajo posterior, cada componente y cada token que creo tiene un nombre que diseño y código comparten.

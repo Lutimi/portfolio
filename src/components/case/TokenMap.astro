@@ -1,0 +1,44 @@
+---
+// Figma names next to the code names they become, on a measuring canvas
+// (naming pattern from the Izipay panel prototype's README). Used by the
+// home plate and inside the Izipay case study.
+import { GridPattern } from '../magicui/grid-pattern'
+
+interface Props {
+  figmaLabel: string
+  codeLabel: string
+  alt: string
+  pairs?: { figma: string; code: string }[]
+  class?: string
+}
+
+const {
+  figmaLabel,
+  codeLabel,
+  alt,
+  pairs = [
+    { figma: 'color/neutral/darkest 900', code: '--color-neutral-darkest-900' },
+    { figma: 'text/body/base/bold', code: '--text-body-base-bold' },
+    { figma: 'Button · Primary · Small', code: '.button.button--primary.button--small' },
+  ],
+  class: className,
+} = Astro.props
+---
+
+<figure class:list={['canvas m-0 px-5 py-12 sm:px-12 sm:py-16', className]} aria-label={alt}>
+  <GridPattern width={24} height={24} />
+  <div class="relative grid gap-y-3 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-center sm:gap-x-6 sm:gap-y-7">
+    <p class="hidden text-[0.75rem] font-semibold text-ink-2 sm:block">{figmaLabel}</p>
+    <span class="hidden sm:block" aria-hidden="true"></span>
+    <p class="hidden text-[0.75rem] font-semibold text-ink-2 sm:block">{codeLabel}</p>
+    {pairs.map(pair => (
+      <>
+        <p class="measure text-[clamp(0.875rem,0.6rem+0.9vw,1.25rem)] text-redline-deep">{pair.figma}</p>
+        <svg class="h-3 w-full min-w-16 sm:w-24" viewBox="0 0 96 12" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 6H94M0 1V11M88 1l6 5-6 5" fill="none" stroke="var(--color-ink)" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+        </svg>
+        <p class="measure mb-4 text-[clamp(0.875rem,0.6rem+0.9vw,1.25rem)] text-code sm:mb-0">{pair.code}</p>
+      </>
+    ))}
+  </div>
+</figure>

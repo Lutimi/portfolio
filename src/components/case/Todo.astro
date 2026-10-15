@@ -1,0 +1,18 @@
+---
+// Visible placeholder for facts only the author can provide.
+// Case studies with pending items stay `draft: true`, so this never ships.
+import { useTranslations, type Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+}
+
+const t = useTranslations(Astro.props.lang)
+---
+
+<div class="mx-auto my-8 max-w-[46.5rem] px-5">
+  <div class="rounded-xl border border-dashed border-code bg-paper-deep px-5 py-4 text-[0.9375rem] leading-relaxed text-ink">
+    <span class="mr-2 font-mono text-[0.75rem] text-code">{t('todo.label')}</span>
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,37 @@
+---
+// Outcome numbers as a measured table: fixed tabular positions, each value
+// counting once when it scrolls in (Magic UI NumberTicker).
+import { NumberTicker } from '../magicui/number-ticker'
+
+interface Props {
+  items: { value: string; label: string }[]
+}
+
+const { items } = Astro.props
+
+// Only plain numbers count up ("86%", "100+"); compound values stay static
+const parse = (value: string) => {
+  const match = value.match(/^(\d+)([%+]?)$/)
+  return match ? { number: Number(match[1]), suffix: match[2] } : null
+}
+---
+
+<div class="mx-auto my-14 max-w-[46.5rem] px-5">
+  <dl class="border-t border-ink">
+    {items.map(item => {
+      const parsed = parse(item.value)
+      return (
+        <div class="grid grid-cols-[7.5rem_minmax(0,1fr)] items-baseline gap-6 border-b border-rule py-5 sm:grid-cols-[10rem_minmax(0,1fr)]">
+          <dt class="text-[1.0625rem] leading-snug text-ink-2">{item.label}</dt>
+          <dd class="display order-first text-[clamp(2rem,1.4rem+1.8vw,3rem)] tabular-nums">
+            {parsed ? (
+              <><NumberTicker client:visible value={parsed.number} />{parsed.suffix}</>
+            ) : (
+              item.value
+            )}
+          </dd>
+        </div>
+      )
+    })}
+  </dl>
+</div>

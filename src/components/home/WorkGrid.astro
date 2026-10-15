@@ -1,0 +1,198 @@
+---
+// The case studies. The first one leads at full width; the rest follow in a
+// row. Every card shares one frame: the real screen on a measuring canvas,
+// with one redline on the detail that proves its headline.
+import type { CollectionEntry } from 'astro:content'
+import { GridPattern } from '../magicui/grid-pattern'
+import AnnotatedShot from '../case/AnnotatedShot.astro'
+import type { HomeContent } from '../../i18n/home'
+import { caseUrl, type Lang } from '../../i18n/ui'
+
+interface Props {
+  entries: CollectionEntry<'work'>[]
+  work: HomeContent['work']
+  lang: Lang
+}
+
+const { entries, work, lang } = Astro.props
+const [lead, ...rest] = entries
+const cards = lead ? [{ entry: lead, featured: true }, ...rest.map(entry => ({ entry, featured: false }))] : []
+---
+
+<section id="work" class="mx-auto max-w-[1360px] scroll-mt-20 px-5 sm:px-10" aria-labelledby="work-heading">
+  <div class="grid gap-4 border-t border-ink pt-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
+    <h2 id="work-heading" class="heading text-[clamp(1.75rem,1.2rem+1.6vw,2.5rem)]">{work.heading}</h2>
+    <p class="max-w-[38rem] text-[1.0625rem] leading-relaxed text-ink-2 lg:pt-2">{work.lede}</p>
+  </div>
+
+  <ul class:list={['work-list mt-10 grid gap-x-10 gap-y-16 md:grid-cols-2', rest.length >= 3 && 'lg:grid-cols-3']}>
+    {cards.map(({ entry, featured }) => {
+      const { data } = entry
+      const plate = data.plate
+      const shot = plate.image ?? data.cover
+      return (
+        <li class:list={['work-card', featured && 'work-card--featured md:col-span-full']}>
+          <a href={caseUrl(lang, entry.id.split('/')[1])} class="group block no-underline">
+            <div class="work-media canvas" data-follow>
+              <GridPattern width={24} height={24} />
+              <div class="work-shot" style={`--aspect: ${shot.width / shot.height}`}>
+                <AnnotatedShot
+                  src={shot}
+                  alt={plate.imageAlt ?? data.coverAlt}
+                  sizes={featured ? '(min-width: 1360px) 1120px, 90vw' : '(min-width: 1024px) 380px, (min-width: 768px) 45vw, 90vw'}
+                  mark={plate.mark}
+                  loading={featured ? 'eager' : 'lazy'}
+                />
+              </div>
+              <span class="work-pill" aria-hidden="true">
+                {work.read}
+                <svg class="size-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" /></svg>
+              </span>
+            </div>
+
+            <div class:list={[featured && 'lg:grid lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-14']}>
+              <div>
+                <p class="mt-5 text-[0.9375rem]">
+                  <span class="font-semibold">{data.project}</span>
+                  <span class="text-ink-3"> · {data.pills[0]}</span>
+                  {plate.status && <span class="text-ink-3"> · {plate.status}</span>}
+                </p>
+                <h3 class:list={['heading mt-2 leading-[1.12]', featured ? 'text-[clamp(1.75rem,1.2rem+1.5vw,2.75rem)]' : 'text-[clamp(1.375rem,1.15rem+0.6vw,1.75rem)]']}>
+                  {plate.headline ?? plate.outcome}
+                </h3>
+              </div>
+              <div class:list={[featured && 'lg:pt-12']}>
+                {featured && plate.headline && <p class="mt-4 max-w-[36rem] text-[1.0625rem] leading-relaxed text-ink-2 lg:mt-0">{plate.outcome}</p>}
+                <ul class="mt-4 flex flex-wrap gap-2">
+                  {data.pills.slice(1).map(pill => <li class="pill">{pill}</li>)}
+                </ul>
+                <span class="work-read link mt-5 inline-flex items-center gap-1.5 font-semibold">
+                  {work.read}
+                  <svg class="size-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" /></svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+      )
+    })}
+  </ul>
+</section>
+
+<style>
+  /* The canvas is a size container: each screen fits whichever side runs out first */
+  .work-media {
+    container-type: size;
+    aspect-ratio: 16 / 10;
+    display: grid;
+    place-items: center;
+  }
+
+  .work-card--featured .work-media {
+    aspect-ratio: 16 / 8;
+  }
+
+  .work-shot {
+    position: relative;
+    width: min(84cqw, 74cqh * var(--aspect));
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+
+  .work-card--featured .work-shot {
+    width: min(80cqw, 84cqh * var(--aspect));
+  }
+
+  .group:hover .work-shot {
+    transform: translateY(-6px);
+  }
+
+  /* Point at one card and the others step back */
+  .work-card {
+    transition: opacity 0.35s var(--ease-out-expo);
+  }
+
+  @media (hover: hover) {
+    .work-list:has(.work-card:hover) .work-card:not(:hover) {
+      opacity: 0.55;
+    }
+  }
+
+  /* A pill that follows the cursor over the canvas, so the whole picture reads as the link */
+  .work-pill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+    border-radius: 999px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    scale: 0.85;
+    translate: calc(var(--x, 50%) - 50%) calc(var(--y, 50%) - 50%);
+    transition: opacity 0.25s var(--ease-out-expo), scale 0.25s var(--ease-out-expo);
+  }
+
+  @media (hover: hover) {
+    .group:hover .work-pill,
+    .group:focus-visible .work-pill {
+      opacity: 1;
+      scale: 1;
+    }
+
+    /* With the pill on the picture, the text link below is redundant for mouse users */
+    .work-read {
+      visibility: hidden;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .work-card,
+    .work-shot,
+    .work-pill {
+      transition: none;
+    }
+
+    .group:hover .work-shot {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  // The pill trails the pointer a little, eased, inside each canvas
+  document.querySelectorAll<HTMLElement>('[data-follow]').forEach(media => {
+    let x = 0
+    let y = 0
+    let tx = 0
+    let ty = 0
+    let frame = 0
+    const step = () => {
+      x += (tx - x) * 0.25
+      y += (ty - y) * 0.25
+      media.style.setProperty('--x', `${x}px`)
+      media.style.setProperty('--y', `${y}px`)
+      frame = Math.abs(tx - x) + Math.abs(ty - y) > 0.5 ? requestAnimationFrame(step) : 0
+    }
+    media.addEventListener('pointerenter', event => {
+      const r = media.getBoundingClientRect()
+      x = tx = event.clientX - r.left
+      y = ty = event.clientY - r.top
+      step()
+    })
+    media.addEventListener('pointermove', event => {
+      const r = media.getBoundingClientRect()
+      tx = event.clientX - r.left
+      ty = event.clientY - r.top
+      if (!frame) frame = requestAnimationFrame(step)
+    })
+  })
+</script>

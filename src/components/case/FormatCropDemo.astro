@@ -1,0 +1,221 @@
+---
+// Interactive version of WIKIVI's "choose the area to publish" step:
+// drag a 9:16 window over a landscape video and see the vertical result.
+import { getImage } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import { GridPattern } from '../magicui/grid-pattern'
+import type { Lang } from '../../i18n/ui'
+
+interface Props {
+  src: ImageMetadata
+  alt: string
+  lang: Lang
+  caption?: string
+}
+
+const { src, alt, lang, caption } = Astro.props
+const frame = await getImage({ src, width: 1600, format: 'webp' })
+
+const copy = {
+  en: { format: 'Format', mobile: 'Mobile 9:16', original: 'Original 16:9', slider: 'Position of the vertical crop', hint: 'Drag the red frame, or focus it and use the arrow keys.' },
+  es: { format: 'Formato', mobile: 'Mobile 9:16', original: 'Original 16:9', slider: 'Posición del recorte vertical', hint: 'Arrastra el marco rojo, o enfócalo y usa las flechas del teclado.' },
+}[lang]
+
+const ratio = src.width / src.height
+// Width of a full-height 9:16 window, as a fraction of the stage width
+const windowWidth = 9 / 16 / ratio
+---
+
+<figure class="mx-auto my-16 max-w-[1360px] px-5 sm:my-20 sm:px-10" data-crop-demo style={`--ratio: ${ratio}; --window: ${windowWidth}; --pos: 0.5;`}>
+  <div class="canvas p-4 sm:p-10">
+    <GridPattern width={24} height={24} />
+    <div class="relative">
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+        <p class="text-[0.875rem] text-ink-2">{copy.hint}</p>
+        <div class="switch" role="group" aria-label={copy.format}>
+          <button type="button" aria-pressed="true" data-mode="mobile">{copy.mobile}</button>
+          <button type="button" aria-pressed="false" data-mode="original">{copy.original}</button>
+        </div>
+      </div>
+
+      <div class="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_auto]">
+        <div class="crop-stage relative cursor-crosshair touch-none select-none overflow-hidden rounded-lg">
+          <img src={frame.src} alt={alt} draggable="false" class="absolute inset-0 h-full w-full object-cover" />
+          <div
+            class="crop-window"
+            role="slider"
+            tabindex="0"
+            aria-label={copy.slider}
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="50"
+          >
+            <span class="crop-grip" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="crop-device mx-auto" aria-hidden="true">
+          <div class="crop-preview" style={`background-image: url(${frame.src})`}></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {caption && (
+    <figcaption class="mx-auto mt-4 max-w-[44rem] text-[0.875rem] leading-relaxed text-ink-3">{caption}</figcaption>
+  )}
+</figure>
+
+<style>
+  .crop-stage {
+    aspect-ratio: var(--ratio);
+  }
+
+  .crop-window {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: calc(var(--window) * 100%);
+    left: calc(var(--pos) * (100% - var(--window) * 100%));
+    border: 1.5px solid var(--color-redline);
+    box-shadow: 0 0 0 9999px rgb(21 21 21 / 0.55);
+    cursor: grab;
+    transition: width 0.45s var(--ease-out-expo), left 0.45s var(--ease-out-expo), box-shadow 0.45s var(--ease-out-expo), border-color 0.3s var(--ease-out-expo);
+  }
+
+  .crop-window:focus-visible {
+    outline: 2px solid var(--color-code);
+    outline-offset: 3px;
+  }
+
+  [data-dragging] .crop-window {
+    cursor: grabbing;
+    transition: none;
+  }
+
+  .crop-grip {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 40px;
+    translate: -50% -50%;
+    border-radius: 3px;
+    background: var(--color-redline);
+  }
+
+  [data-mode='original'] .crop-window {
+    width: 100%;
+    left: 0;
+    border-color: transparent;
+    box-shadow: 0 0 0 9999px rgb(21 21 21 / 0);
+    cursor: default;
+  }
+
+  [data-mode='original'] .crop-grip {
+    display: none;
+  }
+
+  /* Phone (9:16) or laptop (16:9) showing the published result */
+  .crop-device {
+    width: 180px;
+    padding: 8px;
+    border-radius: 28px;
+    background: #05070b;
+    border: 1px solid var(--color-rule);
+    box-shadow: 0 18px 40px -20px rgb(0 0 0 / 0.6);
+    transition: width 0.45s var(--ease-out-expo), border-radius 0.45s var(--ease-out-expo);
+  }
+
+  .crop-preview {
+    aspect-ratio: 9 / 16;
+    border-radius: 20px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position-x: calc(var(--pos) * 100%);
+    transition: aspect-ratio 0.45s var(--ease-out-expo), border-radius 0.45s var(--ease-out-expo), background-position 0.45s var(--ease-out-expo);
+  }
+
+  [data-dragging] .crop-preview {
+    transition: none;
+  }
+
+  /* vw, not %: a percentage inside an auto grid column collapses to zero */
+  [data-mode='original'] .crop-device {
+    width: min(320px, 75vw);
+    border-radius: 12px;
+  }
+
+  [data-mode='original'] .crop-preview {
+    aspect-ratio: var(--ratio);
+    border-radius: 6px;
+    background-size: cover;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .crop-window,
+    .crop-device,
+    .crop-preview {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-crop-demo]').forEach(demo => {
+    const stage = demo.querySelector<HTMLElement>('.crop-stage')!
+    const win = demo.querySelector<HTMLElement>('.crop-window')!
+    const modes = demo.querySelectorAll<HTMLButtonElement>('[data-mode]')
+    const windowWidth = parseFloat(getComputedStyle(demo).getPropertyValue('--window'))
+
+    let pos = 0.5
+
+    const setPos = (value: number) => {
+      pos = Math.min(Math.max(value, 0), 1)
+      demo.style.setProperty('--pos', String(pos))
+      win.setAttribute('aria-valuenow', String(Math.round(pos * 100)))
+    }
+
+    // Center the window under the pointer
+    const posFromPointer = (clientX: number) => {
+      const rect = stage.getBoundingClientRect()
+      const center = (clientX - rect.left) / rect.width
+      return (center - windowWidth / 2) / (1 - windowWidth)
+    }
+
+    const isOriginal = () => demo.dataset.mode === 'original'
+
+    stage.addEventListener('pointerdown', event => {
+      if (isOriginal()) return
+      stage.setPointerCapture(event.pointerId)
+      demo.dataset.dragging = ''
+      setPos(posFromPointer(event.clientX))
+    })
+
+    stage.addEventListener('pointermove', event => {
+      if (demo.dataset.dragging === undefined) return
+      setPos(posFromPointer(event.clientX))
+    })
+
+    const stopDrag = () => delete demo.dataset.dragging
+    stage.addEventListener('pointerup', stopDrag)
+    stage.addEventListener('pointercancel', stopDrag)
+
+    win.addEventListener('keydown', event => {
+      if (isOriginal()) return
+      const steps: Record<string, number> = { ArrowLeft: -0.05, ArrowRight: 0.05, ArrowDown: -0.05, ArrowUp: 0.05 }
+      if (event.key in steps) setPos(pos + steps[event.key])
+      else if (event.key === 'Home') setPos(0)
+      else if (event.key === 'End') setPos(1)
+      else return
+      event.preventDefault()
+    })
+
+    modes.forEach(button => {
+      button.addEventListener('click', () => {
+        demo.dataset.mode = button.dataset.mode
+        modes.forEach(other => other.setAttribute('aria-pressed', String(other === button)))
+        win.setAttribute('aria-disabled', String(isOriginal()))
+      })
+    })
+  })
+</script>

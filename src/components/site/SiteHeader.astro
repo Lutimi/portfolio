@@ -1,0 +1,77 @@
+---
+import { homeUrl, useTranslations, type Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+  // Same page in the other language
+  switchHref: string
+}
+
+const { lang, switchHref } = Astro.props
+const t = useTranslations(lang)
+const home = homeUrl(lang)
+---
+
+<header class="site-header sticky top-0 z-40 bg-paper" data-site-header>
+  <nav class="mx-auto flex h-16 max-w-[1360px] items-center justify-between gap-6 px-5 sm:px-10" aria-label="Main">
+    <a href={home} class="flex items-center gap-3 no-underline" aria-label={t('nav.home')}>
+      <span class="grid size-8 place-items-center rounded-[6px] bg-ink text-[0.8125rem] font-extrabold tracking-tight text-paper [font-stretch:125%]">LT</span>
+      <span class="hidden text-[0.9375rem] font-semibold sm:inline">Luis Ticona</span>
+    </a>
+
+    <div class="flex items-center gap-1 sm:gap-2">
+      <ul class="mr-2 hidden items-center gap-1 md:flex">
+        <li><a class="nav-link" href={`${home}#work`}>{t('nav.work')}</a></li>
+        <li><a class="nav-link" href={`${home}#about`}>{t('nav.about')}</a></li>
+        <li><a class="nav-link" href="/cv-luis-ticona.pdf" target="_blank" rel="noopener">{t('nav.resume')}</a></li>
+      </ul>
+      <a
+        href={switchHref}
+        hreflang={lang === 'en' ? 'es' : 'en'}
+        lang={lang === 'en' ? 'es' : 'en'}
+        aria-label={t('nav.switchLabel')}
+        title={t('nav.switchLabel')}
+        class="nav-link font-mono text-[0.8125rem]"
+      >
+        {t('nav.switch')}
+      </a>
+      <a href="mailto:lutimi19@gmail.com" class="button ml-1 !h-10 !px-4">{t('nav.cta')}</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    box-shadow: 0 1px 0 transparent;
+    transition: box-shadow 0.3s var(--ease-out-expo);
+  }
+
+  .site-header[data-scrolled] {
+    box-shadow: 0 1px 0 var(--color-rule);
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    border-radius: 999px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-ink-2);
+    text-decoration: none;
+    transition: color 0.2s var(--ease-out-expo), background-color 0.2s var(--ease-out-expo);
+  }
+
+  .nav-link:hover {
+    color: var(--color-ink);
+    background: var(--color-paper-deep);
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-site-header]')!
+  const update = () => header.toggleAttribute('data-scrolled', window.scrollY > 8)
+  window.addEventListener('scroll', update, { passive: true })
+  update()
+</script>

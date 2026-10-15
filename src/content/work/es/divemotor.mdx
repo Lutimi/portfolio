@@ -1,0 +1,152 @@
+---
+title: 'El portal de Divemotor atiende seis marcas de vehículos en todo el Perú. Lo seguí mejorando sin sacarlo de línea, y diseñé las secciones que le faltaban.'
+project: Divemotor
+summary: 'Divemotor vende y da servicio a vehículos Mercedes-Benz, Freightliner, FIAT, Jeep, Dodge y RAM en todo el Perú, y divemotor.com es donde un comprador de flotas compara camiones y una familia reserva su mantenimiento. Durante un año y medio me encargué de su mejora continua: una forma más clara de encontrar un concesionario, las secciones nuevas que la marca necesitaba, el UI Kit que creé para cada página y especificaciones con las que desarrollo pudo construir.'
+cover: ../../../assets/work/divemotor/cover.png
+coverAlt: El inicio en vivo de Divemotor, con las tarjetas de sus cuatro líneas de vehículos (automóviles, camiones, vans y buses) y la sección de concesionarios.
+pills: [Cliente, Automotriz, Portal web, UI Kit]
+role: UX Analyst en Altimea y luego UX/UI Designer en Vide Solutions, ambos para Divemotor. Mejora continua, el UI Kit (creado desde cero) y secciones nuevas.
+team: Un equipo de 4; diseñé la mayor parte del trabajo del portal
+duration: 1 año y 6 meses
+tools: [Figma]
+plate:
+  headline: Un portal de seis marcas, mejorado sin salir de línea.
+  status: En vivo
+  outcome: Tres secciones nuevas en vivo, un buscador de concesionarios que se entiende y especificaciones para seis breakpoints con las que desarrollo construyó.
+  role: UX/UI Designer
+  team: Equipo de 4
+  image: ../../../assets/work/divemotor/concesionarios-live.png
+  imageAlt: La página de Concesionarios en vivo, con la tarjeta de filtros bajo el hero, las tarjetas de concesionarios y el mapa.
+  mark: { x: 11.04, y: 44.47, w: 77.92, h: 8.58, label: 'Propuesta en Figma, publicada' }
+order: 2
+draft: false
+---
+
+import Figure from '../../../components/case/Figure.astro'
+import Insight from '../../../components/case/Insight.astro'
+import Metrics from '../../../components/case/Metrics.astro'
+import BeforeAfter from '../../../components/case/BeforeAfter.astro'
+
+import concesionariosBefore from '../../../assets/work/divemotor/concesionarios-before.png'
+import concesionariosAfter from '../../../assets/work/divemotor/concesionarios-after.png'
+import concesionariosLive from '../../../assets/work/divemotor/concesionarios-live.png'
+import newSections from '../../../assets/work/divemotor/new-sections.png'
+import camionesBanners from '../../../assets/work/divemotor/camiones-banners.png'
+import uiKit from '../../../assets/work/divemotor/ui-kit.png'
+import brandTabs from '../../../assets/work/divemotor/brand-tabs.png'
+import filterStates from '../../../assets/work/divemotor/filter-states.png'
+import devspec from '../../../assets/work/divemotor/devspec.png'
+
+## Un portal, seis marcas, cuatro líneas de vehículos
+
+Divemotor es un gran grupo automotriz peruano. Su portal tiene que atender a personas muy distintas a la vez: un jefe de flota que compara dieciséis modelos de camiones, una familia que busca un Jeep, un conductor que reserva su mantenimiento en el taller más cercano. Todo dentro de un mismo marco Divemotor, con el contenido de cada marca en su propia voz.
+
+Un portal así nunca está terminado. Mi trabajo era seguir mejorándolo sin sacarlo de línea: encontrar dónde se perdía la gente, diseñar la solución y entregarla a desarrollo de una forma que pudieran construir.
+
+## Encontrar un concesionario no debería requerir leer un mapa
+
+La página de Concesionarios fue el caso más claro. Los filtros flotaban sobre la foto del hero, la mitad difíciles de leer, y el mapa ocupaba todo el lado izquierdo antes de que eligieras nada.
+
+<BeforeAfter
+  before={concesionariosBefore}
+  after={concesionariosAfter}
+  beforeAlt="La página de Concesionarios anterior: filtros encima de la foto del hero, un mapa a la izquierda y tarjetas de concesionarios a la derecha."
+  afterAlt="La propuesta: una tarjeta de filtros bajo el hero con región, tu ubicación, servicios, marcas y vehículos, y luego las tarjetas junto al mapa."
+  lang="es"
+  caption="Concesionarios, antes y en mi propuesta. Los filtros pasaron a una sola tarjeta bajo el hero, en el orden en que la gente decide: dónde, qué servicio, qué marca."
+/>
+
+La tarjeta de filtros salió a producción: hoy la página en vivo empieza con ella, incluido “usa tu ubicación”, así el concesionario más cercano queda a un toque.
+
+<Figure
+  src={concesionariosLive}
+  mark={{ x: 11.04, y: 44.47, w: 77.92, h: 8.58, label: 'La misma tarjeta de filtros, publicada' }}
+  alt="La página de Concesionarios en vivo en divemotor.com, con la tarjeta de filtros bajo el hero."
+  caption="La misma tarjeta de filtros, en vivo en divemotor.com."
+  framed
+/>
+
+## Las secciones que le faltaban a la marca
+
+Divemotor tenía historias que el portal no podía contar: conductores y clientes en la ruta, entregas de vehículos, su trabajo en sostenibilidad. Diseñé las secciones para contarlas, en desktop y mobile, cada una con sus propios componentes: una serie de videos llamada Juntos en la Ruta, una sección de experiencias de clientes y un layout de artículo que se convirtió en la página de sostenibilidad. Las tres están en vivo.
+
+<Figure
+  src={newSections}
+  mark={{ x: 76.75, y: 55.14, w: 19.75, h: 37.84, label: 'El mismo carrusel, deslizable en móvil', align: 'right' }}
+  alt="La sección Juntos en la Ruta diseñada para desktop y mobile."
+  caption="Juntos en la Ruta, diseñada para desktop y mobile con sus propios componentes de carrusel y video."
+  framed
+/>
+
+Dentro del listado de camiones agregué banners deslizables que ofrecen un siguiente paso cuando un comprador no encontró el modelo adecuado: camiones seminuevos, la serie de videos o lo que dicen otros clientes.
+
+<Figure
+  src={camionesBanners}
+  mark={{ x: 11.88, y: 25.02, w: 16.38, h: 4.45, label: 'Venta cruzada a seminuevos' }}
+  alt="Tres variantes del componente Banner slider usado en el listado de camiones."
+  caption="Un solo componente Banner slider, tres variantes, para que el listado nunca termine en un callejón sin salida."
+  framed
+/>
+
+## Un kit detrás de cada página
+
+Un portal de este tamaño solo se mantiene consistente si cada página se construye con las mismas piezas. Creé el UI Kit como esa fuente: colores, tipografía y componentes agrupados en las mismas secciones que el sitio, así un diseñador o un desarrollador encuentra el header, un filtro o una pestaña de marca donde lo espera.
+
+<Figure
+  src={uiKit}
+  mark={{ x: 3.75, y: 13.23, w: 48.25, h: 15.72, label: 'Azul y naranja de marca, con hex' }}
+  alt="Los fundamentos del UI Kit: la paleta de colores de Divemotor y la escala tipográfica de títulos."
+  caption="Fundamentos: un azul para las acciones, un naranja como acento y una escala de títulos en Roboto Condensed."
+  framed
+/>
+
+Las marcas no tienen su propio tema; tienen su propio contenido dentro del mismo marco. Una pestaña de marca es un solo componente con una variante por marca, así sumar una marca nunca significa diseñar una página nueva.
+
+<Figure
+  src={brandTabs}
+  mark={{ x: 60.59, y: 53.13, w: 13.29, h: 6.84, label: 'La pestaña activa cambia el contenido', align: 'right' }}
+  alt="El componente de pestaña de marca en varias de sus variantes."
+  caption="Un componente, una variante por marca."
+  framed
+/>
+
+<Figure
+  src={filterStates}
+  mark={{ x: 3.34, y: 27.79, w: 17.63, h: 36.04, label: 'Abierto, lista 11 departamentos' }}
+  alt="El componente de filtro de concesionarios en varias de sus variantes."
+  caption="El filtro de concesionarios, con cada variante que necesita dibujada antes de la entrega."
+  framed
+/>
+
+## Especificaciones con las que desarrollo pudo construir
+
+La mayoría de los cambios en un portal son pequeños, y los cambios pequeños se pierden en la entrega. Por eso mantuve en Figma una página solo para el equipo de desarrollo: el layout en cada breakpoint, de 1920 hasta mobile, y al lado, en palabras simples, qué cambia y por qué.
+
+<Figure
+  src={devspec}
+  mark={{ x: 64.57, y: 37.07, w: 30.87, h: 7.86, label: 'Tamaños del hero para desarrollo', align: 'right' }}
+  alt="La vista para desarrolladores en Figma: el layout del inicio en tablet con anotaciones de tamaños de texto y espaciado."
+  caption="La vista para desarrolladores a 768 px: tamaños de texto por breakpoint, escritos junto al layout al que pertenecen."
+  framed
+/>
+
+<Insight>
+  “Colocar las 4 cards: la versión anterior tenía 3 y dejaba un hueco.” Una razón de una línea junto a un cambio es lo que hace que se construya.
+</Insight>
+
+Esa nota hoy es el inicio en vivo: cuatro líneas de vehículos, sin hueco.
+
+<Metrics
+  items={[
+    { value: '3', label: 'secciones nuevas diseñadas y en vivo' },
+    { value: '6', label: 'breakpoints especificados para desarrollo' },
+    { value: '6', label: 'marcas dentro de un mismo portal' },
+    { value: '87', label: 'sets de componentes en el UI Kit que creé' },
+  ]}
+/>
+
+## Lo que aprendí
+
+En un portal en vivo, mejorar es un hábito, no un lanzamiento. Los cambios que salieron a producción fueron los que dejé escritos donde desarrollo ya mira, con la razón al lado.
+
+No todo salió tal como lo dibujé. El filtro lateral que propuse para buses salió como un filtro de marca más simple. Eso me enseñó a diseñar la versión que puede salir en este sprint junto a la ideal, y a dejar que el equipo elija con ambas sobre la mesa.

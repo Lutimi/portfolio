@@ -1,28 +1,42 @@
 ---
+import '@fontsource-variable/archivo/standard.css'
+import '@fontsource/fragment-mono/400.css'
 import '../styles/global.css'
+import type { Lang } from '../i18n/ui'
 
 interface Props {
   title: string
   description?: string
+  lang?: Lang
+  image?: string
+  // Same page in other languages, for hreflang
+  alternates?: { lang: Lang; href: string }[]
 }
 
-const { title, description = 'Portfolio de Luis Misael Ticona Miranda — Product Designer Senior & Software Engineer' } = Astro.props
+const {
+  title,
+  description = 'Luis Ticona — senior product designer who designs systems and builds them in code.',
+  lang = 'en',
+  image,
+  alternates = [],
+} = Astro.props
 ---
 
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang={lang}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
+  <meta name="theme-color" content="#0B1424" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  {image && <meta property="og:image" content={new URL(image, Astro.url)} />}
+  {alternates.map(alt => <link rel="alternate" hreflang={alt.lang} href={new URL(alt.href, Astro.url)} />)}
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <title>{title}</title>
 </head>
-<body class="overflow-x-hidden antialiased">
-  <div class="grain"></div>
+<body>
   <slot />
 </body>
 </html>

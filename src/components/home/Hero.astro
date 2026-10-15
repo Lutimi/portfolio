@@ -1,0 +1,72 @@
+---
+// Arrival: Luis himself, then what he does and where. The case studies start
+// right below, so the first screen already shows the work.
+import PhotoBuild from './PhotoBuild.astro'
+import type { HomeContent } from '../../i18n/home'
+import { caseUrl, type Lang } from '../../i18n/ui'
+
+interface Props {
+  hero: HomeContent['hero']
+  lang: Lang
+}
+
+const { hero, lang } = Astro.props
+---
+
+<section class="mx-auto grid max-w-[1360px] items-center gap-8 px-5 pb-20 pt-8 sm:px-10 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-16 lg:pb-24 lg:pt-14">
+  <PhotoBuild alt={hero.photoAlt} caption={hero.photoCaption} localTime={hero.localTime} lang={lang} />
+
+  <div class="hero-copy">
+    <h1 class="display hero-title">
+      <span class="block">{hero.lines[0]}</span>
+      <span class="block">{hero.lines[1]} <span class="text-code">{hero.lines[2]}</span></span>
+    </h1>
+
+    <p class="mt-7 max-w-[40rem] text-[1.25rem] leading-relaxed">{hero.intro}</p>
+    <p class="mt-4 max-w-[40rem] text-[1.0625rem] leading-relaxed text-ink-2">
+      <span class="font-semibold text-ink">{hero.nowLabel}</span> {hero.now}
+      <span class="font-semibold text-ink">{hero.beforeLabel}</span> {hero.before}
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href={caseUrl(lang, 'izipay')} class="button">
+        {hero.cta}
+        <svg class="size-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </a>
+      <a href="mailto:lutimi19@gmail.com" class="button button--ghost">{hero.email}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-title {
+    font-size: clamp(2.75rem, 1rem + 4.4vw, 5.5rem);
+    font-stretch: 118%;
+  }
+
+  /* Entrance: the copy rises in order while the photo assembles */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-copy > * {
+      animation: rise 0.8s var(--ease-out-expo) both;
+    }
+
+    .hero-copy > :nth-child(2) {
+      animation-delay: 0.12s;
+    }
+
+    .hero-copy > :nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .hero-copy > :nth-child(4) {
+      animation-delay: 0.28s;
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      translate: 0 20px;
+    }
+  }
+</style>

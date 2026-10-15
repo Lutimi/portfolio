@@ -1,0 +1,159 @@
+---
+title: "I gave Izipay’s merchant panel a new look and feel, and documented it as one design system for Figma and code."
+project: Izipay
+summary: "Izipay is a Peruvian payments company, and its merchant panel is where businesses track sales, refunds and payouts. The panel had grown one screen at a time, and it showed. I redesigned its look and feel, rebuilt 23 screens on it, and documented the result as a design system that designers and developers share name for name. The first flow built on it lets any merchant connect their online store on their own."
+cover: ../../../assets/work/izipay/cover.png
+coverAlt: Izipay’s redesigned merchant panel. The home screen with recommendations, and the Integrate your website guide at step one.
+pills: [Design system, Fintech, B2B, Built in code]
+role: Senior Product Designer at 10Pearls, for Izipay. Look and feel, the design system and its documentation, and the onboarding flows.
+team: Izipay’s UX/UI team; my lead built the base panel shell
+duration: 12 days for the coded prototype
+tools: [Figma, HTML, CSS, JavaScript]
+plate:
+  headline: A new look and feel, documented as one system.
+  status: Prototype, 2026
+  outcome: A new look and feel across 23 screens, documented as a design system of 277 tokens and 17 parent components that Figma and code share.
+  role: Senior product designer
+  team: Izipay UX/UI team
+  image: ../../../assets/work/izipay/compare-after.png
+  imageAlt: The redesigned Sales screen, with status counts as a toggle group, instant filters and the transactions table.
+  mark: { x: 21.7, y: 41.1, w: 75.6, h: 19.5, label: 'Status counts and instant filters on every list', align: right }
+order: 1
+draft: false
+---
+
+import Figure from '../../../components/case/Figure.astro'
+import Insight from '../../../components/case/Insight.astro'
+import Metrics from '../../../components/case/Metrics.astro'
+import BeforeAfter from '../../../components/case/BeforeAfter.astro'
+import TokenMap from '../../../components/case/TokenMap.astro'
+
+import oldDevelopers from '../../../assets/work/izipay/old-developers.png'
+import newHome from '../../../assets/work/izipay/new-home.png'
+import newIntegrate from '../../../assets/work/izipay/new-integrate.png'
+import newApiKeys from '../../../assets/work/izipay/new-api-keys.png'
+import compareBefore from '../../../assets/work/izipay/compare-before.png'
+import compareAfter from '../../../assets/work/izipay/compare-after.png'
+import figmaInputStates from '../../../assets/work/izipay/figma-input-states.png'
+
+## A panel that had grown one screen at a time
+
+Izipay’s merchant panel did its job, but every section had been built on its own: its own filters, its own spacing, its own way of showing a status. Merchants felt it as friction, and the team felt it on every handoff, because the Figma file no longer described the product that shipped.
+
+So I started with the look and feel, on a real screen. Sales is where merchants spend their day, and it shows the whole change at once.
+
+<BeforeAfter
+  before={compareBefore}
+  after={compareAfter}
+  beforeAlt="The previous Transactions screen: status tabs, dashed filter chips and a transactions table."
+  afterAlt="The new Sales screen: status counts as a toggle group, instant filters and a transactions table."
+  lang="en"
+  caption="Transactions before, Sales after. Dashed chips became filters that apply the moment you use them, status tabs became counts, and labels moved to the merchant’s language."
+/>
+
+The rules behind it are few, and every screen follows them:
+
+- **One type system.** Aptos for everything a merchant reads or types, and Poppins only for headings of 20 px and up.
+- **One primary colour.** Izipay’s teal marks the main action and the current place; nothing else competes with it.
+- **One filter pattern.** Every list filters the moment you touch a control, with no Apply button.
+- **The merchant’s words.** “Order no.” instead of an internal sale ID; status counts instead of bare tabs.
+
+## Figma, then code, then Figma again
+
+A new look and feel only lasts if the team can keep building it. I started where the team designs: in the DS | Panel 2026 file, I designed the new parent components in Figma, each with every state and size it needs. Input Text alone covers seven states, from default to error and completed, in four sizes.
+
+<Figure
+  src={figmaInputStates}
+  alt="The Input Text component in Figma: a matrix of seven states (default, hover, focused, filled, disabled, error, completed) across four sizes."
+  caption="In Figma first: Input Text, seven states across four sizes, before a single line of code."
+  framed
+/>
+
+Then I took the components to code, where real interactions show what a static frame can’t. Filters should react the moment you touch them. A tooltip needs room to be read. I adapted and improved each component there, and when a flow worked in the browser, I brought it back into Figma, so the file shows the product as it really behaves.
+
+<Insight>
+  Figma is where we explore; code is where we find out. Bringing the flows back to Figma kept both telling the same story.
+</Insight>
+
+What held the round trip together was a naming rule. A token’s code name is its Figma name in lowercase, with slashes and spaces turned into dashes, so designers and developers use the same word for the same value.
+
+<TokenMap figmaLabel="Figma" codeLabel="Code" alt="Three Figma names next to the code names they become." class="mx-5 my-16 sm:mx-10 lg:mx-auto lg:max-w-[1280px]" />
+
+Components follow the same idea: each Figma property becomes a modifier, so `Button · Primary · Small` is `.button.button--primary.button--small` in code.
+
+## Documented where both sides look
+
+A system nobody can find is a system nobody follows. I documented it as a living catalogue, rendered with the panel’s own stylesheet, so if something changes there, it changes in the panel too. It covers 58 sections: foundations, components with all their states, the pieces each flow needed, navigation and the onboarding.
+
+Every component also records where it deliberately differs from Figma, and why. A few examples:
+
+- Tooltips grow up to 240 px wide instead of a fixed 80, so their text can be read.
+- Filter bars stay at 40 px instead of 36, to keep a comfortable touch target.
+- The close “x” is teal, not red, because red reads as an error.
+
+## The first flow on the new system
+
+With the system in place, the first flow to use it was the one Izipay needed most. Connecting an online store depended on personalized support, and that doesn’t scale to thousands of small merchants. In the previous panel, everything a developer needed lived in one Developers screen with two tabs.
+
+<Figure
+  src={oldDevelopers}
+  alt="The previous Izipay Developers screen, with two tabs, Keys and Apple Pay, and an Apple Pay setup form."
+  mark={{ x: 22.9, y: 17.1, w: 17.1, h: 4.7, label: 'Before: one screen, two tabs' }}
+  caption="The previous Developers screen: keys and Apple Pay, and nothing to guide a merchant from a test to a live store."
+  framed
+/>
+
+I mapped the integration journey end to end and studied how other payment platforms onboard developers. Stripe’s setup guide was the clearest reference, minus its focus mode.
+
+<Insight>
+  The onboarding is optional: nothing blocks the panel or covers the dashboard. You start in test mode and finish by turning on production.
+</Insight>
+
+The home now suggests the next step instead of demanding it: integrate your website, create a payment link if you don’t have a website yet, or go straight to production if you already know how.
+
+<Figure
+  src={newHome}
+  alt="The new Izipay home: a greeting, a Recommendations card with three suggested paths, quick actions and recent earnings."
+  mark={{ x: 21.6, y: 20.6, w: 37.1, h: 25.6, label: 'Optional: every card can be closed' }}
+  caption="The new home. Recommendations point to the guide; none of them blocks the dashboard."
+  framed
+/>
+
+Integrate your website breaks the job into five steps in two groups. First, test your integration: choose your platform, get your test keys, set one notification URL and make a test payment. Then turn on production, which stays locked until the tests pass. Any step can be skipped and resumed.
+
+<Figure
+  src={newIntegrate}
+  alt="Step one of Integrate your website: choose between a store plugin, your own code or a mobile app, with a side panel tracking the integration."
+  mark={{ x: 23.7, y: 47.7, w: 48.5, h: 16.4, label: 'Step 1 · the guide adapts to where you sell' }}
+  caption="Step one asks where you sell (a store plugin, your own code or a mobile app) and shows the matching guide and code examples."
+  framed
+/>
+
+Developers now get four focused screens instead of one: Integrate your website, API Keys, Webhooks and Apple Pay. In API Keys, test and production live on separate tabs, and every key is grouped by what it’s used for.
+
+<Figure
+  src={newApiKeys}
+  alt="The new API Keys screen, with Test and Production tabs, test keys grouped by use, and a notification URL card."
+  mark={{ x: 27.2, y: 22, w: 14.1, h: 3.7, label: 'Production stays locked until you’re ready' }}
+  caption="API Keys: grouped by use, each with a copy button, and the notification URL right beside them. The keys shown are demo values."
+  framed
+/>
+
+## What the team builds on now
+
+<Metrics
+  items={[
+    { value: '23', label: 'screens rebuilt on the new look and feel, checked at 1440 and 375 px' },
+    { value: '277', label: 'design tokens, each named after its Figma style' },
+    { value: '17', label: 'parent components, with every state' },
+    { value: '58', label: 'sections documented in the living catalogue' },
+  ]}
+/>
+
+I delivered the prototype, the design system and its documentation to the UX/UI team and to development as the base for the new panel. It’s still a prototype, so there are no live metrics yet.
+
+## What I learned
+
+A design system isn’t finished when it’s drawn. It’s finished when it survives real use. Taking the components from Figma to code and back taught me to treat handoff as a loop, not a one-way delivery: every decision made in the browser has to find its way back into the design file, under the same name, or the two drift apart again.
+
+I also learned that a new look and feel is only as strong as its documentation. Writing down why a component differs from Figma is what stops the next person from “fixing” it back.

@@ -1,0 +1,215 @@
+---
+// Luis's photo, built in front of you: on arrival its own colours fly in as
+// points, settle into the picture, and the sharp photo resolves over them.
+// Without script, or with reduced motion, it is simply the photo.
+import { Image } from 'astro:assets'
+import portrait from '../../assets/luis-ticona.png'
+import type { Lang } from '../../i18n/ui'
+
+interface Props {
+  alt: string
+  caption: string
+  // Shown with the live time, e.g. 14:32 in Lima
+  localTime: string
+  lang: Lang
+}
+
+const { alt, caption, localTime, lang } = Astro.props
+---
+
+<figure class="photo m-0" data-photo>
+  <div class="photo-frame">
+    <Image
+      src={portrait}
+      alt={alt}
+      widths={[320, 480, 640]}
+      sizes="(min-width: 1024px) 320px, 176px"
+      class="photo-img"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <canvas class="photo-canvas" aria-hidden="true"></canvas>
+  </div>
+  <figcaption class="photo-dim" aria-hidden="true">
+    <svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0.5 5H99.5M0.5 1V9M99.5 1V9" vector-effect="non-scaling-stroke" /></svg>
+    <span data-clock data-suffix={localTime} data-lang={lang}>{caption}</span>
+  </figcaption>
+</figure>
+
+<script is:inline>
+  // Hide the photo before first paint so it can be built; give up after 3 s
+  ;(() => {
+    const figure = document.currentScript.previousElementSibling
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    figure.dataset.building = ''
+    setTimeout(() => delete figure.dataset.building, 3000)
+  })()
+</script>
+
+<style>
+  .photo {
+    width: 11rem;
+  }
+
+  .photo-frame {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--color-paper-deep);
+  }
+
+  .photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+    transition: opacity 0.6s var(--ease-out-expo);
+  }
+
+  .photo-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transition: opacity 0.6s var(--ease-out-expo);
+  }
+
+  [data-building] .photo-img {
+    opacity: 0;
+  }
+
+  /* A dimension line under the photo, like every measured part on this site */
+  .photo-dim {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: 0.75rem;
+    color: var(--color-redline);
+  }
+
+  .photo-dim svg {
+    width: 100%;
+    height: 10px;
+    overflow: visible;
+  }
+
+  .photo-dim path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+  }
+
+  .photo-dim span {
+    justify-self: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.3;
+    color: var(--color-ink-2);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 1024px) {
+    .photo {
+      width: 20rem;
+    }
+
+    .photo-dim span {
+      font-size: 0.8125rem;
+    }
+  }
+</style>
+
+<script>
+  // A live detail under the photo: the time where Luis is right now
+  const clock = document.querySelector<HTMLElement>('[data-clock]')
+  if (clock) {
+    const format = new Intl.DateTimeFormat(clock.dataset.lang === 'es' ? 'es-PE' : 'en-US', {
+      timeZone: 'America/Lima',
+      hour: 'numeric',
+      minute: '2-digit',
+    })
+    const tick = () => (clock.textContent = `Luis Ticona · ${format.format(new Date())} ${clock.dataset.suffix}`)
+    tick()
+    setInterval(tick, 30_000)
+  }
+
+  const figure = document.querySelector<HTMLElement>('[data-photo]')
+  if (figure && figure.dataset.building !== undefined) build(figure)
+
+  async function build(figure: HTMLElement) {
+    const img = figure.querySelector('img')!
+    const canvas = figure.querySelector('canvas')!
+    const ctx = canvas.getContext('2d')!
+    const finish = () => {
+      delete figure.dataset.building
+      canvas.style.opacity = '0'
+    }
+    try {
+      await img.decode()
+    } catch {
+      return finish()
+    }
+
+    const rect = canvas.getBoundingClientRect()
+    const dpr = Math.min(devicePixelRatio || 1, 2)
+    canvas.width = Math.round(rect.width * dpr)
+    canvas.height = Math.round(rect.height * dpr)
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    const w = rect.width
+    const h = rect.height
+
+    // Sample the photo as it is framed (cover, focal point 50% 20%)
+    const cols = 44
+    const rows = 55
+    const read = document.createElement('canvas')
+    read.width = cols
+    read.height = rows
+    const rctx = read.getContext('2d', { willReadFrequently: true })!
+    const scale = Math.max(cols / img.naturalWidth, rows / img.naturalHeight)
+    const dw = img.naturalWidth * scale
+    const dh = img.naturalHeight * scale
+    rctx.drawImage(img, (cols - dw) * 0.5, (rows - dh) * 0.2, dw, dh)
+    const px = rctx.getImageData(0, 0, cols, rows).data
+
+    const cell = w / cols
+    const n = cols * rows
+    const sx = new Float32Array(n)
+    const sy = new Float32Array(n)
+    const tx = new Float32Array(n)
+    const ty = new Float32Array(n)
+    const delay = new Float32Array(n)
+    const color: string[] = []
+    for (let i = 0; i < n; i++) {
+      const x = i % cols
+      const y = (i / cols) | 0
+      tx[i] = x * cell
+      ty[i] = y * (h / rows)
+      const a = Math.random() * Math.PI * 2
+      const r = (0.6 + Math.random() * 0.9) * Math.max(w, h)
+      sx[i] = w / 2 + Math.cos(a) * r
+      sy[i] = h / 2 + Math.sin(a) * r
+      delay[i] = (y / rows) * 520 + Math.random() * 220
+      color.push(`rgb(${px[i * 4]},${px[i * 4 + 1]},${px[i * 4 + 2]})`)
+    }
+
+    const duration = 760
+    const start = performance.now()
+    const frame = (now: number) => {
+      const t = now - start
+      ctx.clearRect(0, 0, w, h)
+      let done = true
+      for (let i = 0; i < n; i++) {
+        const p = Math.min(1, Math.max(0, (t - delay[i]) / duration))
+        if (p < 1) done = false
+        const e = 1 - Math.pow(1 - p, 4)
+        const size = cell * (0.35 + 0.5 * e)
+        ctx.fillStyle = color[i]
+        ctx.fillRect(sx[i] + (tx[i] - sx[i]) * e, sy[i] + (ty[i] - sy[i]) * e, size, size)
+      }
+      if (done) return finish()
+      requestAnimationFrame(frame)
+    }
+    requestAnimationFrame(frame)
+  }
+</script>

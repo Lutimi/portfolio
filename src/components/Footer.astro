@@ -1,4 +1,12 @@
 ---
+import { useTranslations, type Lang } from '../i18n/ui'
+
+interface Props {
+  lang?: Lang
+}
+
+const { lang = 'es' } = Astro.props
+const t = useTranslations(lang)
 const currentYear = new Date().getFullYear()
 ---
 
@@ -11,23 +19,23 @@ const currentYear = new Date().getFullYear()
           LT<span class="text-primary">.</span>
         </a>
         <p class="mt-4 text-sm text-text-muted leading-relaxed max-w-xs">
-          Product Designer Senior & Software Engineer. Diseñando experiencias digitales desde Lima, Perú.
+          {t('footer.bio')}
         </p>
       </div>
 
       <!-- Links -->
       <div>
-        <h4 class="font-display font-semibold text-sm text-text-main mb-4">Navegación</h4>
+        <h4 class="font-display font-semibold text-sm text-text-main mb-4">{t('footer.nav')}</h4>
         <ul class="space-y-2">
-          <li><a href="#proyectos" class="text-sm text-text-muted hover:text-text-main transition-colors">Proyectos</a></li>
-          <li><a href="#sobre-mi" class="text-sm text-text-muted hover:text-text-main transition-colors">Sobre mí</a></li>
-          <li><a href="#experiencia" class="text-sm text-text-muted hover:text-text-main transition-colors">Experiencia</a></li>
+          <li><a href="/#proyectos" class="text-sm text-text-muted hover:text-text-main transition-colors">{t('footer.work')}</a></li>
+          <li><a href="/#sobre-mi" class="text-sm text-text-muted hover:text-text-main transition-colors">{t('footer.about')}</a></li>
+          <li><a href="/#experiencia" class="text-sm text-text-muted hover:text-text-main transition-colors">{t('footer.experience')}</a></li>
         </ul>
       </div>
 
       <!-- Contact -->
       <div>
-        <h4 class="font-display font-semibold text-sm text-text-main mb-4">Contacto</h4>
+        <h4 class="font-display font-semibold text-sm text-text-main mb-4">{t('footer.contact')}</h4>
         <ul class="space-y-2">
           <li>
             <a href="mailto:lutimi19@gmail.com" class="text-sm text-text-muted hover:text-primary transition-colors">
@@ -50,10 +58,10 @@ const currentYear = new Date().getFullYear()
 
     <div class="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
       <p class="text-xs text-text-dim">
-        &copy; {currentYear} Luis Misael Ticona Miranda. Todos los derechos reservados.
+        &copy; {currentYear} Luis Misael Ticona Miranda. {t('footer.rights')}
       </p>
       <p class="text-xs text-text-dim">
-        Hecho con <span class="text-primary">Astro</span> + <span class="text-accent">Tailwind CSS</span>
+        {t('footer.made')} <span class="text-primary">Astro</span> + <span class="text-accent">Tailwind CSS</span>
       </p>
     </div>
   </div>

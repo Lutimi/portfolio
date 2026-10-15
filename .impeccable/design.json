@@ -1,0 +1,577 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-15T18:19:27Z",
+  "title": "Design System: Luis Ticona Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Drafting Vellum",
+        "canonical": "#F3F3EF",
+        "oklch": "oklch(96.3% 0.005 106.5)",
+        "tonalRamp": [
+          "#0B0B09",
+          "#252522",
+          "#42423F",
+          "#61615E",
+          "#82827F",
+          "#A5A5A1",
+          "#C9C9C5",
+          "#EFEFEB"
+        ]
+      },
+      "paper-deep": {
+        "role": "neutral",
+        "displayName": "Canvas Board",
+        "canonical": "#E9E9E3",
+        "oklch": "oklch(93.2% 0.008 106.6)",
+        "tonalRamp": [
+          "#0B0B08",
+          "#252521",
+          "#42423D",
+          "#62625C",
+          "#83837D",
+          "#A5A5A0",
+          "#C9C9C4",
+          "#EFEFE9"
+        ]
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Clean Sheet",
+        "canonical": "#FFFFFF",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Hairline Gray",
+        "canonical": "#D6D6CF",
+        "oklch": "oklch(87.4% 0.009 106.6)",
+        "tonalRamp": [
+          "#0C0B07",
+          "#252520",
+          "#42423D",
+          "#62625C",
+          "#83837C",
+          "#A5A59F",
+          "#CACAC3",
+          "#EFEFE8"
+        ]
+      },
+      "grid": {
+        "role": "neutral",
+        "displayName": "Grid Line",
+        "canonical": "#E1E1DA",
+        "oklch": "oklch(90.8% 0.009 106.6)",
+        "tonalRamp": [
+          "#0C0B07",
+          "#252520",
+          "#42423D",
+          "#62625C",
+          "#83837C",
+          "#A5A59F",
+          "#CACAC3",
+          "#EFEFE8"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Carbon Ink",
+        "canonical": "#151515",
+        "oklch": "oklch(19.6% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#A5A5A5",
+          "#C9C9C9",
+          "#EEEEEE"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "#4A4C50",
+        "oklch": "oklch(41.6% 0.007 264.5)",
+        "tonalRamp": [
+          "#0A0B0E",
+          "#232529",
+          "#404246",
+          "#5F6165",
+          "#808287",
+          "#A3A5AA",
+          "#C7C9CE",
+          "#ECEEF3"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Soft Graphite",
+        "canonical": "#6A6D72",
+        "oklch": "oklch(53.4% 0.009 260.7)",
+        "tonalRamp": [
+          "#090B0F",
+          "#232529",
+          "#3F4247",
+          "#5E6166",
+          "#7F8288",
+          "#A2A5AB",
+          "#C6C9CF",
+          "#EBEFF4"
+        ]
+      },
+      "pencil": {
+        "role": "neutral",
+        "displayName": "Pencil",
+        "canonical": "#A2A5A9",
+        "oklch": "oklch(72.1% 0.007 255.5)",
+        "tonalRamp": [
+          "#090B0E",
+          "#232528",
+          "#404246",
+          "#5F6165",
+          "#808386",
+          "#A2A5A9",
+          "#C6C9CD",
+          "#EBEFF3"
+        ]
+      },
+      "redline": {
+        "role": "primary",
+        "displayName": "Redline",
+        "canonical": "#D3203A",
+        "oklch": "oklch(56.0% 0.209 21.0)",
+        "tonalRamp": [
+          "#1F0002",
+          "#4C010C",
+          "#7F021B",
+          "#B7032B",
+          "#E43648",
+          "#FF7175",
+          "#FEB2B0",
+          "#FEE9E8"
+        ]
+      },
+      "redline-deep": {
+        "role": "primary",
+        "displayName": "Deep Redline",
+        "canonical": "#AE1830",
+        "oklch": "oklch(48.5% 0.181 20.3)",
+        "tonalRamp": [
+          "#1F0002",
+          "#4C010D",
+          "#7F011D",
+          "#B11C32",
+          "#D94852",
+          "#FF7176",
+          "#FEB2B1",
+          "#FEE9E8"
+        ]
+      },
+      "code": {
+        "role": "secondary",
+        "displayName": "Code Blue",
+        "canonical": "#2448C9",
+        "oklch": "oklch(46.6% 0.204 266.1)",
+        "tonalRamp": [
+          "#010035",
+          "#06007A",
+          "#122AAB",
+          "#2B51D2",
+          "#4876FA",
+          "#7BA1FF",
+          "#B1C9FE",
+          "#E8EFFE"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headline (118% width) and outcome-led case titles (125%, narrowing to 106% on phones). Closing statements reach up to 6rem."
+      },
+      "display-plate": {
+        "displayName": "Display Plate",
+        "purpose": "Project names on plates."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Home section headings, set 20px below a 1px ink rule."
+      },
+      "chapter": {
+        "displayName": "Chapter",
+        "purpose": "Case study chapter titles that tell the story as a sentence; 128px of air above."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Process note titles; the title-block name at 1.75rem."
+      },
+      "title-small": {
+        "displayName": "Title Small",
+        "purpose": "Case prose subheads."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Outcome numbers in Metrics; tabular, counting once."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Hero intro, bio, closing bodies and case prose, in Graphite."
+      },
+      "outcome": {
+        "displayName": "Outcome",
+        "purpose": "The one-line outcome under a project name."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Base text."
+      },
+      "ui": {
+        "displayName": "UI",
+        "purpose": "Button labels; nav links at 500, switch segments at 0.875rem."
+      },
+      "pill": {
+        "displayName": "Pill",
+        "purpose": "Project-type pills."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "The name half of a label/value pair: bands, facts, timeline groups, title-block cells."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Figure captions and hero hints, in Soft Graphite."
+      },
+      "measure": {
+        "displayName": "Measure",
+        "purpose": "Dimensions, token names and code only. 0.9375rem on spec canvases from 1024px."
+      }
+    },
+    "shadows": [
+      {
+        "name": "resting-print",
+        "value": "0 18px 40px -20px rgb(21 21 21 / 0.35)",
+        "purpose": "A rounded screenshot laid on a canvas."
+      },
+      {
+        "name": "resting-device",
+        "value": "0 18px 40px -20px rgb(21 21 21 / 0.45)",
+        "purpose": "The device frame in the format-crop demo."
+      },
+      {
+        "name": "header-rule",
+        "value": "0 1px 0 var(--color-rule)",
+        "purpose": "The sticky header bottom edge after 8px of scroll; transparent at the top of the page."
+      },
+      {
+        "name": "hairline-outline",
+        "value": "inset 0 0 0 1px var(--color-ink)",
+        "purpose": "The ghost button and switch outline, drawn inset so it never shifts layout."
+      },
+      {
+        "name": "crop-scrim",
+        "value": "0 0 0 9999px rgb(21 21 21 / 0.55)",
+        "purpose": "Dims everything outside the crop window in the interactive demo."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The only easing curve: every transition and the NumberTicker count."
+      },
+      {
+        "name": "duration-color",
+        "value": "200ms",
+        "purpose": "Color and fill changes on links, buttons, nav links, chips."
+      },
+      {
+        "name": "duration-state",
+        "value": "250ms",
+        "purpose": "Switch segment state."
+      },
+      {
+        "name": "duration-settle",
+        "value": "300ms",
+        "purpose": "Header rule, arrow nudge, annotation ink change."
+      },
+      {
+        "name": "duration-label",
+        "value": "350ms",
+        "purpose": "Annotation labels arriving: 4px rise and 4px blur clearing."
+      },
+      {
+        "name": "duration-morph",
+        "value": "450ms",
+        "purpose": "Crop window and device morphs."
+      },
+      {
+        "name": "duration-draw",
+        "value": "550ms",
+        "purpose": "Redline stroke draw via stroke-dashoffset."
+      },
+      {
+        "name": "duration-lift",
+        "value": "900ms",
+        "purpose": "Project plate image lifting 4px on hover."
+      },
+      {
+        "name": "duration-count",
+        "value": "1200ms",
+        "purpose": "Metrics numbers counting once on entering view."
+      },
+      {
+        "name": "press-scale",
+        "value": "scale(0.97)",
+        "purpose": "Button active state."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "transition-duration: 0.01ms; animation-duration: 0.01ms",
+        "purpose": "Global collapse under prefers-reduced-motion; the spec canvas and crop demo also drop their transitions."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone-max",
+        "value": "639px",
+        "note": "Long case titles narrow to 106% width."
+      },
+      {
+        "name": "sm",
+        "value": "640px",
+        "note": "Gutters 20px to 40px; two-up title block; full name in header."
+      },
+      {
+        "name": "md",
+        "value": "768px",
+        "note": "Header section links; process grid; crop demo side by side."
+      },
+      {
+        "name": "lg",
+        "value": "1024px",
+        "note": "Column splits; hero specimen at 1.25x; larger annotation type; four-column title block."
+      },
+      {
+        "name": "container",
+        "value": "1360px",
+        "note": "Sheet max width."
+      },
+      {
+        "name": "touch",
+        "value": "(hover: none)",
+        "note": "Hover hints swap to tap hints."
+      }
+    ],
+    "scopedSpecimen": {
+      "note": "The hero specimen (WIKIVI \"Request a video\") keeps its own product values. They are not system tokens.",
+      "fontFamily": "Poppins (500/600/700), exposed as --font-wikivi",
+      "colors": {
+        "rojo-primario": "#F24452",
+        "rojo-hover": "#D93A47",
+        "gray-900": "#111827",
+        "gray-700": "#374151",
+        "gray-500": "#6B7280",
+        "sent": "#059669"
+      },
+      "shadow": "0 18px 40px -18px rgb(17 24 39 / 0.28), 0 2px 6px rgb(17 24 39 / 0.06)"
+    },
+    "strokes": [
+      {
+        "name": "redline",
+        "value": "1.5px solid",
+        "purpose": "Dimension lines, measurement boxes, leaders, crop window, Insight and closing ticks."
+      },
+      {
+        "name": "extension",
+        "value": "1px dashed 3/3 at 70% opacity",
+        "purpose": "Extension lines carrying an edge out to its dimension."
+      },
+      {
+        "name": "callout",
+        "value": "1px dashed, active ink",
+        "purpose": "Token callout frames."
+      },
+      {
+        "name": "rule-ink",
+        "value": "1px solid ink",
+        "purpose": "Opens or frames a structure."
+      },
+      {
+        "name": "rule-gray",
+        "value": "1px solid rule",
+        "purpose": "Subdivides within a structure."
+      },
+      {
+        "name": "focus",
+        "value": "2px solid code, 3px offset, 4px radius",
+        "purpose": "Keyboard focus everywhere."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ink pill for the one main action in a block (email). Blushes redline on hover.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Email me</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; height: 2.75rem; padding: 0 1.25rem; border: 0; border-radius: 999px; background: var(--color-ink, #151515); color: var(--color-paper, #F3F3EF); font-family: var(--font-sans, \"Archivo Variable\", \"Archivo\", system-ui, sans-serif); font-size: 0.9375rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: background-color 0.2s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)), transform 0.2s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)); } .ds-btn:hover { background: var(--color-redline, #D3203A); } .ds-btn:active { transform: scale(0.97); } .ds-btn:focus-visible { outline: 2px solid var(--color-code, #2448C9); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Inset ink outline for secondary destinations beside one primary; fills ink on hover.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">Resume (PDF)</a>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; height: 2.75rem; padding: 0 1.25rem; border: 0; border-radius: 999px; background: transparent; color: var(--color-ink, #151515); box-shadow: inset 0 0 0 1px var(--color-ink, #151515); font-family: var(--font-sans, \"Archivo Variable\", \"Archivo\", system-ui, sans-serif); font-size: 0.9375rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: background-color 0.2s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)), color 0.2s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)), transform 0.2s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)); } .ds-btn-ghost:hover { background: var(--color-ink, #151515); color: var(--color-paper, #F3F3EF); } .ds-btn-ghost:active { transform: scale(0.97); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--color-code, #2448C9); outline-offset: 3px; }"
+    },
+    {
+      "name": "Project Pills",
+      "kind": "chip",
+      "refersTo": "pill",
+      "description": "Outlined project-type labels; on a case title the first pill names the project in solid ink.",
+      "html": "<ul class=\"ds-pills\"><li class=\"ds-pill ds-pill--project\">WIKIVI</li><li class=\"ds-pill\">Two-sided marketplace</li><li class=\"ds-pill\">0 to 1</li></ul>",
+      "css": ".ds-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; } .ds-pill { display: inline-flex; align-items: center; height: 1.75rem; padding: 0 0.75rem; border: 1px solid var(--color-ink, #151515); border-radius: 999px; color: var(--color-ink, #151515); font-family: var(--font-sans, \"Archivo Variable\", \"Archivo\", system-ui, sans-serif); font-size: 0.8125rem; font-weight: 550; white-space: nowrap; } .ds-pill--project { background: var(--color-ink, #151515); color: var(--color-paper, #F3F3EF); }"
+    },
+    {
+      "name": "Design / Code Switch",
+      "kind": "custom",
+      "refersTo": "switch",
+      "description": "Segmented control that renames every annotation between Figma and code.",
+      "html": "<div class=\"ds-switch\" role=\"group\" aria-label=\"Show names as\"><button type=\"button\" aria-pressed=\"true\">Design</button><button type=\"button\" aria-pressed=\"false\">Code</button></div>",
+      "css": ".ds-switch { display: inline-flex; padding: 3px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--color-ink, #151515); background: var(--color-paper, #F3F3EF); } .ds-switch button { height: 2.25rem; padding: 0 1rem; border: 0; border-radius: 999px; background: transparent; color: var(--color-ink-2, #4A4C50); font-family: var(--font-sans, \"Archivo Variable\", \"Archivo\", system-ui, sans-serif); font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: background-color 0.25s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)), color 0.25s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)); } .ds-switch button[aria-pressed='true'] { background: var(--color-ink, #151515); color: var(--color-paper, #F3F3EF); } .ds-switch button:not([aria-pressed='true']):hover { color: var(--color-ink, #151515); } .ds-switch button:focus-visible { outline: 2px solid var(--color-code, #2448C9); outline-offset: 3px; }"
+    },
+    {
+      "name": "Site Header",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Sticky solid-paper header: ink monogram tile, pill nav links, language switch, compact primary button.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main\"><a class=\"ds-nav-brand\" href=\"#\"><span class=\"ds-nav-mono\">LT</span><span>Luis Ticona</span></a><div class=\"ds-nav-right\"><a class=\"ds-nav-link\" href=\"#\">Work</a><a class=\"ds-nav-link\" href=\"#\">About</a><a class=\"ds-nav-link\" href=\"#\">Resume</a><a class=\"ds-nav-cta\" href=\"#\">Email me</a></div></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 4rem; padding: 0 1.25rem; background: var(--color-paper, #F3F3EF); box-shadow: 0 1px 0 var(--color-rule, #D6D6CF); font-family: var(--font-sans, \"Archivo Variable\", \"Archivo\", system-ui, sans-serif); } .ds-nav-brand { display: flex; align-items: center; gap: 0.75rem; color: var(--color-ink, #151515); text-decoration: none; font-size: 0.9375rem; font-weight: 600; } .ds-nav-mono { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 6px; background: var(--color-ink, #151515); color: var(--color-paper, #F3F3EF); font-size: 0.8125rem; font-weight: 800; font-stretch: 125%; letter-spacing: -0.025em; } .ds-nav-right { display: flex; align-items: center; gap: 0.25rem; } .ds-nav-link { display: inline-flex; align-items: center; height: 2.5rem; padding: 0 0.75rem; border-radius: 999px; color: var(--color-ink-2, #4A4C50); font-size: 0.9375rem; font-weight: 500; text-decoration: none; transition: color 0.2s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)), background-color 0.2s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)); } .ds-nav-link:hover { color: var(--color-ink, #151515); background: var(--color-paper-deep, #E9E9E3); } .ds-nav-link:focus-visible, .ds-nav-cta:focus-visible { outline: 2px solid var(--color-code, #2448C9); outline-offset: 3px; } .ds-nav-cta { display: inline-flex; align-items: center; height: 2.5rem; margin-left: 0.25rem; padding: 0 1rem; border-radius: 999px; background: var(--color-ink, #151515); color: var(--color-paper, #F3F3EF); font-size: 0.9375rem; font-weight: 600; text-decoration: none; transition: background-color 0.2s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)); } .ds-nav-cta:hover { background: var(--color-redline, #D3203A); }"
+    },
+    {
+      "name": "Spec Canvas Annotation",
+      "kind": "custom",
+      "refersTo": "spec-token",
+      "description": "Signature: an object on a gridded canvas with a redline width dimension and a dashed token callout outside it. Hover the canvas to see Code mode.",
+      "html": "<div class=\"ds-spec\"><div class=\"ds-spec-dim\"><span class=\"ds-spec-dim-line\"></span><span class=\"ds-spec-dim-value\">384</span></div><div class=\"ds-spec-object\">Publish request</div><span class=\"ds-spec-token\" data-design=\"Button / Primary · Rojo-primario #F24452\" data-code=\"bg-rojo-primario rounded-lg text-white\"></span></div>",
+      "css": ".ds-spec { --mark: var(--color-redline, #D3203A); position: relative; display: grid; justify-items: start; gap: 0.75rem; padding: 2rem 1.5rem; border-radius: 16px; background-color: var(--color-paper-deep, #E9E9E3); background-image: linear-gradient(var(--color-grid, #E1E1DA) 1px, transparent 1px), linear-gradient(90deg, var(--color-grid, #E1E1DA) 1px, transparent 1px); background-size: 24px 24px; font-family: var(--font-sans, \"Archivo Variable\", \"Archivo\", system-ui, sans-serif); } .ds-spec:hover { --mark: var(--color-code, #2448C9); } .ds-spec-dim { position: relative; display: grid; place-items: center; width: 16rem; height: 12px; } .ds-spec-dim-line { position: absolute; inset: 5px 0 auto; height: 0; border-top: 1.5px solid var(--mark); transition: border-color 0.3s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)); } .ds-spec-dim-line::before, .ds-spec-dim-line::after { content: ''; position: absolute; top: -5.75px; width: 1.5px; height: 10px; background: var(--mark); transition: background-color 0.3s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)); } .ds-spec-dim-line::before { left: 0; } .ds-spec-dim-line::after { right: 0; } .ds-spec-dim-value { position: relative; padding: 0 0.25rem; background: var(--color-paper-deep, #E9E9E3); color: var(--mark); font-family: var(--font-mono, \"Fragment Mono\", ui-monospace, \"SFMono-Regular\", monospace); font-size: 0.8125rem; line-height: 1.35; transition: color 0.3s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)); } .ds-spec-object { display: grid; place-items: center; width: 16rem; height: 2.75rem; border-radius: 8px; background: #f24452; color: #fff; font-weight: 700; } .ds-spec-token { padding: 0.25rem 0.5rem; border: 1px dashed var(--mark); border-radius: 6px; background: var(--color-paper, #F3F3EF); color: var(--mark); font-family: var(--font-mono, \"Fragment Mono\", ui-monospace, \"SFMono-Regular\", monospace); font-size: 0.8125rem; line-height: 1.3; white-space: nowrap; transition: color 0.3s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)), border-color 0.3s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)); } .ds-spec-token::before { content: attr(data-design); } .ds-spec:hover .ds-spec-token::before { content: attr(data-code); }"
+    },
+    {
+      "name": "Project Band",
+      "kind": "card",
+      "refersTo": "band-cell",
+      "description": "Every project carries Duration, Role and Team in three hairline-ruled cells; never a year.",
+      "html": "<dl class=\"ds-band\"><div><dt>Duration</dt><dd>5 months</dd></div><div><dt>Role</dt><dd>UX/UI Team Lead</dd></div><div><dt>Team</dt><dd>Me + 2 designers</dd></div></dl>",
+      "css": ".ds-band { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--color-rule, #D6D6CF); border-bottom: 1px solid var(--color-rule, #D6D6CF); font-family: var(--font-sans, \"Archivo Variable\", \"Archivo\", system-ui, sans-serif); font-size: 0.875rem; color: var(--color-ink, #151515); } .ds-band > div { padding: 0.75rem 0; } .ds-band > div + div { padding-left: 1rem; border-left: 1px solid var(--color-rule, #D6D6CF); } .ds-band dt { font-size: 0.75rem; font-weight: 600; color: var(--color-ink-3, #6A6D72); } .ds-band dd { margin: 0; }"
+    },
+    {
+      "name": "Inline Link",
+      "kind": "custom",
+      "refersTo": "link",
+      "description": "Ink text on a 1.5px redline underline; deepens to Deep Redline on hover.",
+      "html": "<p class=\"ds-link-copy\">Older work lives on <a class=\"ds-link\" href=\"#\">Behance</a>.</p>",
+      "css": ".ds-link-copy { margin: 0; font-family: var(--font-sans, \"Archivo Variable\", \"Archivo\", system-ui, sans-serif); font-size: 1.0625rem; line-height: 1.6; color: var(--color-ink-2, #4A4C50); } .ds-link { color: var(--color-ink, #151515); text-decoration: underline; text-decoration-color: var(--color-redline, #D3203A); text-decoration-thickness: 1.5px; text-underline-offset: 0.2em; transition: color 0.2s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)); } .ds-link:hover { color: var(--color-redline-deep, #AE1830); } .ds-link:focus-visible { outline: 2px solid var(--color-code, #2448C9); outline-offset: 3px; border-radius: 4px; }"
+    },
+    {
+      "name": "Insight",
+      "kind": "custom",
+      "refersTo": "chapter",
+      "description": "A chapter's turning point: a full-width redline dimension tick over a large statement in the heading face.",
+      "html": "<aside class=\"ds-insight\"><svg viewBox=\"0 0 100 12\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path d=\"M0 1V11M0 6H100M100 1V11\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" vector-effect=\"non-scaling-stroke\"/></svg><p>Changing one word changed the core feature.</p></aside>",
+      "css": ".ds-insight { max-width: 46.5rem; color: var(--color-ink, #151515); font-family: var(--font-sans, \"Archivo Variable\", \"Archivo\", system-ui, sans-serif); } .ds-insight svg { display: block; width: 100%; height: 12px; margin-bottom: 1.5rem; color: var(--color-redline, #D3203A); } .ds-insight p { margin: 0; font-size: clamp(1.625rem, 1.1rem + 1.6vw, 2.375rem); font-weight: 750; font-stretch: 112%; letter-spacing: -0.025em; line-height: 1.15; text-wrap: balance; }"
+    },
+    {
+      "name": "Title Block",
+      "kind": "custom",
+      "refersTo": "title-block-cell",
+      "description": "The footer as a drawing title block: ink-ruled cells, each a small label over its value.",
+      "html": "<footer class=\"ds-tb\"><div class=\"ds-tb-cell ds-tb-main\"><p class=\"ds-tb-label\">Drawn and built by</p><p class=\"ds-tb-name\">Luis Ticona</p></div><div class=\"ds-tb-cell\"><p class=\"ds-tb-label\">Location</p><p>Lima, Peru · UTC−5</p></div><div class=\"ds-tb-cell\"><p class=\"ds-tb-label\">Built with</p><p>Astro · Tailwind CSS · Magic UI</p></div><div class=\"ds-tb-cell\"><p class=\"ds-tb-label\">Sheet</p><p>Home</p></div></footer>",
+      "css": ".ds-tb { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; border: 1px solid var(--color-ink, #151515); font-family: var(--font-sans, \"Archivo Variable\", \"Archivo\", system-ui, sans-serif); font-size: 0.875rem; color: var(--color-ink, #151515); } .ds-tb-cell { padding: 1rem 1.25rem; border-right: 1px solid var(--color-ink, #151515); } .ds-tb-cell:last-child { border-right: 0; } .ds-tb-cell p { margin: 0; } .ds-tb-label { margin-bottom: 0.25rem !important; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; color: var(--color-ink-3, #6A6D72); } .ds-tb-name { font-size: 1.75rem; font-weight: 750; font-stretch: 112%; letter-spacing: -0.025em; line-height: 1.05; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Redline Spec Sheet",
+    "overview": "The site is a drawing sheet. The ground is drafting vellum, the type is carbon ink, and two annotation inks carry fixed meanings. Real work is laid on gridded canvases and drawn around: dimension lines with end ticks, dashed extension lines and dashed token callouts sit outside the object, the way they would on an engineering drawing. The footer is the drawing's title block. Nothing on the page claims anything. It shows the measurement instead.\n\nDensity is editorial and generous. Expanded heavy display type, a wide 1360px sheet and 128px between sections, but every block is held together by 1px rules, like cells on a drawing: an ink rule opens a structure, a hairline gray rule subdivides it. The palette is near-monochrome and warm-neutral. Color carries meaning, not mood: red names design values and marks the one thing a story is about, and blue names code values and draws the keyboard focus.\n\nSurfaces are flat paper. Depth appears only when an object rests on a canvas, such as a screenshot or a device. There is no glass, no glow, no blur material and no dark neon. Motion uses one curve, an exponential ease-out, so lines draw quickly and settle precisely. Every transition collapses under reduced motion.",
+    "keyCharacteristics": [
+      "Warm drafting-paper ground with carbon-ink text; near-monochrome by default.",
+      "Two annotation inks with fixed meanings: redline for design, code blue for code and focus.",
+      "Archivo's width axis carries hierarchy; Fragment Mono sets only measured values.",
+      "Gridded canvases (24px cell) appear only where something is being measured.",
+      "1px rules give the structure: ink to open, hairline gray to subdivide.",
+      "Everything pressable is fully round; surfaces are 16px.",
+      "One easing curve, exponential ease-out, for every transition."
+    ],
+    "rules": [
+      {
+        "name": "The Two Languages Rule",
+        "body": "Redline speaks design, code blue speaks code. When the Design/Code switch flips, every mark changes hue with its name. Blue's only other job is the focus ring. Neither color is ever used for decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Red Is a Line Rule",
+        "body": "Redline appears as strokes, underlines, type and marks no bigger than a dot or a grip. A resting surface is never filled red. The only red field is a primary button under the pointer.",
+        "section": "colors"
+      },
+      {
+        "name": "The Canvas Contrast Rule",
+        "body": "Small text on Canvas Board must clear 4.5:1. Carbon Ink, Graphite, Code Blue and Deep Redline do. Redline (4.27:1) and Soft Graphite (4.26:1) do not, so they set small text on Drafting Vellum only. Pencil never sets text (2.2:1).",
+        "section": "colors"
+      },
+      {
+        "name": "The Width Is Rank Rule",
+        "body": "Archivo's width axis carries hierarchy: 125% for display, 118% for the hero, 112% for headings and 100% for reading text. Weight follows: 800, then 750, then 650 for emphasis, then 400.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono Means Measured Rule",
+        "body": "Fragment Mono sets only a value that exists in a spec: a pixel or rem dimension, a token name, a class name. Prose, headings, labels and navigation are never set in mono.",
+        "section": "typography"
+      },
+      {
+        "name": "The Resting Object Rule",
+        "body": "Page surfaces never cast shadows. Only an object placed on a canvas (a screenshot or a device) casts one soft, downward shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Ink Opens, Gray Divides Rule",
+        "body": "A 1px Carbon Ink rule opens or frames a structure: section tops, the title block, the closing sheet, the first fact row and the top of a metrics table. A 1px Hairline Gray rule subdivides within it.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do open every home section with a 1px Carbon Ink rule, put the heading 20px below it and start the content 40px later.",
+      "Do draw annotations as a drawing would: 1.5px dimension strokes with serifed ends, 1px dashed extension lines, a dashed callout in Fragment Mono, all placed outside the object.",
+      "Do switch annotation hue with the language: Redline (#D3203A) for design names in px, Code Blue (#2448C9) for code names in rem.",
+      "Do make anything pressable fully round (999px) and any surface 16px; keep screenshots on canvases at 12px.",
+      "Do give every project its band of Duration, Role and Team in three Hairline Gray-ruled cells.",
+      "Do set numbers that line up (periods, metrics) in tabular numerals.",
+      "Do use `cubic-bezier(0.16, 1, 0.3, 1)` for every transition: 0.2s for color, 0.25–0.3s for state, 0.55s for line draws, 0.9s for plate lifts. Collapse every transition under `prefers-reduced-motion`.",
+      "Do draw keyboard focus as a 2px Code Blue outline with a 3px offset."
+    ],
+    "donts": [
+      "Don't draw the measuring grid on a surface where nothing is being measured.",
+      "Don't fill a resting surface with Redline. Red is a line, a letterform or a dot.",
+      "Don't set small Redline or Soft Graphite text on Canvas Board, and never set text in Pencil.",
+      "Don't set prose, headings, labels or navigation in Fragment Mono.",
+      "Don't use glass, backdrop blur, glow or neon. The header is solid paper.",
+      "Don't cast a shadow from a page surface, card or section. Only an object resting on a canvas casts one.",
+      "Don't carry the specimen's product type (Poppins) or palette outside the specimen.",
+      "Don't put a small label above a headline. Small labels only name a value: in a band, a fact table, a timeline or the title block.",
+      "Don't put a year on a project."
+    ]
+  }
+}

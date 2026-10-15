@@ -1,0 +1,980 @@
+---
+// The inspector: real components from three apps on a measuring canvas,
+// rendered larger than life on desktop. Hovering or focusing any part draws
+// its redlines and names its token; the Design/Code switch renames every
+// value between the project's design names and its code. Measurements report
+// each component's 1x size.
+import '@fontsource/poppins/500.css'
+import '@fontsource/poppins/600.css'
+import '@fontsource/poppins/700.css'
+import { GridPattern } from '../magicui/grid-pattern'
+import type { HomeContent } from '../../i18n/home'
+
+interface Props {
+  hero: HomeContent['hero']
+}
+
+const { hero } = Astro.props
+const { izipay, wikivi, turuta } = hero.specimens
+// Apps first: the merchant panel leads, then the marketplace, then the transit app
+const tabs = [
+  { id: 'izipay', label: izipay.tab, caption: izipay.caption },
+  { id: 'wikivi', label: wikivi.tab, caption: wikivi.caption },
+  { id: 'turuta', label: turuta.tab, caption: turuta.caption },
+]
+---
+
+<section class="mx-auto mt-32 grid max-w-[1360px] gap-10 px-5 sm:px-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14" data-spec data-mode="design" aria-labelledby="inspect-heading">
+  <div class="flex flex-col justify-center">
+    <h2 id="inspect-heading" class="heading text-[clamp(2.25rem,1.3rem+2.6vw,3.75rem)]">{hero.inspect.heading}</h2>
+    <p class="mt-5 max-w-[34rem] text-[1.1875rem] leading-relaxed text-ink-2">{hero.inspect.body}</p>
+
+    <div class="mt-8">
+      <div class="switch" role="tablist" aria-label={hero.projectsLabel}>
+        {tabs.map((tab, i) => (
+          <button
+            type="button"
+            role="tab"
+            id={`spec-tab-${tab.id}`}
+            aria-controls={`spec-${tab.id}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+            data-tab={tab.id}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-4 flex flex-wrap items-center gap-4">
+      <div class="switch" role="group" aria-label={hero.switchLabel}>
+        <button type="button" aria-pressed="true" data-mode-set="design">{hero.design}</button>
+        <button type="button" aria-pressed="false" data-mode-set="code">{hero.code}</button>
+      </div>
+      <p class="max-w-[19rem] text-[0.875rem] leading-snug text-ink-3">
+        <span class="hint-hover">{hero.hint}</span>
+        <span class="hint-touch">{hero.hintTouch}</span>
+      </p>
+    </div>
+  </div>
+
+  <figure class="m-0">
+    <div class="canvas spec-canvas" data-spec-stage>
+      <GridPattern width={24} height={24} x={-1} y={-1} />
+
+      <!-- Izipay -->
+      <div class="specimen" id="spec-izipay" role="tabpanel" aria-labelledby="spec-tab-izipay" data-specimen="izipay" data-names={JSON.stringify(izipay.names)} data-active>
+        <div class="iz-card" data-inspect="card" data-card>
+          <p class="iz-step">{izipay.step}</p>
+          <div class="iz-progress" data-inspect="step" aria-hidden="true">
+            {[0, 1, 2, 3, 4].map(i => <span data-done={i < 2 ? '' : undefined}></span>)}
+          </div>
+          <div class="iz-head">
+            <h2 class="iz-title" data-inspect="title">{izipay.title}</h2>
+            <span class="iz-badge" data-inspect="badge">{izipay.badge}</span>
+          </div>
+          <p class="iz-body" data-inspect="body">{izipay.body}</p>
+          <label class="iz-label" for="iz-key">{izipay.label}</label>
+          <div class="iz-input" data-inspect="input">
+            <input id="iz-key" type="text" value={izipay.value} readonly />
+          </div>
+          <button type="button" class="iz-button" data-inspect="primary" data-primary data-copy data-label={izipay.copy} data-done={izipay.copied}>{izipay.copy}</button>
+        </div>
+      </div>
+
+      <!-- WIKIVI -->
+      <div class="specimen" id="spec-wikivi" role="tabpanel" aria-labelledby="spec-tab-wikivi" data-specimen="wikivi" data-names={JSON.stringify(wikivi.names)}>
+        <form class="wv-card" data-inspect="card" data-card data-spec-form novalidate>
+          <h2 class="wv-title" data-inspect="title">{wikivi.title}</h2>
+
+          <label class="wv-label" for="wv-description">{wikivi.description}</label>
+          <textarea id="wv-description" class="wv-input" rows="2" placeholder={wikivi.placeholder} data-inspect="input"></textarea>
+
+          <fieldset class="wv-group">
+            <legend class="wv-label">{wikivi.device}</legend>
+            <div class="wv-chips" data-single>
+              {wikivi.devices.map((device, i) => (
+                <button type="button" class="wv-chip" aria-pressed={i === 0 ? 'true' : 'false'} data-inspect="chip">{device}</button>
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset class="wv-group">
+            <legend class="wv-label">{wikivi.format}</legend>
+            <div class="wv-chips" data-single>
+              {wikivi.formats.map((format, i) => (
+                <button type="button" class="wv-chip" aria-pressed={i === 0 ? 'true' : 'false'} data-inspect="chip">{format}</button>
+              ))}
+            </div>
+          </fieldset>
+
+          <button type="submit" class="wv-publish" data-inspect="primary" data-primary data-label={wikivi.publish} data-sent={wikivi.sent}>{wikivi.publish}</button>
+        </form>
+      </div>
+
+      <!-- TuRuta -->
+      <div class="specimen" id="spec-turuta" role="tabpanel" aria-labelledby="spec-tab-turuta" data-specimen="turuta" data-names={JSON.stringify(turuta.names)}>
+        <div class="tr-card" data-inspect="card" data-card>
+          <label class="tr-label" for="tr-destination">{turuta.label}</label>
+          <div class="tr-input" data-inspect="input">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 14.5s5-4.3 5-8.25A5 5 0 0 0 3 6.25C3 10.2 8 14.5 8 14.5Z" stroke="currentColor" stroke-width="1.5" /><circle cx="8" cy="6.25" r="1.75" fill="currentColor" /></svg>
+            <input id="tr-destination" type="text" value={turuta.value} />
+          </div>
+          <div class="tr-route">
+            <div class="tr-row">
+              <h2 class="tr-time" data-inspect="title">{turuta.title}</h2>
+              <span class="tr-fare" data-inspect="fare">{turuta.fare}</span>
+            </div>
+            <div class="tr-lines">
+              {turuta.lines.map((line, i) => (
+                <>
+                  {i > 0 && <svg class="tr-chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>}
+                  <span class="tr-line" data-inspect="badge">{line}</span>
+                </>
+              ))}
+            </div>
+            <p class="tr-transfer">{turuta.transfer}</p>
+          </div>
+          <button type="button" class="tr-cta" data-inspect="primary" data-primary>{turuta.cta}</button>
+        </div>
+      </div>
+
+      <svg class="spec-lines" aria-hidden="true" data-spec-lines></svg>
+      <div class="spec-labels" aria-hidden="true" data-spec-labels></div>
+    </div>
+
+    <figcaption class="mt-3 text-[0.8125rem] leading-snug text-ink-3">
+      {tabs.map((tab, i) => (
+        <span data-caption={tab.id} hidden={i !== 0}>{tab.caption}</span>
+      ))}
+    </figcaption>
+    <p class="sr-only" aria-live="polite" data-spec-live></p>
+  </figure>
+</section>
+
+<style>
+  .hint-touch {
+    display: none;
+  }
+
+  @media (hover: none) {
+    .hint-hover {
+      display: none;
+    }
+
+    .hint-touch {
+      display: inline;
+    }
+  }
+
+  /* All specimens share one grid cell, so the canvas keeps the height of the
+     tallest and switching projects never shifts the page */
+  .spec-canvas {
+    display: grid;
+    place-items: center;
+    padding: 5.25rem 1.25rem 4.5rem;
+  }
+
+  .specimen {
+    grid-area: 1 / 1;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.35s var(--ease-out-expo), visibility 0s linear 0.35s;
+  }
+
+  .specimen[data-active] {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.35s var(--ease-out-expo), visibility 0s;
+  }
+
+  /* Every component sizes in em, so it scales with --s; redlines divide it out */
+  .iz-card,
+  .wv-card,
+  .tr-card {
+    --s: 1;
+    position: relative;
+    z-index: 1;
+    font-size: calc(1rem * var(--s));
+  }
+
+  @media (min-width: 1024px) {
+    .spec-canvas {
+      padding: 5.5rem 2rem 4rem;
+    }
+
+    .iz-card,
+    .wv-card,
+    .tr-card {
+      --s: 1.2;
+    }
+  }
+
+  /* WIKIVI, in its own type and palette */
+  .wv-card {
+    width: min(100%, 28em);
+    padding: 2em;
+    border-radius: 1.25em;
+    background: #fff;
+    color: #111827;
+    font-family: var(--font-wikivi);
+    box-shadow: 0 18px 40px -18px rgb(17 24 39 / 0.28), 0 2px 6px rgb(17 24 39 / 0.06);
+  }
+
+  .wv-title {
+    width: fit-content;
+    margin-bottom: 0.8333em;
+    font-size: 1.5em;
+    line-height: 1.3333;
+    font-weight: 600;
+  }
+
+  .wv-label {
+    display: block;
+    margin-bottom: 0.5714em;
+    font-size: 0.875em;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .wv-input {
+    display: block;
+    width: 100%;
+    margin-bottom: 1.4286em;
+    padding: 0.7143em 0.8571em;
+    border: 1px solid rgb(55 65 81 / 0.3);
+    border-radius: 0.5714em;
+    font: 400 0.875em/1.4 var(--font-wikivi);
+    color: #111827;
+    resize: none;
+    caret-color: #f24452;
+  }
+
+  .wv-input::placeholder {
+    color: #6b7280;
+  }
+
+  .wv-input:focus {
+    outline: none;
+    border-color: #111827;
+  }
+
+  .wv-group {
+    margin: 0 0 1.25em;
+    padding: 0;
+    border: 0;
+  }
+
+  .wv-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+  }
+
+  .wv-chip {
+    height: 2.5em;
+    padding: 0 1em;
+    border-radius: 0.5em;
+    border: 1px solid rgb(55 65 81 / 0.35);
+    color: #374151;
+    font: 500 0.875em var(--font-wikivi);
+    transition: border-color 0.2s var(--ease-out-expo), box-shadow 0.2s var(--ease-out-expo);
+  }
+
+  .wv-chip[aria-pressed='true'] {
+    border-color: #111827;
+    color: #111827;
+    box-shadow: inset 0 0 0 1px #111827;
+  }
+
+  /* Label set as large text (19px bold) so white on #F24452 meets AA */
+  .wv-publish {
+    display: block;
+    width: 100%;
+    /* em here is the button's own 19px label: 44px tall, 8px radius at 1x */
+    height: 2.3158em;
+    margin-top: 0.4211em;
+    border-radius: 0.4211em;
+    background: #f24452;
+    color: #fff;
+    font: 700 1.1875em var(--font-wikivi);
+    transition: background-color 0.2s var(--ease-out-expo), transform 0.15s var(--ease-out-expo);
+  }
+
+  .wv-publish:hover {
+    background: #d93a47;
+  }
+
+  .wv-publish[data-state='sent'] {
+    background: #059669;
+  }
+
+  /* Izipay: a step of the merchant onboarding, in Panel DS values.
+     Aptos is the system face; its desktop files can't be served on the web,
+     so it falls back to Segoe UI exactly as the panel does. */
+  .iz-card {
+    width: min(100%, 26em);
+    padding: 1.5em;
+    border-radius: 0.75em;
+    background: #fff;
+    color: #2a2a2a;
+    font-family: Aptos, 'Segoe UI', system-ui, sans-serif;
+    box-shadow: 0 4px 32px 0 rgb(203 203 203 / 0.24);
+  }
+
+  .iz-step {
+    font-size: 0.875em;
+    line-height: 1.4286;
+    font-weight: 600;
+    color: #006462;
+  }
+
+  .iz-progress {
+    display: flex;
+    gap: 0.25em;
+    width: fit-content;
+    margin: 0.5em 0 1.25em;
+  }
+
+  .iz-progress span {
+    width: 2.5em;
+    height: 0.25em;
+    border-radius: 120px;
+    background: #d6dada;
+  }
+
+  .iz-progress span[data-done] {
+    background: #008380;
+  }
+
+  .iz-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+  }
+
+  .iz-title {
+    width: fit-content;
+    font: 600 1.25em/1.4 var(--font-wikivi);
+  }
+
+  .iz-badge {
+    display: inline-flex;
+    align-items: center;
+    height: 1.7143em;
+    padding: 0 0.7143em;
+    border: 1px solid #fae698;
+    border-radius: 120px;
+    background: #fdf3cd;
+    color: #a85823;
+    font-size: 0.875em;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .iz-body {
+    margin: 0.5714em 0 1.7143em;
+    font-size: 0.875em;
+    line-height: 1.4286;
+    color: #636565;
+  }
+
+  .iz-label {
+    display: block;
+    margin-bottom: 0.5714em;
+    font-size: 0.875em;
+    font-weight: 600;
+  }
+
+  .iz-input {
+    display: flex;
+    align-items: center;
+    height: 3em;
+    padding: 0 1em;
+    border: 1px solid #d6dada;
+    border-radius: 0.5em;
+    transition: border-color 0.2s var(--ease-out-expo), box-shadow 0.2s var(--ease-out-expo);
+  }
+
+  .iz-input:hover {
+    border-color: #636565;
+  }
+
+  .iz-input:focus-within {
+    border-color: #008380;
+    box-shadow: 0 0 0 3px #dff5f4;
+  }
+
+  .iz-input input {
+    width: 100%;
+    font: 600 1em/1.5 Aptos, 'Segoe UI', system-ui, sans-serif;
+    color: #2a2a2a;
+    letter-spacing: 0.04em;
+    outline: none;
+  }
+
+  /* Button · Primary · Small: 40px at 1x, white on #008380 clears AA */
+  .iz-button {
+    display: block;
+    margin-top: 1.5em;
+    height: 2.5em;
+    padding: 0 1.5em;
+    border-radius: 120px;
+    background: #008380;
+    color: #fff;
+    font: 700 1em Aptos, 'Segoe UI', system-ui, sans-serif;
+    transition: background-color 0.2s var(--ease-out-expo), transform 0.15s var(--ease-out-expo);
+  }
+
+  .iz-button:hover {
+    background: #006462;
+  }
+
+  .iz-button[data-state='done'] {
+    background: #337559;
+  }
+
+  /* TuRuta: a route option in its UI kit's Poppins, red and pink */
+  .tr-card {
+    width: min(100%, 22em);
+    padding: 1.25em;
+    border-radius: 1em;
+    background: #fff;
+    color: #111827;
+    font-family: var(--font-wikivi);
+    box-shadow: 0 10px 24px -6px rgb(17 24 39 / 0.25);
+  }
+
+  .tr-label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-size: 0.875em;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .tr-input {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    height: 3em;
+    padding: 0 0.875em;
+    border: 1px solid rgb(17 24 39 / 0.2);
+    border-radius: 0.75em;
+    color: #d62b70;
+    transition: border-color 0.2s var(--ease-out-expo);
+  }
+
+  .tr-input:focus-within {
+    border-color: #111827;
+  }
+
+  .tr-input svg {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+  }
+
+  .tr-input input {
+    width: 100%;
+    font: 500 0.9375em var(--font-wikivi);
+    color: #111827;
+    outline: none;
+  }
+
+  .tr-route {
+    margin: 1em 0 1.25em;
+    padding: 1em;
+    border-radius: 0.75em;
+    background: #fafafa;
+  }
+
+  .tr-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .tr-time {
+    width: fit-content;
+    font-size: 1.5em;
+    line-height: 1.3333;
+    font-weight: 600;
+  }
+
+  .tr-fare {
+    padding: 0.25em 0.625em;
+    border: 1px solid rgb(17 24 39 / 0.12);
+    border-radius: 0.375em;
+    background: #fff;
+    font-size: 0.875em;
+    font-weight: 600;
+  }
+
+  .tr-lines {
+    display: flex;
+    align-items: center;
+    gap: 0.375em;
+    margin-top: 0.625em;
+    color: #6b7280;
+  }
+
+  .tr-line {
+    padding: 0.125em 0.5em;
+    border-radius: 0.375em;
+    background: #d62b70;
+    color: #fff;
+    font-size: 0.875em;
+    font-weight: 600;
+  }
+
+  .tr-chevron {
+    width: 1em;
+    height: 1em;
+  }
+
+  .tr-transfer {
+    margin-top: 0.625em;
+    font-size: 0.8125em;
+    color: #4b5563;
+  }
+
+  /* White on red/600 #E11D48 clears AA at this weight */
+  .tr-cta {
+    display: block;
+    width: 100%;
+    height: 3em;
+    border-radius: 0.75em;
+    background: #e11d48;
+    color: #fff;
+    font: 600 1em var(--font-wikivi);
+    transition: background-color 0.2s var(--ease-out-expo), transform 0.15s var(--ease-out-expo);
+  }
+
+  .tr-cta:hover {
+    background: #be123c;
+  }
+
+  .wv-chip:focus-visible,
+  .wv-publish:focus-visible,
+  .iz-button:focus-visible,
+  .tr-cta:focus-visible {
+    outline: 2px solid var(--color-code);
+    outline-offset: 2px;
+  }
+
+  .wv-publish:active,
+  .iz-button:active,
+  .tr-cta:active {
+    transform: scale(0.98);
+  }
+
+  /* Redlines: one 1.5px stroke, red for design names, blue for code */
+  .spec-lines,
+  .spec-labels {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  [data-spec] {
+    --mark: var(--color-redline);
+  }
+
+  [data-mode='code'] {
+    --mark: var(--color-code);
+  }
+
+  .spec-lines :global(path) {
+    fill: none;
+    stroke: var(--mark);
+    stroke-width: 1.5;
+    transition: stroke-dashoffset 0.55s var(--ease-out-expo), stroke 0.3s var(--ease-out-expo);
+  }
+
+  .spec-lines :global(path.ext) {
+    stroke-width: 1;
+    stroke-dasharray: 3 3;
+    opacity: 0.7;
+    transition: opacity 0.4s var(--ease-out-expo), stroke 0.3s var(--ease-out-expo);
+  }
+
+  .spec-labels :global(.spec-dim),
+  .spec-labels :global(.spec-token) {
+    position: absolute;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.3;
+    color: var(--mark);
+    white-space: nowrap;
+    transition: color 0.3s var(--ease-out-expo), opacity 0.35s var(--ease-out-expo), filter 0.35s var(--ease-out-expo), translate 0.35s var(--ease-out-expo);
+  }
+
+  @media (min-width: 1024px) {
+    .spec-labels :global(.spec-dim),
+    .spec-labels :global(.spec-token) {
+      font-size: 0.9375rem;
+    }
+  }
+
+  /* A paper chip under each value, like label tape: keeps redline and
+     pencil text at AA on the darker canvas */
+  .spec-labels :global(.spec-dim) {
+    padding: 0 0.25rem;
+    border-radius: 3px;
+    background: var(--color-paper);
+  }
+
+  .spec-labels :global(.spec-token) {
+    padding: 0.25rem 0.5rem;
+    border: 1px dashed var(--mark);
+    border-radius: 6px;
+    background: var(--color-paper);
+  }
+
+  /* The previous annotation stays in pencil; any of its labels that would
+     collide with the newest one step aside */
+  .spec-lines :global(.is-old path) {
+    stroke: var(--color-pencil);
+  }
+
+  .spec-labels :global(.is-old) {
+    color: var(--color-ink-3);
+    border-color: var(--color-pencil);
+  }
+
+  .spec-labels :global(.is-hidden),
+  .spec-labels :global(.is-entering) {
+    opacity: 0;
+  }
+
+  .spec-labels :global(.is-entering) {
+    filter: blur(4px);
+    translate: 0 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .specimen,
+    .spec-lines :global(path),
+    .spec-labels :global(.spec-dim),
+    .spec-labels :global(.spec-token) {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  type Mode = 'design' | 'code'
+  type Names = Record<string, Record<Mode, string>>
+  type Annotation = {
+    el: HTMLElement
+    group: SVGGElement
+    dims: { node: HTMLElement; px: number }[]
+    token: HTMLElement
+    age: number
+  }
+
+  const SVG = 'http://www.w3.org/2000/svg'
+  const root = document.querySelector<HTMLElement>('[data-spec]')!
+  const stage = root.querySelector<HTMLElement>('[data-spec-stage]')!
+  const lines = root.querySelector<SVGSVGElement>('[data-spec-lines]')!
+  const labels = root.querySelector<HTMLElement>('[data-spec-labels]')!
+  const live = root.querySelector<HTMLElement>('[data-spec-live]')!
+  const specimens = [...root.querySelectorAll<HTMLElement>('[data-specimen]')]
+  const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-tab]')]
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  let mode: Mode = 'design'
+  let history: Annotation[] = []
+  let specimen = specimens[0]
+  let card = specimen.querySelector<HTMLElement>('[data-card]')!
+  let names: Names = JSON.parse(specimen.dataset.names!)
+
+  // Components render at --s times their real size; labels report the 1x value
+  const scale = () => parseFloat(getComputedStyle(card).fontSize) / 16
+
+  const nameFor = (el: HTMLElement) => {
+    const key = el.dataset.inspect === 'chip' && el.getAttribute('aria-pressed') === 'true' ? 'chipSelected' : el.dataset.inspect!
+    return names[key]?.[mode] ?? ''
+  }
+
+  // Design reads in px, code in rem
+  const formatPx = (px: number) => (mode === 'design' ? `${Math.round(px)}` : `${+(px / 16).toFixed(2)}rem`)
+
+  const path = (group: SVGGElement, d: string) => {
+    const p = document.createElementNS(SVG, 'path')
+    p.setAttribute('d', d)
+    group.append(p)
+    return p
+  }
+
+  const label = (className: string, text: string, x: number, y: number) => {
+    const node = document.createElement('span')
+    node.className = `${className} is-entering`
+    node.textContent = text
+    node.style.left = `${x}px`
+    node.style.top = `${y}px`
+    labels.append(node)
+    return node
+  }
+
+  const reveal = (group: SVGGElement, nodes: HTMLElement[], animate: boolean) => {
+    // Dimension lines draw themselves; dashed extension lines fade in.
+    // A redraw after a resize snaps into place instead of replaying.
+    if (!animate || reduceMotion) {
+      nodes.forEach(n => n.classList.remove('is-entering'))
+      return
+    }
+    const paths = [...group.querySelectorAll<SVGPathElement>('path:not(.ext)')]
+    const extensions = [...group.querySelectorAll<SVGPathElement>('path.ext')]
+    paths.forEach(p => {
+      const length = p.getTotalLength()
+      p.style.strokeDasharray = `${length}`
+      p.style.strokeDashoffset = `${length}`
+    })
+    extensions.forEach(p => (p.style.opacity = '0'))
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        paths.forEach(p => (p.style.strokeDashoffset = '0'))
+        extensions.forEach(p => (p.style.opacity = ''))
+        nodes.forEach(n => n.classList.remove('is-entering'))
+      }),
+    )
+  }
+
+  // The card's full footprint, including parts that overhang it (a badge)
+  const footprint = () => {
+    const r = card.getBoundingClientRect()
+    let top = r.top
+    let bottom = r.bottom
+    card.querySelectorAll('*').forEach(child => {
+      const c = child.getBoundingClientRect()
+      if (c.height) {
+        top = Math.min(top, c.top)
+        bottom = Math.max(bottom, c.bottom)
+      }
+    })
+    return { left: r.left, right: r.right, top, bottom }
+  }
+
+  // Dimensions sit outside the object, as on a drawing: extension lines carry
+  // each edge out past the card, where the dimension line and its value live.
+  const draw = (el: HTMLElement, animate = true): Annotation => {
+    const s = stage.getBoundingClientRect()
+    const r = el.getBoundingClientRect()
+    const f = footprint()
+    const k = scale()
+    const x = r.left - s.left
+    const y = r.top - s.top
+    const w = r.width
+    const h = r.height
+    const cardTop = f.top - s.top
+    const cardBottom = f.bottom - s.top
+    const cardLeft = f.left - s.left
+    const cardRight = f.right - s.left
+    const isCard = el === card
+    const tick = 5
+    const offset = 22
+
+    const group = document.createElementNS(SVG, 'g')
+    lines.append(group)
+
+    // Width: on the card edge nearest the element (the card itself: on top)
+    const onTop = isCard || y + h / 2 < cardTop + (cardBottom - cardTop) / 2
+    const dimY = onTop ? cardTop - offset : cardBottom + offset
+    const edgeY = onTop ? y : y + h
+    const reach = onTop ? dimY - 4 : dimY + 4
+    if (!isCard) path(group, `M${x} ${edgeY}V${reach}M${x + w} ${edgeY}V${reach}`).classList.add('ext')
+    path(group, `M${x} ${dimY}H${x + w}M${x} ${dimY - tick}V${dimY + tick}M${x + w} ${dimY - tick}V${dimY + tick}`)
+    const widthLabel = label('spec-dim', formatPx(w / k), x + w / 2, dimY)
+    widthLabel.style.translate = '-50% -50%'
+    const dims = [{ node: widthLabel, px: w / k }]
+
+    // Height: right of the card (the card itself: left), when there is room
+    const dimX = isCard ? cardLeft - offset : cardRight + offset
+    const room = isCard ? dimX > 44 : dimX + 44 < s.width
+    if (room) {
+      if (!isCard) path(group, `M${x + w} ${y}H${dimX + 4}M${x + w} ${y + h}H${dimX + 4}`).classList.add('ext')
+      path(group, `M${dimX} ${y}V${y + h}M${dimX - tick} ${y}H${dimX + tick}M${dimX - tick} ${y + h}H${dimX + tick}`)
+      const heightLabel = label('spec-dim', formatPx(h / k), dimX + (isCard ? -8 : 8), y + h / 2)
+      heightLabel.style.translate = isCard ? '-100% -50%' : '0 -50%'
+      dims.push({ node: heightLabel, px: h / k })
+    }
+
+    // Token callout, past the width dimension, kept inside the canvas
+    const tokenY = onTop ? dimY - 28 : dimY + 28
+    path(group, `M${x} ${dimY}V${tokenY}H${x + 8}`)
+    const token = label('spec-token', nameFor(el), x + 12, tokenY)
+    token.style.translate = '0 -50%'
+    const overflow = x + 12 + token.offsetWidth - (s.width - 8)
+    if (overflow > 0) token.style.left = `${Math.max(8, x + 12 - overflow)}px`
+
+    const annotation = { el, group, dims, token, age: 0 }
+    reveal(group, [...dims.map(d => d.node), token], animate)
+    return annotation
+  }
+
+  const remove = (a: Annotation) => {
+    a.group.remove()
+    a.dims.forEach(d => d.node.remove())
+    a.token.remove()
+  }
+
+  const nodesOf = (a: Annotation) => [...a.dims.map(d => d.node), a.token]
+
+  const overlaps = (a: DOMRect, b: DOMRect) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom
+
+  // The newest annotation is in the mark color; the previous one fades to pencil
+  const annotate = (el: HTMLElement, animate = true) => {
+    if (history[0]?.el === el) return
+    history.forEach(a => {
+      a.age += 1
+      a.group.classList.add('is-old')
+      nodesOf(a).forEach(n => n.classList.add('is-old'))
+    })
+    history.filter(a => a.age > 1).forEach(remove)
+    const newest = draw(el, animate)
+    history = [newest, ...history.filter(a => a.age <= 1)]
+    const fresh = nodesOf(newest).map(n => n.getBoundingClientRect())
+    history.slice(1).forEach(a =>
+      nodesOf(a).forEach(n => n.classList.toggle('is-hidden', fresh.some(r => overlaps(r, n.getBoundingClientRect())))),
+    )
+    live.textContent = nameFor(el)
+  }
+
+  const clear = () => {
+    history.forEach(remove)
+    history = []
+  }
+
+  const relabel = () => {
+    history.forEach(a => {
+      a.dims.forEach(d => (d.node.textContent = formatPx(d.px)))
+      a.token.textContent = nameFor(a.el)
+    })
+    if (history[0]) live.textContent = nameFor(history[0].el)
+  }
+
+  const redraw = () => {
+    const order = history.map(a => a.el).reverse()
+    clear()
+    order.forEach(el => annotate(el, false))
+  }
+
+  // The one authored moment: a component is measured on arrival, then its
+  // primary action, so one pencil and one ink annotation rest on the sheet
+  let arrival: ReturnType<typeof setTimeout> | undefined
+  const arrive = () => {
+    clearTimeout(arrival)
+    annotate(card)
+    arrival = setTimeout(() => annotate(card.querySelector<HTMLElement>('[data-primary]')!), reduceMotion ? 0 : 650)
+  }
+
+  const target = (event: Event) => {
+    const el = (event.target as HTMLElement).closest<HTMLElement>('[data-inspect]')
+    return el && specimen.contains(el) ? el : null
+  }
+
+  stage.addEventListener('pointerover', event => {
+    const el = target(event)
+    if (el) annotate(el)
+  })
+
+  stage.addEventListener('focusin', event => {
+    const el = target(event)
+    if (el) annotate(el)
+  })
+
+  // Switching projects: crossfade the component, then measure it on arrival
+  const select = (tab: HTMLButtonElement, focus = false) => {
+    const id = tab.dataset.tab!
+    tabs.forEach(other => {
+      const on = other === tab
+      other.setAttribute('aria-selected', String(on))
+      other.tabIndex = on ? 0 : -1
+    })
+    if (focus) tab.focus()
+    if (specimen.dataset.specimen === id) return
+    specimens.forEach(s => s.toggleAttribute('data-active', s.dataset.specimen === id))
+    root.querySelectorAll<HTMLElement>('[data-caption]').forEach(c => (c.hidden = c.dataset.caption !== id))
+    specimen = specimens.find(s => s.dataset.specimen === id)!
+    card = specimen.querySelector<HTMLElement>('[data-card]')!
+    names = JSON.parse(specimen.dataset.names!)
+    clear()
+    arrive()
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(tab))
+    tab.addEventListener('keydown', event => {
+      const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0
+      if (event.key === 'Home') select(tabs[0], true)
+      else if (event.key === 'End') select(tabs[tabs.length - 1], true)
+      else if (step) select(tabs[(i + step + tabs.length) % tabs.length], true)
+      else return
+      event.preventDefault()
+    })
+  })
+
+  // WIKIVI's chips behave like a single-choice group
+  root.querySelectorAll<HTMLElement>('[data-single]').forEach(group => {
+    group.addEventListener('click', event => {
+      const chip = (event.target as HTMLElement).closest<HTMLButtonElement>('.wv-chip')
+      if (!chip) return
+      group.querySelectorAll('.wv-chip').forEach(other => other.setAttribute('aria-pressed', String(other === chip)))
+      relabel()
+    })
+  })
+
+  const form = root.querySelector<HTMLFormElement>('[data-spec-form]')!
+  form.addEventListener('submit', event => {
+    event.preventDefault()
+    const publish = form.querySelector<HTMLButtonElement>('[data-primary]')!
+    publish.dataset.state = 'sent'
+    publish.textContent = publish.dataset.sent!
+    setTimeout(() => {
+      delete publish.dataset.state
+      publish.textContent = publish.dataset.label!
+    }, 2200)
+  })
+
+  root.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach(button => {
+    button.addEventListener('click', () => {
+      button.dataset.state = 'done'
+      button.textContent = button.dataset.done!
+      setTimeout(() => {
+        delete button.dataset.state
+        button.textContent = button.dataset.label!
+      }, 2200)
+    })
+  })
+
+  root.querySelectorAll<HTMLButtonElement>('[data-mode-set]').forEach(button => {
+    button.addEventListener('click', () => {
+      mode = button.dataset.modeSet as Mode
+      root.dataset.mode = mode
+      root.querySelectorAll('[data-mode-set]').forEach(other => other.setAttribute('aria-pressed', String(other === button)))
+      relabel()
+    })
+  })
+
+  // Redraw only when the canvas actually changes width, not on every resize
+  let lastWidth = 0
+  new ResizeObserver(([entry]) => {
+    const width = Math.round(entry.contentRect.width)
+    if (width === lastWidth) return
+    lastWidth = width
+    if (history.length) redraw()
+  }).observe(stage)
+
+  document.fonts.ready.then(arrive)
+</script>

@@ -1,0 +1,181 @@
+---
+title: "Stock sites didn’t show Peruvian culture. So I designed a marketplace where businesses ask creators for it."
+project: WIKIVI
+summary: "WIKIVI is a video marketplace made in Peru: creators sell clips that show their culture and their land, and businesses buy them, or commission the ones that don’t exist yet. The idea was mine: I pitched the concept, wrote the work plan, and led two designers all the way to handing the client a user-tested product, with 100+ screens and its design system."
+cover: ../../../assets/work/wikivi/cover.png
+coverAlt: WIKIVI’s home page with its search bar, next to the preview screen of a video cropped to vertical format.
+pills: [Two-sided marketplace, 0 to 1, Web + Mobile]
+role: UX/UI Team Lead. Pitched the idea, wrote the work plan and led the design end to end.
+team: 'Me and 2 designers: Lucía Martos and Lucero Figueroa'
+duration: 5 months
+tools: [Figma, LucidChart, Illustrator, Photoshop]
+plate:
+  headline: A misread tab became the product’s core feature.
+  status: Delivered to the client
+  outcome: Usability tests turned a misread tab into the product’s core feature.
+  role: UX/UI Team Lead
+  team: Me + 2 designers
+  image: ../../../assets/work/wikivi/search-results.png
+  imageAlt: WIKIVI search results for #Cajamarca, with the red Request a video button in the header.
+  mark: { x: 73.4, y: 5.1, w: 9.9, h: 5.1, label: 'The misread tab, renamed', align: right }
+order: 3
+draft: false
+---
+
+import Figure from '../../../components/case/Figure.astro'
+import Insight from '../../../components/case/Insight.astro'
+import Metrics from '../../../components/case/Metrics.astro'
+import FormatCropDemo from '../../../components/case/FormatCropDemo.astro'
+
+import storyboard from '../../../assets/work/wikivi/storyboard.webp'
+import cardSort from '../../../assets/work/wikivi/card-sort.webp'
+import architecture from '../../../assets/work/wikivi/information-architecture.webp'
+import requestVideo from '../../../assets/work/wikivi/request-video.png'
+import wireframes from '../../../assets/work/wikivi/wireframes-lofi.webp'
+import searchResults from '../../../assets/work/wikivi/search-results.png'
+import videoFrame from '../../../assets/work/wikivi/video-frame.png'
+import previewMobile from '../../../assets/work/wikivi/preview-mobile.png'
+import components from '../../../assets/work/wikivi/components.webp'
+import uiKit from '../../../assets/work/wikivi/ui-kit.png'
+
+## Millions of videos. None of them from here.
+
+Stock footage platforms lived at two extremes: professional content at professional prices, or generic clips that looked nothing like local culture. For an agency promoting a restaurant in Cajamarca, neither one worked.
+
+That’s where I saw the opportunity: a video bank made by local creators, with culture and place at its core. I pitched the idea and wrote a work plan to validate it before designing a single screen: benchmark, interviews, card sorting, flows, wireframes and usability testing.
+
+We studied Pexels, Shutterstock and Getty Images, and interviewed 10 people to understand both sides of the problem:
+
+- **Irene**, a 26-year-old designer, had footage nobody was watching, and was afraid of it being used without her permission.
+- **Jonathan**, a 38-year-old advertising professional, needed videos that looked like his clients' audiences, without expensive or restrictive licenses.
+
+<Figure
+  src={storyboard}
+  alt="Hand-drawn 10-panel storyboard: a creator uploads a reel of Cajamarca and gets paid; a restaurant owner buys it and gets more customers."
+  caption="The storyboard I used to align the team: a creator earns money from a Cajamarca reel, and a restaurant uses it to bring in customers. Both sides of the marketplace in one story. (Original in Spanish.)"
+/>
+
+## Two products under one roof
+
+Creators and businesses wanted different things: one side wanted to upload and get paid, the other to search and buy. The easy answer was two products. A card sort with 5 creators and 5 businesses pointed somewhere else.
+
+Participants grouped location, culture and trends together with the search filters. Culture wasn’t just another category: it was how people searched. So every video shows where it was shot, and the filters start from there.
+
+<Figure
+  src={cardSort}
+  alt="Card sort similarity matrix for content creators, with grouping percentages and three annotated takeaways."
+  caption="Creators' similarity matrix: location, culture, trends and categories ended up together, as search filters. (Original in Spanish.)"
+/>
+
+<Insight>
+  Whoever sells a video today might buy one tomorrow. So both sides had to speak the same language.
+</Insight>
+
+I unified the vocabulary across both information architectures, so switching roles didn’t mean learning a new product, and cut the main sections from 6 to 5 for creators and from 7 to 5 for businesses.
+
+<Figure
+  src={architecture}
+  alt="Information architecture tree for content creators with five sections: My profile, Upload files, My gallery, Search and Ads."
+  caption="The creator’s architecture: five sections that mirror the business side. (Original in Spanish.)"
+/>
+
+## If the video doesn’t exist, let them ask for it
+
+On a regular stock site, if you can’t find what you need, you leave. My idea was to turn that failed search into a commission. The business posts a brief (description, location, deadline, device, format, and whether people should appear), creators send proposals, and the business picks the one that fits.
+
+<Figure
+  src={requestVideo}
+  alt="Request a video form with fields for description, location, deadline, device, file type, people and the purpose of the video."
+  mark={{ x: 9.9, y: 53, w: 39.8, h: 8.7, label: 'Device · asked in every brief' }}
+  caption="The brief a business fills in. Every field answers a question the creator needs before going out to shoot."
+  framed
+/>
+
+## What testing broke
+
+We tested the prototypes with both roles, on desktop and mobile. Creators finished every task on mobile, but on desktop there were two tasks nobody could complete. Businesses took longer on desktop and got stuck on two tasks too.
+
+The biggest finding was a single word. We called the request section **"Anuncios"** (Ads), and both user types took it for advertising.
+
+<Figure
+  src={wireframes}
+  alt="Low-fidelity wireframes of the creator’s web app, with navigation Home, Gallery, Ads and an Upload button."
+  mark={{ x: 41.3, y: 41.6, w: 4.3, h: 3.8, label: '“Anuncios” · read as advertising' }}
+  caption="The wireframes still said “Anuncios” (Ads). It looked clear on paper. It wasn’t, with real users."
+/>
+
+There were other stumbles: the floating “+” button on mobile blended in with the home feed’s videos, and the preview of a creator’s proposal had no way to add it to the cart.
+
+## Changing one word changed the core feature
+
+I renamed the section “Video requests” for creators and “Request a video” for businesses, and moved it to the most visible spot in the header. Testing had already told us that the ability to ask for a specific resource was what users valued most.
+
+In the same round, we made the upload button permanently visible and in color, muted video previews by default, and replaced the jump straight to checkout with a confirmation offering “view cart” and “keep shopping”.
+
+<Figure
+  src={searchResults}
+  alt="Search results for #Cajamarca in the business view, with the red Request a video button in the header."
+  mark={{ x: 73.4, y: 5.1, w: 9.9, h: 5.1, label: 'Request a video · the main action', align: 'right' }}
+  caption="The final version: “Request a video” went from a confusing tab to the main button on the business side."
+  framed
+/>
+
+## One video, every screen
+
+Every request brief already asked which device the video was for: phone, desktop or both. But creators uploaded a single file, and a horizontal clip forced into a reel loses exactly what made the shot worth buying.
+
+For the next version of the web app, I designed a format step for both publishing and downloading. The creator decides which part of the video shows in vertical and checks it on a phone before it goes live, and the business downloads the format it asked for, with no editing needed.
+
+<FormatCropDemo
+  src={videoFrame}
+  alt="Traditional dance parade on a colonial street in Cajamarca."
+  lang="en"
+  caption="An interactive version of the “Select the area of the video to publish” step, rebuilt in code for this portfolio."
+/>
+
+<Figure
+  src={previewMobile}
+  alt="Preview screen with the video cropped to vertical format and its publishing details: description, location, format, file type, quality and people."
+  mark={{ x: 15.2, y: 34.1, w: 17.6, h: 57.8, label: '9:16 · checked before publishing' }}
+  caption="The preview before publishing: format, file type, quality and whether people appear, all in one view."
+  framed
+/>
+
+## A system so three designers sound like one
+
+With 100+ desktop screens and three people designing in parallel, consistency couldn’t depend on memory. I led the design system in Figma using Atomic Design: from color and type up to components unique to this product, like request cards and their states (open, sent, accepted, declined), the role picker, and payouts through Yape and Plin, Peru’s most popular mobile wallets.
+
+I always designed with the dev team in mind. That’s why colors and the type scale follow Tailwind’s naming (gray-900, text-sm to text-5xl): design tokens and code tokens share the same names, so handoff wouldn’t need translating.
+
+<Figure
+  src={components}
+  alt="WIKIVI composite components: request and proposal cards with states, resource cards, role picker, profile form and a payout modal with bank transfer, Yape and Plin."
+  caption="Components that only exist in this product: requests, proposals, the role picker and payouts with local payment methods."
+/>
+
+<Figure
+  src={uiKit}
+  alt="Overview of WIKIVI’s UI kit in Figma: grids, buttons, shadows, corner radii, color palette, inputs, modals and icons."
+  caption="The full UI kit in Figma."
+/>
+
+## What we validated
+
+<Metrics
+  items={[
+    { value: '10', label: 'interviews to define the scope' },
+    { value: '5 + 5', label: 'creators and businesses in the card sort' },
+    { value: '86%', label: 'rated the desktop experience pleasant or very pleasant' },
+    { value: '100+', label: 'desktop screens built on the system' },
+  ]}
+/>
+
+I handed the client the complete design: user-tested flows, 100+ desktop screens and a design system ready for development.
+
+Beyond the numbers, the lesson was clear: people didn’t just want a catalog of their culture, they wanted to be able to ask for it. That feature went from a badly named tab to the center of the product.
+
+## What I learned
+
+Words are interface. “Anuncios” was well designed and badly named, and no amount of visual polish was going to fix it; only putting it in front of real users could show us. Since then I test labels as early as I test layouts.
+
+I also learned that leading is mostly planning. The work plan I wrote at the start (research, structure, test, and only then polish) is what gave the team room to change course while it was still cheap. Today I protect that second round in every project, because it’s where the product gets right.

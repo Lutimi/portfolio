@@ -1,0 +1,181 @@
+---
+title: 'Los bancos de video no mostraban la cultura peruana. Diseñé el marketplace donde los negocios se la piden a los creadores.'
+project: WIKIVI
+summary: 'WIKIVI es un marketplace de videos hechos en Perú: los creadores venden clips que muestran su cultura y su territorio, y los negocios los compran o encargan los que todavía no existen. La idea fue mía: propuse el concepto, armé el plan de trabajo y lideré a dos diseñadoras hasta entregar al cliente un producto probado con usuarios, con más de 100 pantallas y su design system.'
+cover: ../../../assets/work/wikivi/cover.png
+coverAlt: La home de WIKIVI con el buscador "Aquí seguro lo encuentras" y la pantalla de previsualización de un video en formato vertical.
+pills: [Marketplace de dos lados, 0 a 1, Web + Mobile]
+role: Team Lead UX/UI. Propuse la idea, armé el plan de trabajo y lideré el diseño de punta a punta.
+team: 'Yo y 2 diseñadoras: Lucía Martos y Lucero Figueroa'
+duration: 5 meses
+tools: [Figma, LucidChart, Illustrator, Photoshop]
+plate:
+  headline: Una pestaña mal entendida se volvió la función principal del producto.
+  status: Entregado al cliente
+  outcome: Las pruebas con usuarios convirtieron una pestaña mal entendida en la función principal del producto.
+  role: Team Lead UX/UI
+  team: Yo + 2 diseñadoras
+  image: ../../../assets/work/wikivi/search-results.png
+  imageAlt: Resultados de búsqueda de WIKIVI para #Cajamarca, con el botón rojo Solicitar video en el header.
+  mark: { x: 73.4, y: 5.1, w: 9.9, h: 5.1, label: 'La pestaña mal entendida, renombrada', align: right }
+order: 3
+draft: false
+---
+
+import Figure from '../../../components/case/Figure.astro'
+import Insight from '../../../components/case/Insight.astro'
+import Metrics from '../../../components/case/Metrics.astro'
+import FormatCropDemo from '../../../components/case/FormatCropDemo.astro'
+
+import storyboard from '../../../assets/work/wikivi/storyboard.webp'
+import cardSort from '../../../assets/work/wikivi/card-sort.webp'
+import architecture from '../../../assets/work/wikivi/information-architecture.webp'
+import requestVideo from '../../../assets/work/wikivi/request-video.png'
+import wireframes from '../../../assets/work/wikivi/wireframes-lofi.webp'
+import searchResults from '../../../assets/work/wikivi/search-results.png'
+import videoFrame from '../../../assets/work/wikivi/video-frame.png'
+import previewMobile from '../../../assets/work/wikivi/preview-mobile.png'
+import components from '../../../assets/work/wikivi/components.webp'
+import uiKit from '../../../assets/work/wikivi/ui-kit.png'
+
+## Había millones de videos. Ninguno de aquí.
+
+Las plataformas de recursos audiovisuales tenían dos extremos: contenido profesional a precios altos, o imágenes genéricas que no se parecían en nada a la cultura local. Para una agencia que promociona un restaurante en Cajamarca, ninguno de los dos servía.
+
+Ahí vi la oportunidad: un banco de videos hecho por creadores locales, con la cultura y el territorio en el centro. Propuse la idea y armé el plan de trabajo para validarla antes de diseñar una sola pantalla: benchmark, entrevistas, card sorting, flujos, wireframes y pruebas con usuarios.
+
+Revisamos Pexels, Shutterstock y Getty Images, y entrevistamos a 10 personas para entender los dos lados del problema:
+
+- **Irene**, diseñadora de 26 años, tenía material ya producido que nadie veía, y miedo a que lo usaran sin su permiso.
+- **Jonathan**, publicista de 38 años, necesitaba videos que se parecieran al público de sus clientes, sin licencias caras ni restrictivas.
+
+<Figure
+  src={storyboard}
+  alt="Storyboard de 10 viñetas dibujado a mano: una creadora sube un reel de Cajamarca y gana dinero; el dueño de un restaurante lo compra y consigue más clientes."
+  caption="El storyboard con el que alineé al equipo: una creadora gana dinero con un reel de Cajamarca y un restaurante lo usa para atraer clientes. Los dos lados del marketplace en una sola historia."
+/>
+
+## Dos productos bajo el mismo techo
+
+Creadores y negocios querían cosas distintas: unos, subir y cobrar; otros, buscar y comprar. Lo fácil era diseñar dos productos. El card sorting, con 5 creadores y 5 clientes, nos mostró otro camino.
+
+Los participantes agrupaban ubicación, cultura y tendencias junto a los filtros de búsqueda. La cultura no era una categoría más: era la manera de buscar. Por eso cada video muestra su ubicación y los filtros parten de ahí.
+
+<Figure
+  src={cardSort}
+  alt="Matriz de similitud del card sorting con creadores de contenido, con porcentajes de agrupación y tres conclusiones anotadas."
+  caption="Matriz de similitud con creadores: ubicación, cultura, tendencias y categorías terminaron juntas, como filtros de búsqueda."
+/>
+
+<Insight>
+  Quien hoy vende un video mañana puede comprar otro. Por eso los dos lados tenían que hablar el mismo idioma.
+</Insight>
+
+Unifiqué los términos de las dos arquitecturas para que cambiar de rol no obligara a aprender otro producto, y reduje las secciones de 6 a 5 para creadores y de 7 a 5 para negocios.
+
+<Figure
+  src={architecture}
+  alt="Árbol de arquitectura de información del creador de contenido con cinco secciones: Mi perfil, Cargar archivos, Mi galería, Buscar y Anuncios."
+  caption="La arquitectura del creador: cinco secciones con la misma lógica que la del negocio."
+/>
+
+## Si el video no existe, que lo pidan
+
+En un banco de videos tradicional, si no encuentras lo que buscas, te vas. Mi idea fue que esa búsqueda fallida se convirtiera en un encargo. El negocio publica lo que necesita (descripción, ubicación, vigencia, dispositivo, formato y si debe aparecer gente), los creadores envían propuestas y el negocio elige la que más le sirve.
+
+<Figure
+  src={requestVideo}
+  alt="Formulario Solicitar video con campos de descripción, ubicación, vigencia del anuncio, dispositivo, tipo de archivo, personas y motivo referencial del video."
+  mark={{ x: 9.9, y: 53, w: 39.8, h: 8.7, label: 'Dispositivo · se pide en cada brief' }}
+  caption="El brief que llena el negocio. Cada campo responde una pregunta que el creador necesita antes de salir a grabar."
+  framed
+/>
+
+## Lo que las pruebas rompieron
+
+Probamos los prototipos con usuarios de los dos roles, en desktop y en mobile. Los creadores completaron todas las tareas en mobile, pero en desktop hubo dos que nadie pudo terminar. Los negocios tardaron más en desktop y también se trabaron en dos tareas.
+
+El hallazgo más grande fue una sola palabra. A la sección de solicitudes la llamábamos **"Anuncios"**, y los dos tipos de usuario pensaron que era publicidad.
+
+<Figure
+  src={wireframes}
+  alt="Wireframes de baja fidelidad de la web del creador, con la navegación Home, Galería, Anuncios y un botón Cargar."
+  mark={{ x: 41.3, y: 41.6, w: 4.3, h: 3.8, label: '“Anuncios” · leído como publicidad' }}
+  caption="Los wireframes todavía decían “Anuncios”. En papel parecía claro; con usuarios, no."
+/>
+
+Hubo otros tropiezos: el botón flotante “+” de mobile se confundía con los videos del home, y la vista previa del video que enviaba un creador no tenía carrito.
+
+## Cambiar una palabra cambió la función principal
+
+Renombré la sección como “Solicitudes de video” para los creadores y “Solicitar video” para los negocios, y la llevé al lugar más visible del header. Las pruebas ya lo habían dicho: lo que más valoraban los usuarios era poder pedir un recurso específico.
+
+En la misma ronda dejamos el botón de subir contenido siempre visible y en color, silenciamos las previsualizaciones por defecto y, al agregar un video al carrito, mostramos una confirmación con “ver carrito” y “seguir comprando” en lugar de saltar directo al pago.
+
+<Figure
+  src={searchResults}
+  alt="Resultados de búsqueda para #Cajamarca en la vista del negocio, con el botón rojo Solicitar video en el header."
+  mark={{ x: 73.4, y: 5.1, w: 9.9, h: 5.1, label: 'Solicitar video · la acción principal', align: 'right' }}
+  caption="La versión final: “Solicitar video” dejó de ser una pestaña confusa y pasó a ser el botón principal del negocio."
+  framed
+/>
+
+## Un video, todas las pantallas
+
+El brief de cada solicitud ya preguntaba para qué dispositivo era el video: celular, desktop o ambos. Pero el creador subía un solo archivo, y un clip horizontal recortado a la fuerza para un reel pierde justo lo importante de la toma.
+
+En la siguiente versión de la web diseñé un paso para elegir el formato al publicar y al descargar. El creador decide qué parte del video se ve en vertical y lo revisa en un celular antes de publicarlo, y el negocio descarga el formato que pidió sin tener que editarlo.
+
+<FormatCropDemo
+  src={videoFrame}
+  alt="Desfile de danzas tradicionales en una calle colonial de Cajamarca."
+  lang="es"
+  caption="Versión interactiva del paso “Selecciona el área del video a publicar”. La reconstruí en código para este portafolio."
+/>
+
+<Figure
+  src={previewMobile}
+  alt="Pantalla de previsualización con el video recortado en formato vertical y los datos de publicación: descripción, ubicación, formato, tipo de archivo, calidad y personas."
+  mark={{ x: 15.2, y: 34.1, w: 17.6, h: 57.8, label: '9:16 · se revisa antes de publicar' }}
+  caption="La previsualización antes de publicar: formato, archivo, calidad y si aparecen personas, todo en una vista."
+  framed
+/>
+
+## Un sistema para que tres diseñadores suenen como uno
+
+Con más de 100 pantallas de escritorio y tres personas diseñando en paralelo, la consistencia no podía depender de la memoria. Lideré la construcción del design system en Figma con Atomic Design: desde colores y tipografía hasta componentes propios del producto, como las tarjetas de solicitud con sus estados (vigente, enviado, aceptado, no aceptado), el selector de rol y los retiros por Yape y Plin.
+
+Diseñé pensando siempre en el equipo de desarrollo. Por eso los colores y la escala tipográfica siguen la nomenclatura de Tailwind (gray-900, text-sm a text-5xl): los tokens de diseño y los del código se llaman igual, para que la entrega no necesitara traducción.
+
+<Figure
+  src={components}
+  alt="Componentes compuestos de WIKIVI: tarjetas de solicitud y propuesta con estados, tarjetas de recurso, selector de rol, formulario de perfil y modal de retiro con banco, Yape y Plin."
+  caption="Componentes que solo existen en este producto: solicitudes, propuestas, selector de rol y retiros con medios de pago locales."
+/>
+
+<Figure
+  src={uiKit}
+  alt="Vista general del UI Kit de WIKIVI en Figma: grillas, botones, sombras, radios, paleta de colores, inputs, modales e iconos."
+  caption="El UI Kit completo en Figma."
+/>
+
+## Lo que validamos
+
+<Metrics
+  items={[
+    { value: '10', label: 'entrevistas para definir el alcance' },
+    { value: '5 + 5', label: 'creadores y negocios en el card sorting' },
+    { value: '86%', label: 'calificó la experiencia en desktop como agradable o muy agradable' },
+    { value: '100+', label: 'pantallas de escritorio construidas sobre el sistema' },
+  ]}
+/>
+
+Entregué al cliente el diseño completo: flujos validados con usuarios, más de 100 pantallas de escritorio y el design system listo para desarrollo.
+
+Más allá de los números, el aprendizaje fue claro: los usuarios no solo querían un catálogo con su cultura, querían poder pedirla. Esa función pasó de ser una pestaña mal nombrada a ser el centro del producto.
+
+## Lo que aprendí
+
+Las palabras también son interfaz. “Anuncios” estaba bien diseñado y mal nombrado, y ningún pulido visual lo iba a arreglar: solo ponerlo frente a usuarios reales podía mostrárnoslo. Desde entonces pruebo las etiquetas tan temprano como los layouts.
+
+También aprendí que liderar es, sobre todo, planificar. El plan de trabajo que armé al inicio (investigar, estructurar, probar y recién después pulir) le dio al equipo margen para corregir el rumbo cuando todavía era barato. Hoy protejo esa segunda ronda en cada proyecto, porque es donde el producto se acierta.

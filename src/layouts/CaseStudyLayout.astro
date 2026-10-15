@@ -1,0 +1,125 @@
+---
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import Layout from './Layout.astro'
+import SiteHeader from '../components/site/SiteHeader.astro'
+import TitleBlock from '../components/site/TitleBlock.astro'
+import { ScrollProgress } from '../components/magicui/scroll-progress'
+import { caseUrl, homeUrl, useTranslations, type Lang } from '../i18n/ui'
+import '../styles/case-study.css'
+
+interface Props {
+  entry: CollectionEntry<'work'>
+  lang: Lang
+  slug: string
+}
+
+const { entry, lang, slug } = Astro.props
+const { data } = entry
+const t = useTranslations(lang)
+const otherLang: Lang = lang === 'en' ? 'es' : 'en'
+
+// Lead with the impact: the outcome opens the facts, before role and team
+const facts = [
+  { label: t('case.outcome'), value: data.plate.outcome },
+  { label: t('case.role'), value: data.role },
+  { label: t('case.team'), value: data.team },
+  { label: t('case.duration'), value: data.duration },
+  ...(data.tools.length ? [{ label: t('case.tools'), value: data.tools.join(', ') }] : []),
+]
+---
+
+<Layout
+  title={`${data.project} — Luis Ticona`}
+  description={data.summary}
+  lang={lang}
+  image={data.cover.src}
+  alternates={[
+    { lang, href: caseUrl(lang, slug) },
+    { lang: otherLang, href: caseUrl(otherLang, slug) },
+  ]}
+>
+  <ScrollProgress client:load className="h-[2px]" />
+  <SiteHeader lang={lang} switchHref={caseUrl(otherLang, slug)} />
+
+  <main>
+    <!-- Lead with the outcome, not the project name -->
+    <section class="mx-auto max-w-[1360px] px-5 pb-12 pt-14 sm:px-10 sm:pt-20">
+      <h1 class="display case-title max-w-[26ch] text-[clamp(1.875rem,0.8rem+3.1vw,3.75rem)]">{data.title}</h1>
+      <ul class="mt-8 flex flex-wrap gap-2">
+        <li class="pill bg-ink text-paper">{data.project}</li>
+        {data.pills.map(pill => <li class="pill">{pill}</li>)}
+      </ul>
+    </section>
+
+    <div class="mx-auto max-w-[1360px] px-5 sm:px-10">
+      <div class="overflow-hidden rounded-2xl border border-rule">
+        <Image
+          src={data.cover}
+          alt={data.coverAlt}
+          widths={[640, 1024, 1600, 2400]}
+          sizes="(min-width: 1360px) 1280px, 100vw"
+          loading="eager"
+          class="h-auto w-full"
+        />
+      </div>
+    </div>
+
+    <!-- Context, role and scope -->
+    <section class="mx-auto grid max-w-[1360px] gap-12 px-5 py-20 sm:px-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
+      <p class="max-w-[40rem] text-[clamp(1.25rem,1rem+0.7vw,1.5rem)] leading-relaxed">{data.summary}</p>
+      <dl class="facts">
+        {facts.map(fact => (
+          <div class="row">
+            <dt>{fact.label}</dt>
+            <dd>{fact.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <article class="case-prose">
+      <slot />
+    </article>
+
+    <!-- The portfolio is the trailer; the interview is the movie -->
+    <section class="mx-auto mt-32 max-w-[1360px] px-5 sm:px-10">
+      <div class="border-t border-ink pt-10">
+        <p class="display max-w-[16ch] text-[clamp(2.25rem,1rem+3.6vw,4rem)]">{t('case.close.title')}</p>
+        <p class="mt-5 max-w-[34rem] text-[1.1875rem] text-ink-2">{t('case.close.body')}</p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="mailto:lutimi19@gmail.com" class="button">{t('case.close.button')}</a>
+          <a href={`${homeUrl(lang)}#work`} class="button button--ghost">{t('case.close.back')}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <TitleBlock lang={lang} sheet={data.project} />
+</Layout>
+
+<style>
+  .facts .row {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .facts .row:first-child {
+    border-top: 1px solid var(--color-ink);
+  }
+
+  .facts dt {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-ink-3);
+    padding-top: 0.125rem;
+  }
+
+  .facts dd {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+</style>

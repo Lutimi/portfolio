@@ -1,0 +1,88 @@
+---
+// The site footer as the title block in the corner of a drawing sheet
+import { useTranslations, type Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+  sheet: string
+}
+
+const { lang, sheet } = Astro.props
+const t = useTranslations(lang)
+const year = new Date().getFullYear()
+---
+
+<footer class="mx-auto max-w-[1360px] px-5 pb-10 pt-16 sm:px-10">
+  <div class="title-block grid border border-ink text-[0.875rem] sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+    <div class="cell lg:row-span-2">
+      <p class="cell-label">{t('block.drawn')}</p>
+      <p class="heading text-[1.75rem]">Luis Ticona</p>
+      <p class="mt-1 text-ink-2">© {year}</p>
+    </div>
+    <div class="cell">
+      <p class="cell-label">{t('block.location')}</p>
+      <p>{t('block.locationValue')}</p>
+    </div>
+    <div class="cell">
+      <p class="cell-label">{t('block.stack')}</p>
+      <p>Astro · Tailwind CSS · Magic UI</p>
+    </div>
+    <div class="cell">
+      <p class="cell-label">{t('block.sheet')}</p>
+      <p>{sheet}</p>
+    </div>
+    <div class="cell sm:col-span-2 lg:col-span-3">
+      <p class="cell-label">{t('block.contact')}</p>
+      <ul class="flex flex-wrap gap-x-6 gap-y-1">
+        <li><a class="link" href="mailto:lutimi19@gmail.com">lutimi19@gmail.com</a></li>
+        <li><a class="link" href="https://github.com/Lutimi" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a class="link" href="https://www.behance.net/luisticona1" target="_blank" rel="noopener">Behance</a></li>
+        <li><a class="link" href="/cv-luis-ticona.pdf" target="_blank" rel="noopener">{t('nav.resume')} (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .cell {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-ink);
+  }
+
+  .cell-label {
+    margin-bottom: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-ink-3);
+  }
+
+  @media (min-width: 640px) {
+    .cell:nth-child(odd) {
+      border-right: 1px solid var(--color-ink);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cell {
+      border-right: 1px solid var(--color-ink);
+    }
+
+    .cell:nth-child(4) {
+      border-right: 0;
+    }
+
+    .cell:last-child {
+      border-right: 0;
+      border-bottom: 0;
+    }
+
+    .cell:first-child {
+      border-bottom: 0;
+    }
+  }
+
+  .title-block > .cell:last-child {
+    border-bottom: 0;
+  }
+</style>

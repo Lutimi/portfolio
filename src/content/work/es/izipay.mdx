@@ -1,0 +1,159 @@
+---
+title: 'Le di al panel de comercios de Izipay un nuevo look and feel, y lo documenté como un solo design system para Figma y código.'
+project: Izipay
+summary: 'Izipay es una empresa peruana de pagos, y su panel de comercios es donde los negocios ven sus ventas, devoluciones y abonos. El panel había crecido pantalla por pantalla, y se notaba. Rediseñé su look and feel, reconstruí 23 pantallas con él y documenté el resultado como un design system que diseño y desarrollo comparten nombre por nombre. El primer flujo construido sobre él permite que cualquier comercio conecte su tienda online por su cuenta.'
+cover: ../../../assets/work/izipay/cover.png
+coverAlt: El panel de comercios rediseñado de Izipay. El inicio con recomendaciones y la guía Integra tu web en el primer paso.
+pills: [Design system, Fintech, B2B, Hecho en código]
+role: Product Designer Senior en 10Pearls, para Izipay. Look and feel, el design system y su documentación, y los flujos del onboarding.
+team: Equipo UX/UI de Izipay; mi líder construyó la base del panel
+duration: 12 días para el prototipo en código
+tools: [Figma, HTML, CSS, JavaScript]
+plate:
+  headline: Un nuevo look and feel, documentado como un solo sistema.
+  status: Prototipo, 2026
+  outcome: Un nuevo look and feel en 23 pantallas, documentado como un design system de 277 tokens y 17 componentes padre que Figma y el código comparten.
+  role: Product Designer Senior
+  team: Equipo UX/UI de Izipay
+  image: ../../../assets/work/izipay/compare-after.png
+  imageAlt: La pantalla de Ventas rediseñada, con los totales por estado como grupo de botones, filtros instantáneos y la tabla de transacciones.
+  mark: { x: 21.7, y: 41.1, w: 75.6, h: 19.5, label: 'Totales por estado y filtros instantáneos en cada lista', align: right }
+order: 1
+draft: false
+---
+
+import Figure from '../../../components/case/Figure.astro'
+import Insight from '../../../components/case/Insight.astro'
+import Metrics from '../../../components/case/Metrics.astro'
+import BeforeAfter from '../../../components/case/BeforeAfter.astro'
+import TokenMap from '../../../components/case/TokenMap.astro'
+
+import oldDevelopers from '../../../assets/work/izipay/old-developers.png'
+import newHome from '../../../assets/work/izipay/new-home.png'
+import newIntegrate from '../../../assets/work/izipay/new-integrate.png'
+import newApiKeys from '../../../assets/work/izipay/new-api-keys.png'
+import compareBefore from '../../../assets/work/izipay/compare-before.png'
+import compareAfter from '../../../assets/work/izipay/compare-after.png'
+import figmaInputStates from '../../../assets/work/izipay/figma-input-states.png'
+
+## Un panel que había crecido pantalla por pantalla
+
+El panel de comercios de Izipay cumplía su función, pero cada sección se había construido por su lado: sus propios filtros, su propio espaciado, su propia forma de mostrar un estado. Los comercios lo sentían como fricción, y el equipo lo sentía en cada entrega, porque el Figma ya no describía el producto que salía a producción.
+
+Así que empecé por el look and feel, sobre una pantalla real. Ventas es donde los comercios pasan el día, y muestra todo el cambio de una vez.
+
+<BeforeAfter
+  before={compareBefore}
+  after={compareAfter}
+  beforeAlt="La pantalla anterior de Transacciones: pestañas de estado, chips de filtro punteados y una tabla de transacciones."
+  afterAlt="La nueva pantalla de Ventas: los estados como un grupo de botones con totales, filtros instantáneos y una tabla de transacciones."
+  lang="es"
+  caption="Transacciones antes, Ventas después. Los chips punteados se volvieron filtros que se aplican apenas los usas, las pestañas de estado se volvieron totales y las etiquetas pasaron al idioma del comercio."
+/>
+
+Las reglas detrás son pocas, y cada pantalla las sigue:
+
+- **Un solo sistema tipográfico.** Aptos para todo lo que un comercio lee o escribe, y Poppins solo en títulos de 20 px o más.
+- **Un solo color principal.** El turquesa de Izipay marca la acción principal y el lugar actual; nada más compite con él.
+- **Un solo patrón de filtros.** Cada lista filtra apenas tocas un control, sin botón Aplicar.
+- **Las palabras del comercio.** “N.° de pedido” en vez de un ID interno de venta; totales por estado en vez de pestañas sueltas.
+
+## Figma, después código, y de vuelta a Figma
+
+Un nuevo look and feel solo dura si el equipo puede seguir construyéndolo. Empecé donde diseña el equipo: en el archivo DS | Panel 2026 diseñé en Figma los nuevos componentes padre, cada uno con todos los estados y tamaños que necesita. Solo Input Text cubre siete estados, de default a error y completado, en cuatro tamaños.
+
+<Figure
+  src={figmaInputStates}
+  alt="El componente Input Text en Figma: una matriz de siete estados (default, hover, focused, filled, disabled, error, completed) en cuatro tamaños."
+  caption="Primero en Figma: Input Text, siete estados en cuatro tamaños, antes de escribir una sola línea de código."
+  framed
+/>
+
+Después llevé los componentes a código, donde las interacciones reales muestran lo que un frame estático no puede. Los filtros deberían reaccionar apenas los tocas. Un tooltip necesita espacio para poder leerse. Ahí adapté y mejoré cada componente, y cuando un flujo funcionaba en el navegador, lo llevaba de vuelta a Figma, para que el archivo muestre el producto tal como se comporta.
+
+<Insight>
+  Figma es donde exploramos; el código es donde lo comprobamos. Llevar los flujos de vuelta a Figma hizo que los dos contaran la misma historia.
+</Insight>
+
+Lo que sostuvo ese ida y vuelta fue una regla de nombres. El nombre de un token en código es su nombre de Figma en minúsculas, con barras y espacios convertidos en guiones, así diseño y desarrollo usan la misma palabra para el mismo valor.
+
+<TokenMap figmaLabel="Figma" codeLabel="Código" alt="Tres nombres de Figma junto a los nombres de código en los que se convierten." class="mx-5 my-16 sm:mx-10 lg:mx-auto lg:max-w-[1280px]" />
+
+Los componentes siguen la misma idea: cada propiedad de Figma se vuelve un modificador, así `Button · Primary · Small` es `.button.button--primary.button--small` en código.
+
+## Documentado donde ambos lados miran
+
+Un sistema que nadie encuentra es un sistema que nadie sigue. Lo documenté como un catálogo vivo, renderizado con la misma hoja de estilos del panel, así si algo cambia ahí, cambia también en el panel. Cubre 58 secciones: fundamentos, componentes con todos sus estados, las piezas que necesitó cada flujo, la navegación y el onboarding.
+
+Cada componente también registra dónde se diferencia a propósito del Figma, y por qué. Algunos ejemplos:
+
+- Los tooltips crecen hasta 240 px de ancho en vez de 80 fijos, para que su texto se pueda leer.
+- Las barras de filtros se quedan en 40 px en vez de 36, para mantener un área táctil cómoda.
+- La “x” para cerrar es turquesa y no roja, porque el rojo se lee como error.
+
+## El primer flujo sobre el nuevo sistema
+
+Con el sistema listo, el primer flujo en usarlo fue el que Izipay más necesitaba. Conectar una tienda online dependía de atención personalizada, y eso no escala a miles de comercios pequeños. En el panel anterior, todo lo que necesitaba un desarrollador vivía en una sola pantalla de Desarrolladores con dos pestañas.
+
+<Figure
+  src={oldDevelopers}
+  alt="La pantalla anterior de Desarrolladores de Izipay, con dos pestañas, Claves y Apple Pay, y un formulario de configuración de Apple Pay."
+  mark={{ x: 22.9, y: 17.1, w: 17.1, h: 4.7, label: 'Antes: una pantalla, dos pestañas' }}
+  caption="La pantalla anterior de Desarrolladores: claves y Apple Pay, y nada que guiara a un comercio de una prueba a una tienda en vivo."
+  framed
+/>
+
+Mapeé el recorrido de integración de principio a fin y estudié cómo otras plataformas de pago hacen el onboarding de desarrolladores. La guía de configuración de Stripe fue la referencia más clara, sin su modo enfoque.
+
+<Insight>
+  El onboarding es opcional: nada bloquea el panel ni tapa el dashboard. Empiezas en modo prueba y terminas activando producción.
+</Insight>
+
+El inicio ahora sugiere el siguiente paso en vez de exigirlo: integrar tu web, crear un link de pago si todavía no tienes web, o ir directo a producción si ya sabes cómo.
+
+<Figure
+  src={newHome}
+  alt="El nuevo inicio de Izipay: un saludo, una tarjeta de Recomendaciones con tres caminos sugeridos, acciones rápidas y ganancias recientes."
+  mark={{ x: 21.6, y: 20.6, w: 37.1, h: 25.6, label: 'Opcional: cada tarjeta se puede cerrar' }}
+  caption="El nuevo inicio. Las recomendaciones llevan a la guía; ninguna bloquea el dashboard."
+  framed
+/>
+
+Integra tu web divide el trabajo en cinco pasos y dos grupos. Primero, prueba tu integración: elige tu plataforma, obtén tus claves de prueba, configura una URL de notificación y haz un pago de prueba. Después activa producción, que queda bloqueada hasta que las pruebas pasen. Cualquier paso se puede saltar y retomar.
+
+<Figure
+  src={newIntegrate}
+  alt="El primer paso de Integra tu web: elegir entre un plugin de tienda, código propio o una app móvil, con un panel lateral que sigue la integración."
+  mark={{ x: 23.7, y: 47.7, w: 48.5, h: 16.4, label: 'Paso 1 · la guía se adapta a dónde vendes' }}
+  caption="El primer paso pregunta dónde vendes (un plugin de tienda, código propio o una app móvil) y muestra la guía y los ejemplos de código que corresponden."
+  framed
+/>
+
+Los desarrolladores ahora tienen cuatro pantallas enfocadas en vez de una: Integra tu web, API Keys, Webhooks y Apple Pay. En API Keys, prueba y producción viven en pestañas separadas, y cada clave se agrupa según para qué sirve.
+
+<Figure
+  src={newApiKeys}
+  alt="La nueva pantalla de API Keys, con pestañas de Prueba y Producción, claves de prueba agrupadas por uso y una tarjeta con la URL de notificación."
+  mark={{ x: 27.2, y: 22, w: 14.1, h: 3.7, label: 'Producción queda bloqueada hasta que estés listo' }}
+  caption="API Keys: agrupadas por uso, cada una con un botón para copiar, y la URL de notificación al lado. Las claves que se ven son valores de demostración."
+  framed
+/>
+
+## Sobre lo que el equipo construye ahora
+
+<Metrics
+  items={[
+    { value: '23', label: 'pantallas reconstruidas con el nuevo look and feel, revisadas a 1440 y 375 px' },
+    { value: '277', label: 'tokens de diseño, cada uno con el nombre de su estilo de Figma' },
+    { value: '17', label: 'componentes padre, con todos sus estados' },
+    { value: '58', label: 'secciones documentadas en el catálogo vivo' },
+  ]}
+/>
+
+Entregué el prototipo, el design system y su documentación al equipo UX/UI y a desarrollo como base del nuevo panel. Todavía es un prototipo, así que aún no hay métricas en vivo.
+
+## Lo que aprendí
+
+Un design system no está terminado cuando se dibuja. Está terminado cuando resiste el uso real. Llevar los componentes de Figma a código y de vuelta me enseñó a tratar la entrega como un ciclo y no como algo de una sola vía: cada decisión tomada en el navegador tiene que volver al archivo de diseño, con el mismo nombre, o los dos vuelven a separarse.
+
+También aprendí que un nuevo look and feel es tan fuerte como su documentación. Dejar escrito por qué un componente se diferencia del Figma es lo que evita que la siguiente persona lo “arregle” de vuelta.

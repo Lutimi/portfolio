@@ -1,0 +1,185 @@
+---
+title: "En TuRuta, 4 de cada 10 personas no encontraban qué bus tomar. Rediseñé la app alrededor del viaje."
+project: TuRuta
+summary: "TuRuta le dice a la gente en Lima qué bus la lleva a donde va. La idea funcionaba, pero la app había crecido sección por sección: menús que se repetían, inglés y español en la misma pantalla y pantallas sin forma de volver. La rediseñé de principio a fin como propuesta de concurso para el equipo de TuRuta, desde las entrevistas y un tree test hasta un prototipo probado con usuarios."
+cover: ../../../assets/work/turuta/cover.png
+coverAlt: Tres pantallas de la app TuRuta rediseñada, con el inicio, la guía de ruta y las opciones de ruta.
+pills: [Propuesta de concurso, App móvil, Rediseño]
+role: Product designer, en solitario. Investigación, arquitectura de información, UI y pruebas de usabilidad.
+team: Proyecto individual, con 27 participaciones entre entrevistas y pruebas
+duration: '2022, propuesta de concurso'
+tools: [Figma, Optimal Workshop, Maze, Illustrator]
+plate:
+  headline: Una app de transporte, rearmada alrededor del viaje.
+  status: Concepto, 2022
+  outcome: Una nueva estructura construida con un tree test y un card sorting con 19 personas. En el rediseño, los participantes completaron 11 de 12 tareas.
+  role: Product designer
+  team: Individual
+  image: ../../../assets/work/turuta/final-routes.png
+  imageAlt: La búsqueda de destino y las opciones de ruta rediseñadas de TuRuta, con tiempo de viaje, pasaje y líneas de bus.
+  mark: { x: 57.2, y: 35.9, w: 32.5, h: 16.1, label: 'Tiempo, pasaje, líneas' }
+order: 4
+draft: false
+---
+
+import Figure from '../../../components/case/Figure.astro'
+import Insight from '../../../components/case/Insight.astro'
+import Metrics from '../../../components/case/Metrics.astro'
+import BeforeAfter from '../../../components/case/BeforeAfter.astro'
+
+import beforeApp from '../../../assets/work/turuta/before-app.png'
+import persona from '../../../assets/work/turuta/persona.png'
+import treeTest from '../../../assets/work/turuta/tree-test.png'
+import cardSort from '../../../assets/work/turuta/card-sort.png'
+import iaBefore from '../../../assets/work/turuta/ia-before.png'
+import iaAfter from '../../../assets/work/turuta/ia-after.png'
+import taskFlow from '../../../assets/work/turuta/task-flow.png'
+import finalTrip from '../../../assets/work/turuta/final-trip.png'
+import finalRoutes from '../../../assets/work/turuta/final-routes.png'
+import searchBefore from '../../../assets/work/turuta/iteration-search-before.png'
+import searchAfter from '../../../assets/work/turuta/iteration-search-after.png'
+import iterationSave from '../../../assets/work/turuta/iteration-save.png'
+
+## Una buena idea, enterrada en sus propios menús
+
+En Lima la mayoría se mueve en bus, y las rutas son difíciles de leer si no las conoces. TuRuta responde la única pregunta que importa: ¿qué bus me lleva?
+
+La idea funcionaba. La app que la rodeaba había crecido sección por sección. Dos menús ofrecían opciones que se repetían. El inglés y el español compartían la misma pantalla. Un lugar guardado aparecía como coordenadas sueltas, y la sección de pagos no tenía salida. Nadie había diseñado el conjunto; cada parte simplemente se había ido agregando.
+
+<Figure
+  src={beforeApp}
+  alt="Pantallas de la app TuRuta original: un menú lateral que mezcla inglés y español, un mapa, una lista de lugares guardados y una pantalla de pago."
+  mark={{ x: 4.0, y: 8.7, w: 19.6, h: 25.3, label: 'Un menú, dos idiomas', align: 'left' }}
+  caption="La app antes del rediseño: tres colores de acento a la vez, menús en dos idiomas, un mapa que abre en otro continente y un lugar guardado mostrado como coordenadas."
+  framed
+/>
+
+## Cuatro entrevistas, una persona para quien diseñar
+
+Entrevisté a cuatro estudiantes y trabajadores de Lima que toman el bus todos los días. Describieron la app como simple pero desorganizada, y todos mencionaron la mezcla de idiomas. Lo que pedían era concreto: guardar los lugares a los que van seguido, compartir su ubicación y saber el pasaje antes de salir.
+
+Con esas entrevistas construí a Jimmy: 27 años, estudiante de mecatrónica que trabaja medio tiempo como barista y viaja en bus todos los días. Tiene tres preguntas que la app nunca le respondía bien: cuánto gastará hoy en pasajes, qué bus lo deja sin transbordos y a qué hora pasa.
+
+<Figure
+  src={persona}
+  alt="Ficha de la user persona Jimmy Pérez, 27 años, estudiante de mecatrónica y barista a medio tiempo en Lima, con sus objetivos y frustraciones."
+  caption="Jimmy, la persona construida con las cuatro entrevistas. Cada decisión del rediseño responde a una de sus frustraciones."
+/>
+
+## 4 de cada 10 no encontraban qué bus tomar
+
+Antes de tocar la interfaz, probé la estructura. En un tree test en Optimal Workshop, 10 personas buscaron cosas en los menús de la app, sin diseño visual que las ayudara o las distrajera.
+
+Lo primero que falló fue la tarea principal: el 40% no encontró qué bus tomar. Cambiar el método de pago llegó a un 60% de éxito, pero solo el 20% fue directo. El resto dio vueltas antes de encontrarlo.
+
+<Figure
+  src={treeTest}
+  alt="Resultados del tree test en Optimal Workshop para la tarea de encontrar qué bus tomar: 60% de éxito y 40% de fracaso."
+  mark={{ x: 1.6, y: 72.2, w: 46.8, h: 9.0, label: 'El 40% no encontró su bus', align: 'left' }}
+  caption="Tree test sobre la estructura anterior, tarea uno: ¿qué bus debo tomar? Cuatro de cada diez nunca encontraron la respuesta."
+  framed
+/>
+
+<Insight>
+  El problema no eran las pantallas. Era dónde vivía cada cosa.
+</Insight>
+
+## Las personas ordenaron la app en cuatro lugares
+
+Así que les pedí a las personas que ordenaran la app ellas mismas. En un card sorting con 9 participantes, los grupos coincidieron en cuatro categorías principales. Dos eran secciones independientes, y además había dos secciones pequeñas: compartir y configuración.
+
+<Figure
+  src={cardSort}
+  alt="Dendrograma del card sorting en Optimal Workshop que muestra cómo los participantes agruparon las funciones de la app."
+  caption="El dendrograma del card sorting: cuatro grupos principales, dos de ellos independientes, con compartir y configuración como secciones pequeñas."
+  framed
+/>
+
+Esa fue la nueva arquitectura. El inicio se divide en menú lateral, Viajar, Favoritos y Búsquedas recientes. La configuración vive en un solo lugar. Compartir y pagar pasan a Viajar, junto al viaje al que pertenecen. Las dos secciones independientes se volvieron botones flotantes sobre el mapa, a un toque mientras viajas.
+
+<BeforeAfter
+  before={iaBefore}
+  after={iaAfter}
+  beforeAlt="La arquitectura de información original: un menú lateral largo, con Favoritos duplicado y una función rota."
+  afterAlt="La nueva arquitectura de información: cuatro ramas principales, con la configuración agrupada y compartir y pagar dentro de Viajar."
+  lang="es"
+  caption="La arquitectura de información antes y después. Once opciones sueltas se convirtieron en cuatro ramas construidas alrededor del viaje."
+/>
+
+## Cada pantalla tiene cómo volver
+
+Ordené cada mejora según qué tan viable y qué tan deseada era, y lo primero de la fila fueron las bases:
+
+- un botón para volver en cada sección;
+- un solo idioma, el español, en toda la app;
+- un menú que se reconoce como menú;
+- una jerarquía visual donde el siguiente paso destaca;
+- y nada roto. Una función enlazaba a una página que ya no existía, así que la retiré.
+
+Después dibujé la tarea principal, planificar un viaje, como flujo y en baja fidelidad, para comprobar que cada paso tuviera un siguiente paso obvio antes de pulir un solo pixel.
+
+<Figure
+  src={taskFlow}
+  alt="Flujo de la tarea de planificar un viaje, dibujado como una secuencia de wireframes de baja fidelidad."
+  caption="El flujo de la tarea principal de la app, planificar un viaje, en wireframes de baja fidelidad."
+  framed
+/>
+
+## Todo el viaje en una pantalla
+
+Las opciones de ruta responden las tres preguntas de Jimmy una al lado de la otra: cuánto dura el viaje, cuánto cuesta y qué líneas tomar. Al elegir una ruta, un slider horizontal te guía paso a paso sin salir del mapa, y la llegada tiene su propia confirmación.
+
+<Figure
+  src={finalRoutes}
+  alt="Pantallas rediseñadas de TuRuta: la búsqueda de destino y las opciones de ruta con tiempo de viaje, pasaje y líneas de bus."
+  mark={{ x: 57.2, y: 35.9, w: 32.5, h: 16.1, label: 'Tiempo, pasaje y líneas al frente' }}
+  caption="Opciones de ruta con tiempo, pasaje y líneas: las tres cosas que Jimmy necesita para decidir."
+  framed
+/>
+
+El rojo pasó a ser el color principal, porque transmite urgencia y se nota en la calle. Mantuve el rosado de la app como color secundario, para que la versión dos siguiera sintiéndose como TuRuta.
+
+<Figure
+  src={finalTrip}
+  alt="Pantallas rediseñadas de TuRuta: el inicio con destinos frecuentes, la guía de ruta paso a paso sobre el mapa y la confirmación de llegada."
+  caption="El inicio, la guía de ruta y la llegada. La guía se desliza hacia los lados, así el mapa nunca sale de la pantalla. (El mapa es el de ejemplo del UI Kit.)"
+  framed
+/>
+
+## Cuatro personas, tres tareas, dos mejoras
+
+Probé el prototipo de forma remota en Maze, con cuatro participantes por videollamada. Tenían tres tareas: planificar un viaje, quitar la publicidad y configurar una alarma de llegada. Completaron 11 de los 12 intentos.
+
+Las sesiones igual encontraron problemas. Dos de tres participantes notaron que el buscador se veía distinto en cada pantalla, y la configuración no tenía botón de guardar, así que nadie sabía si un cambio se había aplicado. Corregí ambas cosas en la siguiente versión.
+
+<BeforeAfter
+  before={searchBefore}
+  after={searchAfter}
+  beforeAlt="El prototipo versión 1.0, con un buscador con un estilo distinto al de otras pantallas."
+  afterAlt="El prototipo mejorado, con un solo estilo de buscador en todas las pantallas."
+  lang="es"
+  caption="Después de las pruebas: un solo buscador, igual en todas las pantallas."
+/>
+
+<Figure
+  src={iterationSave}
+  alt="La configuración de alarma e idioma antes y después de las pruebas; la versión mejorada agrega un botón Guardar."
+  mark={{ x: 55.7, y: 61.4, w: 40.6, h: 14.1, label: 'Agregado tras las pruebas' }}
+  caption="La configuración antes (izquierda) y después de las pruebas (derecha): un botón Guardar, así ningún cambio queda en duda."
+  framed
+/>
+
+<Metrics
+  items={[
+    { value: '40%', label: 'no encontró qué bus tomar en la estructura anterior' },
+    { value: '19', label: 'personas en el tree test y el card sorting' },
+    { value: '11', label: 'de 12 tareas completadas en el rediseño' },
+    { value: '2', label: 'mejoras hechas después de las pruebas' },
+  ]}
+/>
+
+## Lo que aprendí
+
+Hay que probar la versión anterior y la nueva con las mismas tareas. Mi tree test demostró que la estructura anterior fallaba, y mi prueba de usabilidad mostró que la nueva funcionaba, pero midieron cosas distintas, así que no puedo resumir la mejora en un solo número. Hoy corro las mismas tareas en ambas, para que el antes y el después se puedan comparar directamente.
+
+También aprendí que un rediseño gana confianza cuando conserva lo que la gente ya reconoce. Mantener el rosado de TuRuta hizo que la versión dos se sintiera como una mejora y no como otra app.

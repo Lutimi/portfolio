@@ -1,0 +1,144 @@
+---
+// Drag a redline divider across two screenshots of the same screen: the
+// previous version on the left, the redesign on the right. A native range
+// input carries the drag, the keyboard and the accessible value.
+import { getImage } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import { GridPattern } from '../magicui/grid-pattern'
+import type { Lang } from '../../i18n/ui'
+
+interface Props {
+  before: ImageMetadata
+  after: ImageMetadata
+  beforeAlt: string
+  afterAlt: string
+  lang: Lang
+  caption?: string
+}
+
+const { before, after, beforeAlt, afterAlt, lang, caption } = Astro.props
+const [beforeImg, afterImg] = await Promise.all([
+  getImage({ src: before, width: 1600, format: 'webp' }),
+  getImage({ src: after, width: 1600, format: 'webp' }),
+])
+
+const copy = {
+  en: { before: 'Before', after: 'After', slider: 'Compare the previous version with the redesign', hint: 'Drag the red line, or focus it and use the arrow keys.' },
+  es: { before: 'Antes', after: 'Después', slider: 'Compara la versión anterior con el rediseño', hint: 'Arrastra la línea roja, o enfócala y usa las flechas del teclado.' },
+}[lang]
+---
+
+<figure class="mx-auto my-16 max-w-[1360px] px-5 sm:my-20 sm:px-10" data-compare style="--split: 50%;">
+  <div class="canvas p-4 sm:p-10">
+    <GridPattern width={24} height={24} />
+    <p class="relative mb-5 text-[0.875rem] text-ink-2">{copy.hint}</p>
+    <div class="compare relative overflow-hidden rounded-xl">
+      <img src={afterImg.src} alt={afterAlt} width={after.width} height={after.height} loading="lazy" class="block h-auto w-full" />
+      <img src={beforeImg.src} alt={beforeAlt} width={before.width} height={before.height} loading="lazy" class="compare-before absolute inset-0 h-full w-full" />
+      <div class="compare-line" aria-hidden="true">
+        <span class="compare-handle">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" /></svg>
+        </span>
+      </div>
+      <span class="compare-tag compare-tag--before" aria-hidden="true">{copy.before}</span>
+      <span class="compare-tag compare-tag--after" aria-hidden="true">{copy.after}</span>
+      <input type="range" class="compare-range" min="0" max="100" value="50" step="1" aria-label={copy.slider} />
+    </div>
+  </div>
+  {caption && (
+    <figcaption class="mx-auto mt-4 max-w-[44rem] text-[0.875rem] leading-relaxed text-ink-3">{caption}</figcaption>
+  )}
+</figure>
+
+<style>
+  .compare {
+    box-shadow: 0 18px 40px -20px rgb(21 21 21 / 0.35);
+  }
+
+  .compare-before {
+    object-fit: cover;
+    clip-path: inset(0 calc(100% - var(--split)) 0 0);
+  }
+
+  .compare-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--split);
+    width: 1.5px;
+    translate: -50% 0;
+    background: var(--color-redline);
+    pointer-events: none;
+  }
+
+  .compare-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    translate: -50% -50%;
+    border-radius: 999px;
+    background: var(--color-redline);
+    color: var(--color-sheet);
+    box-shadow: 0 6px 16px -6px rgb(21 21 21 / 0.5);
+    transition: scale 0.2s var(--ease-out-expo);
+  }
+
+  .compare-handle svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .compare:has(.compare-range:active) .compare-handle {
+    scale: 1.08;
+  }
+
+  .compare:has(.compare-range:focus-visible) .compare-handle {
+    outline: 2px solid var(--color-code);
+    outline-offset: 3px;
+  }
+
+  .compare-tag {
+    position: absolute;
+    top: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-size: 0.75rem;
+    font-weight: 600;
+    pointer-events: none;
+  }
+
+  .compare-tag--before {
+    left: 0.75rem;
+  }
+
+  .compare-tag--after {
+    right: 0.75rem;
+  }
+
+  /* The range input covers the image: dragging anywhere moves the line */
+  .compare-range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+    touch-action: pan-y;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-compare]').forEach(figure => {
+    const range = figure.querySelector<HTMLInputElement>('.compare-range')!
+    const update = () => figure.style.setProperty('--split', `${range.value}%`)
+    range.addEventListener('input', update)
+    update()
+  })
+</script>

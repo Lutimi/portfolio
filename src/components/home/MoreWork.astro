@@ -1,0 +1,62 @@
+---
+// Secondary projects, clearly smaller than the case studies: a thumbnail,
+// one line, type pills and where to see more.
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import nexvault from '../../assets/more/nexvault.png'
+import gymrat from '../../assets/more/gymrat.png'
+import showroom from '../../assets/more/showroom.png'
+import type { HomeContent } from '../../i18n/home'
+
+interface Props {
+  more: HomeContent['more']
+}
+
+const { more } = Astro.props
+const images: Record<string, ImageMetadata> = { nexvault, gymrat, showroom }
+---
+
+<section class="mx-auto mt-32 max-w-[1360px] px-5 sm:px-10">
+  <h2 class="heading border-t border-ink pt-5 text-[clamp(1.75rem,1.2rem+1.6vw,2.5rem)]">{more.heading}</h2>
+  <ul class="mt-10 grid gap-x-12 gap-y-12 lg:grid-cols-2">
+    {more.items.map(item => (
+      <li class="grid grid-cols-[7.5rem_minmax(0,1fr)] items-start gap-5 sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-7">
+        <div class="overflow-hidden rounded-xl bg-paper-deep">
+          {item.image && (
+            <Image
+              src={images[item.image]}
+              alt={item.imageAlt}
+              widths={[240, 480]}
+              sizes="(min-width: 640px) 192px, 120px"
+              class="aspect-[4/3] w-full object-cover"
+            />
+          )}
+        </div>
+        <div>
+          <h3 class="heading text-[1.375rem]">{item.name}</h3>
+          <p class="mt-2 max-w-[34rem] text-[0.9375rem] leading-relaxed text-ink-2">{item.body}</p>
+          <ul class="mt-3 flex flex-wrap gap-2">
+            {item.pills.map(pill => <li class="pill">{pill}</li>)}
+          </ul>
+          {item.links.length > 0 ? (
+            <p class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+              {item.links.map(link => (
+                <a class="link inline-flex items-center gap-1.5 font-semibold" href={link.href} target="_blank" rel="noopener">
+                  {link.label}
+                  <svg class="size-3.5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M5 11l6-6M6 5h5v5" stroke="currentColor" stroke-width="1.5" />
+                  </svg>
+                </a>
+              ))}
+            </p>
+          ) : (
+            'note' in item && <p class="mt-4 text-[0.9375rem] font-semibold text-ink-2">{item.note}</p>
+          )}
+        </div>
+      </li>
+    ))}
+  </ul>
+  <p class="mt-14 text-ink-2">
+    {more.behance} <a class="link" href="https://www.behance.net/luisticona1" target="_blank" rel="noopener">Behance</a>.
+  </p>
+</section>

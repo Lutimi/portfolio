@@ -1,0 +1,152 @@
+---
+title: "Divemotor’s portal serves six vehicle brands across Peru. I kept it improving while it stayed live, and designed the sections it was missing."
+project: Divemotor
+summary: "Divemotor sells and services Mercedes-Benz, Freightliner, FIAT, Jeep, Dodge and RAM vehicles across Peru, and divemotor.com is where a fleet buyer compares trucks and a family books a service. For a year and a half I owned its continuous improvement: a clearer way to find a dealer, new sections the brand needed, the UI kit I built behind every page, and specs developers could build from."
+cover: ../../../assets/work/divemotor/cover.png
+coverAlt: Divemotor’s live home page, with tiles for its four vehicle lines (cars, trucks, vans and buses) and the dealerships section.
+pills: [Client work, Automotive, Web portal, UI kit]
+role: UX Analyst at Altimea, then UX/UI Designer at Vide Solutions, both for Divemotor. Continuous improvement, the UI kit (built from scratch) and new sections.
+team: A team of 4; I designed most of the portal’s work
+duration: 1 year and 6 months
+tools: [Figma]
+plate:
+  headline: A six-brand portal, improved while it stayed live.
+  status: Live
+  outcome: Three new sections shipped, a dealer finder people can use, and specs for six breakpoints that developers built from.
+  role: UX/UI designer
+  team: Team of 4
+  image: ../../../assets/work/divemotor/concesionarios-live.png
+  imageAlt: The live Dealerships page, with the filter card under the hero, dealer cards and the map.
+  mark: { x: 11.04, y: 44.47, w: 77.92, h: 8.58, label: 'Proposed in Figma, shipped live' }
+order: 2
+draft: false
+---
+
+import Figure from '../../../components/case/Figure.astro'
+import Insight from '../../../components/case/Insight.astro'
+import Metrics from '../../../components/case/Metrics.astro'
+import BeforeAfter from '../../../components/case/BeforeAfter.astro'
+
+import concesionariosBefore from '../../../assets/work/divemotor/concesionarios-before.png'
+import concesionariosAfter from '../../../assets/work/divemotor/concesionarios-after.png'
+import concesionariosLive from '../../../assets/work/divemotor/concesionarios-live.png'
+import newSections from '../../../assets/work/divemotor/new-sections.png'
+import camionesBanners from '../../../assets/work/divemotor/camiones-banners.png'
+import uiKit from '../../../assets/work/divemotor/ui-kit.png'
+import brandTabs from '../../../assets/work/divemotor/brand-tabs.png'
+import filterStates from '../../../assets/work/divemotor/filter-states.png'
+import devspec from '../../../assets/work/divemotor/devspec.png'
+
+## One portal, six brands, four vehicle lines
+
+Divemotor is a large Peruvian automotive group. Its portal has to serve very different people at once: a fleet manager comparing sixteen truck models, a family looking for a Jeep, a driver booking a service at the nearest workshop. All of it inside one Divemotor shell, with each brand’s content in its own voice.
+
+A portal like that is never finished. My job was to keep it improving without taking it offline: find where people got lost, design the fix, and hand it to development in a form they could ship.
+
+## Finding a dealer shouldn’t need a map-reading lesson
+
+The Dealerships page was the clearest case. The filters floated over the hero photo, half of them hard to read, and the map took the whole left side before you had chosen anything.
+
+<BeforeAfter
+  before={concesionariosBefore}
+  after={concesionariosAfter}
+  beforeAlt="The previous Dealerships page: filters overlapping the hero photo, a map on the left and dealer cards on the right."
+  afterAlt="The proposal: a filter card below the hero with region, your location, services, brands and vehicles, then dealer cards next to the map."
+  lang="en"
+  caption="Dealerships, before and in my proposal. The filters moved into one card under the hero, in the order people decide: where, what service, which brand."
+/>
+
+The filter card shipped: today the live page leads with it, including “use your location”, so the nearest dealer is one tap away.
+
+<Figure
+  src={concesionariosLive}
+  mark={{ x: 11.04, y: 44.47, w: 77.92, h: 8.58, label: 'Same filter card, shipped live' }}
+  alt="The live Dealerships page on divemotor.com, with the filter card under the hero."
+  caption="The same filter card, live on divemotor.com."
+  framed
+/>
+
+## The sections the brand was missing
+
+Divemotor had stories the portal couldn’t tell: drivers and clients on the road, vehicle deliveries, its sustainability work. I designed the sections for them, desktop and mobile, each with its own components: a video series called Juntos en la Ruta, a customer experiences section, and an article layout that became the sustainability page. All three are live.
+
+<Figure
+  src={newSections}
+  mark={{ x: 76.75, y: 55.14, w: 19.75, h: 37.84, label: 'The same carousel, swipeable on mobile', align: 'right' }}
+  alt="The Juntos en la Ruta section designed for desktop and mobile."
+  caption="Juntos en la Ruta, designed for desktop and mobile with its own carousel and video components."
+  framed
+/>
+
+Inside the trucks listing, I added banner sliders that offer a next step when a buyer hasn’t found the right model: used trucks, the video series, or what other clients say.
+
+<Figure
+  src={camionesBanners}
+  mark={{ x: 11.88, y: 25.02, w: 16.38, h: 4.45, label: 'Cross-sell to used trucks' }}
+  alt="Three variants of the Banner slider component used in the trucks listing."
+  caption="One Banner slider component, three variants, so the listing never ends in a dead end."
+  framed
+/>
+
+## One kit behind every page
+
+A portal this size only stays consistent if every page is built from the same parts. I built the UI kit as that source: colours, type, and components grouped in the same sections as the site, so a designer or developer finds the header, a filter or a brand tab where they expect it.
+
+<Figure
+  src={uiKit}
+  mark={{ x: 3.75, y: 13.23, w: 48.25, h: 15.72, label: 'Brand blue and orange, with hex' }}
+  alt="The UI kit foundations: Divemotor’s colour palette and heading type scale."
+  caption="Foundations: one blue for actions, one orange as the accent, and a heading scale in Roboto Condensed."
+  framed
+/>
+
+Brands don’t get their own theme; they get their own content inside the same shell. A brand tab is one component with a variant per brand, so adding a brand never means designing a new page.
+
+<Figure
+  src={brandTabs}
+  mark={{ x: 60.59, y: 53.13, w: 13.29, h: 6.84, label: 'The active tab swaps the content', align: 'right' }}
+  alt="The brand tab component in several brand variants."
+  caption="One component, one variant per brand."
+  framed
+/>
+
+<Figure
+  src={filterStates}
+  mark={{ x: 3.34, y: 27.79, w: 17.63, h: 36.04, label: 'Open state lists 11 regions' }}
+  alt="The dealership filter component in several of its variants."
+  caption="The dealership filter, with every variant it needs drawn before handoff."
+  framed
+/>
+
+## Specs developers could build from
+
+Most portal changes are small, and small changes get lost in handoff. So I kept a page in Figma just for the development team: the layout at every breakpoint from 1920 down to mobile, and next to it, in plain words, what changes and why.
+
+<Figure
+  src={devspec}
+  mark={{ x: 64.57, y: 37.07, w: 30.87, h: 7.86, label: 'Hero type sizes for developers', align: 'right' }}
+  alt="The developer view in Figma: the tablet home layout with annotations for type sizes and spacing."
+  caption="The developer view at 768 px: type sizes per breakpoint, written next to the layout they belong to."
+  framed
+/>
+
+<Insight>
+  “Use four cards: the previous version had three and left a gap.” A one-line reason next to a change is what gets it built.
+</Insight>
+
+That note is now the live home: four vehicle lines, no gap.
+
+<Metrics
+  items={[
+    { value: '3', label: 'new sections designed and live' },
+    { value: '6', label: 'breakpoints specified for development' },
+    { value: '6', label: 'brands inside one portal shell' },
+    { value: '87', label: 'component sets in the UI kit I built' },
+  ]}
+/>
+
+## What I learned
+
+On a live portal, improvement is a habit, not a launch. The changes that shipped were the ones I wrote down where developers already look, with the reason next to them.
+
+Not everything shipped as drawn. The sidebar filter I proposed for buses went live as a simpler brand filter. That taught me to design the version that can ship this sprint next to the ideal one, and to let the team choose with both on the table.

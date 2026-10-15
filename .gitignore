@@ -4,3 +4,10 @@ Thumbs.db
 node_modules/
 dist/
 .astro/
+
+# Impeccable working files (decision sketches, review captures)
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/build/
+.impeccable/questions/
+.taste-skill/

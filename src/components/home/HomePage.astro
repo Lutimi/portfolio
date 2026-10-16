@@ -6,7 +6,7 @@ import TitleBlock from '../site/TitleBlock.astro'
 import Hero from './Hero.astro'
 import WorkGrid from './WorkGrid.astro'
 import SpecHero from './SpecHero.astro'
-import MoreWork from './MoreWork.astro'
+import Websites from './Websites.astro'
 import NamePress from '../figures/NamePress.astro'
 import { homeContent } from '../../i18n/home'
 import { homeUrl, type Lang } from '../../i18n/ui'
@@ -38,12 +38,12 @@ const entries = (
   <main>
     <Hero hero={c.hero} lang={lang} />
 
-    <!-- All three case studies in one view, then the inspector for their parts -->
+    <!-- The case studies, then the websites I built, then the inspector for the parts -->
     <WorkGrid entries={entries} work={c.work} lang={lang} />
 
-    <SpecHero hero={c.hero} />
+    <Websites webs={c.webs} />
 
-    <MoreWork more={c.more} />
+    <SpecHero hero={c.hero} />
 
     <section class="mx-auto mt-32 max-w-[1360px] px-5 sm:px-10">
       <h2 class="heading border-t border-ink pt-5 text-[clamp(1.75rem,1.2rem+1.6vw,2.5rem)]">{c.process.heading}</h2>

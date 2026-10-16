@@ -11,6 +11,7 @@ export const homeUrl = (lang: Lang) => (lang === 'en' ? '/' : '/es/')
 export const ui = {
   en: {
     'nav.work': 'Work',
+    'nav.webs': 'Websites',
     'nav.about': 'About',
     'nav.resume': 'Resume',
     'nav.cta': 'Email me',
@@ -36,6 +37,7 @@ export const ui = {
   },
   es: {
     'nav.work': 'Proyectos',
+    'nav.webs': 'Webs',
     'nav.about': 'Sobre mí',
     'nav.resume': 'CV',
     'nav.cta': 'Escríbeme',

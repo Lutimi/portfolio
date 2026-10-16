@@ -1,0 +1,268 @@
+---
+// Websites I designed and built myself. Each sits in a browser window with two
+// tabs, the page and its design system; pointing at the window scrolls the
+// whole page, so the full build reads without leaving the home page.
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import nexvaultSite from '../../assets/webs/nexvault-site.jpg'
+import nexvaultSystem from '../../assets/webs/nexvault-ds.jpg'
+import gymratSite from '../../assets/webs/gymrat-site.jpg'
+import gymratSystem from '../../assets/webs/gymrat-ds.jpg'
+import type { HomeContent } from '../../i18n/home'
+
+interface Props {
+  webs: HomeContent['webs']
+}
+
+const { webs } = Astro.props
+const shots: Record<string, { site: ImageMetadata; system: ImageMetadata }> = {
+  nexvault: { site: nexvaultSite, system: nexvaultSystem },
+  gymrat: { site: gymratSite, system: gymratSystem },
+}
+
+// The window shows a 16:10 slice of each full-page capture. The scroll takes
+// longer on longer pages, and the scrollbar thumb is sized to the slice.
+const FRAME = 10 / 16
+const scroll = (img: ImageMetadata) => {
+  const page = img.height / img.width
+  const visible = Math.min(1, FRAME / page)
+  const seconds = Math.min(12, Math.max(4, (page - FRAME) * 2))
+  return {
+    '--dur': `${seconds.toFixed(1)}s`,
+    '--thumb': `${(visible * 100).toFixed(2)}%`,
+    '--travel': `${((1 / visible - 1) * 100).toFixed(2)}%`,
+  }
+}
+
+const external = '<svg class="size-3.5" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" stroke="currentColor" stroke-width="1.5" /></svg>'
+---
+
+<section id="websites" class="mx-auto mt-32 max-w-[1360px] scroll-mt-20 px-5 sm:px-10" aria-labelledby="webs-heading">
+  <div class="grid gap-4 border-t border-ink pt-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
+    <h2 id="webs-heading" class="heading text-[clamp(1.75rem,1.2rem+1.6vw,2.5rem)]">{webs.heading}</h2>
+    <p class="max-w-[38rem] text-[1.0625rem] leading-relaxed text-ink-2 lg:pt-2">{webs.lede}</p>
+  </div>
+
+  <ul class="mt-10 grid gap-x-10 gap-y-16 md:grid-cols-2">
+    {webs.items.map(item => {
+      const shot = shots[item.slug]
+      const views = [
+        { key: 'site', label: webs.tabs.site, img: shot.site, alt: item.siteAlt, href: item.site },
+        { key: 'system', label: webs.tabs.system, img: shot.system, alt: item.systemAlt, href: item.system },
+      ]
+      return (
+        <li data-web>
+          <div class="web-window">
+            <div class="web-chrome">
+              <span class="web-dots" aria-hidden="true"><i /><i /><i /></span>
+              <div class="web-tabs" role="tablist" aria-label={item.name}>
+                {views.map((view, i) => (
+                  <button
+                    type="button"
+                    role="tab"
+                    class="web-tab"
+                    id={`web-${item.slug}-${view.key}-tab`}
+                    aria-controls={`web-${item.slug}-${view.key}`}
+                    aria-selected={i === 0 ? 'true' : 'false'}
+                    tabindex={i === 0 ? 0 : -1}
+                  >
+                    {view.label}
+                  </button>
+                ))}
+              </div>
+              <span class="web-hint" aria-hidden="true">{webs.hint}</span>
+            </div>
+
+            {views.map((view, i) => (
+              <div role="tabpanel" id={`web-${item.slug}-${view.key}`} aria-labelledby={`web-${item.slug}-${view.key}-tab`} hidden={i !== 0}>
+                <a class="web-view" href={view.href} target="_blank" rel="noopener" style={scroll(view.img)}>
+                  <div class="web-page">
+                    <Image
+                      src={view.img}
+                      alt={view.alt}
+                      widths={[640, 1280]}
+                      sizes="(min-width: 1360px) 620px, (min-width: 768px) 46vw, 92vw"
+                      loading="lazy"
+                      class="block h-auto w-full"
+                    />
+                  </div>
+                  <span class="web-bar" aria-hidden="true"><span class="web-thumb" /></span>
+                </a>
+              </div>
+            ))}
+          </div>
+
+          <p class="mt-5 text-[0.9375rem] text-ink-3">{item.kind}</p>
+          <h3 class="heading mt-1 text-[clamp(1.375rem,1.15rem+0.6vw,1.75rem)]">{item.name}</h3>
+          <p class="mt-3 max-w-[36rem] text-[1.0625rem] leading-relaxed text-ink-2">{item.body}</p>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {item.pills.map(pill => <li class="pill">{pill}</li>)}
+          </ul>
+          <p class="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+            <a class="link inline-flex items-center gap-1.5 font-semibold" href={item.site} target="_blank" rel="noopener">{webs.links.live}<Fragment set:html={external} /></a>
+            <a class="link inline-flex items-center gap-1.5 font-semibold" href={item.system} target="_blank" rel="noopener">{webs.links.system}<Fragment set:html={external} /></a>
+            <a class="link inline-flex items-center gap-1.5 font-semibold" href={item.code} target="_blank" rel="noopener">{webs.links.code}<Fragment set:html={external} /></a>
+          </p>
+        </li>
+      )
+    })}
+  </ul>
+
+  <p class="mt-14 text-ink-2">
+    {webs.behance} <a class="link" href="https://www.behance.net/luisticona1" target="_blank" rel="noopener">Behance</a>.
+  </p>
+</section>
+
+<style>
+  .web-window {
+    overflow: hidden;
+    border: 1px solid var(--color-rule);
+    border-radius: 14px;
+    background: var(--color-paper-deep);
+    transition: border-color 0.3s var(--ease-out-expo);
+  }
+
+  .web-window:hover {
+    border-color: var(--color-pencil);
+  }
+
+  .web-chrome {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    height: 2.75rem;
+    padding: 0 0.625rem 0 0.875rem;
+    border-bottom: 1px solid var(--color-rule);
+  }
+
+  .web-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .web-dots i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-rule);
+  }
+
+  .web-tabs {
+    display: flex;
+    gap: 2px;
+  }
+
+  .web-tab {
+    height: 1.875rem;
+    padding: 0 0.75rem;
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-ink-3);
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+  }
+
+  .web-tab:hover {
+    color: var(--color-ink);
+  }
+
+  .web-tab[aria-selected='true'] {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1px var(--color-rule);
+  }
+
+  .web-hint {
+    display: none;
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-3);
+    white-space: nowrap;
+  }
+
+  /* The page, seen through a 16:10 window; the window is the size container */
+  .web-view {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    container-type: size;
+  }
+
+  .web-page,
+  .web-thumb {
+    transition: transform 0.9s var(--ease-out-expo);
+  }
+
+  .web-bar {
+    position: absolute;
+    top: 6px;
+    right: 4px;
+    bottom: 6px;
+    width: 4px;
+    border-radius: 2px;
+    background: rgb(128 128 128 / 0.2);
+  }
+
+  /* A light thumb with a dark edge reads on dark pages and on white headers */
+  .web-thumb {
+    display: block;
+    height: var(--thumb);
+    border-radius: inherit;
+    background: rgb(255 255 255 / 0.6);
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.35);
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .web-hint {
+      display: block;
+    }
+
+    /* Point at the window and the whole page scrolls by; leave and it springs back */
+    .web-view:hover .web-page,
+    .web-view:focus-visible .web-page {
+      transform: translateY(calc(-100% + 100cqh));
+      transition: transform var(--dur) cubic-bezier(0.45, 0, 0.55, 1);
+    }
+
+    .web-view:hover .web-thumb,
+    .web-view:focus-visible .web-thumb {
+      transform: translateY(var(--travel));
+      transition: transform var(--dur) cubic-bezier(0.45, 0, 0.55, 1);
+    }
+  }
+
+  @media (max-width: 420px) {
+    .web-dots {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Two tabs per window, the page and its design system, with arrow-key support
+  document.querySelectorAll<HTMLElement>('[data-web]').forEach(web => {
+    const tabs = [...web.querySelectorAll<HTMLButtonElement>('[role="tab"]')]
+    const select = (tab: HTMLButtonElement) => {
+      tabs.forEach(t => {
+        const on = t === tab
+        t.setAttribute('aria-selected', String(on))
+        t.tabIndex = on ? 0 : -1
+        const panel = document.getElementById(t.getAttribute('aria-controls') ?? '')
+        if (panel) panel.hidden = !on
+      })
+    }
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(tab))
+      tab.addEventListener('keydown', event => {
+        const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0
+        if (!step) return
+        const next = tabs[(i + step + tabs.length) % tabs.length]
+        next.focus()
+        select(next)
+      })
+    })
+  })
+</script>
